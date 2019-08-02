@@ -1,16 +1,15 @@
 package org.nerdizin.eztrial.entities;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.nerdizin.eztrial.entities.base.BaseEntity;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User extends BaseEntity {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
+	private String userName;
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -28,40 +27,36 @@ public class User {
 		this.email = email;
 	}
 
-	public Long getId() {
-		return id;
+	public String getUserName() {
+		return userName;
 	}
 
-	public User setId(final Long id) {
-		this.id = id;
-		return this;
+	public void setUserName(final String userName) {
+		this.userName = userName;
 	}
 
 	public String getFirstName() {
 		return firstName;
 	}
 
-	public User setFirstName(final String firstName) {
+	public void setFirstName(final String firstName) {
 		this.firstName = firstName;
-		return this;
 	}
 
 	public String getLastName() {
 		return lastName;
 	}
 
-	public User setLastName(final String lastName) {
+	public void setLastName(final String lastName) {
 		this.lastName = lastName;
-		return this;
 	}
 
 	public String getEmail() {
 		return email;
 	}
 
-	public User setEmail(final String email) {
+	public void setEmail(final String email) {
 		this.email = email;
-		return this;
 	}
 
 	@Override

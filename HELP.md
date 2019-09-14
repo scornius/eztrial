@@ -1,4 +1,6 @@
-# Getting Started
+# EzTrial
+
+Perform clinical trials with ease.
 
 ### Reference Documentation
 For further reference, please consider the following sections:

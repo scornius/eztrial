@@ -25,7 +25,8 @@ public class FallbackLocaleResolver extends AcceptHeaderLocaleResolver
 
     @Override
     public void setLocale(HttpServletRequest httpServletRequest,
-                          HttpServletResponse httpServletResponse, Locale locale) {
+                          HttpServletResponse httpServletResponse,
+                          Locale locale) {
 
     }
 }

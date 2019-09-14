@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xs:schema targetNamespace="http://www.cdisc.org/ns/odm/v1.3"
+           xmlns="http://www.cdisc.org/ns/odm/v1.3"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:xlink="http://www.w3.org/1999/xlink"
+           xmlns:odm="http://www.cdisc.org/ns/odm/v1.3"
+           xmlns:ez="http://nerdizin.org/eztrial/1.0"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+
+    <xs:import namespace="http://nerdizin.org/eztrial/1.0" schemaLocation="eztrial-ns.xsd"/>
+    <xs:redefine schemaLocation="../ODM1-3-2-foundation.xsd">
+
+        <xs:group name="ItemDefElementExtension">
+            <xs:sequence>
+                <xs:group ref="ItemDefElementExtension"/>
+                <xs:element ref="ez:Script" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+        </xs:group>
+
+    </xs:redefine>
+</xs:schema>

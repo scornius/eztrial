@@ -23,8 +23,8 @@ public class AuditorAwareImpl implements AuditorAware<User> {
 			return Optional.of(admin);
 		}
 
-		String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		User user = userRepository.findByUserName(username);
+		final String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		final User user = userRepository.findByUserName(username);
 		return Optional.of(user);
 	}
 

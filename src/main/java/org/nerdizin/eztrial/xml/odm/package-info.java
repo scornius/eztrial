@@ -1,5 +1,9 @@
 @XmlSchema(
         namespace = Namespaces.ODM,
+        xmlns = {
+                @javax.xml.bind.annotation.XmlNs(prefix = "", namespaceURI = Namespaces.ODM),
+                @javax.xml.bind.annotation.XmlNs(prefix = "ez", namespaceURI = Namespaces.EZTRIAL)
+        },
         elementFormDefault = XmlNsForm.QUALIFIED)
 @XmlAccessorType(XmlAccessType.FIELD)
 package org.nerdizin.eztrial.xml.odm;

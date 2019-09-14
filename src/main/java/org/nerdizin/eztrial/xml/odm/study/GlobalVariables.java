@@ -1,9 +1,5 @@
 package org.nerdizin.eztrial.xml.odm.study;
 
-import org.nerdizin.eztrial.xml.Namespaces;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 
 
@@ -23,7 +19,7 @@ public class GlobalVariables {
         return studyName;
     }
 
-    public void setStudyName(String studyName) {
+    public void setStudyName(final String studyName) {
         this.studyName = studyName;
     }
 
@@ -31,7 +27,7 @@ public class GlobalVariables {
         return studyDescription;
     }
 
-    public void setStudyDescription(String studyDescription) {
+    public void setStudyDescription(final String studyDescription) {
         this.studyDescription = studyDescription;
     }
 
@@ -39,7 +35,7 @@ public class GlobalVariables {
         return protocolName;
     }
 
-    public void setProtocolName(String protocolName) {
+    public void setProtocolName(final String protocolName) {
         this.protocolName = protocolName;
     }
 }

@@ -1,9 +1,5 @@
 package org.nerdizin.eztrial.xml.odm.study;
 
-import org.nerdizin.eztrial.xml.Namespaces;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
@@ -20,12 +16,21 @@ public class MetaDataVersion {
     @XmlElement(name = "StudyEventDef")
     private List<StudyEventDef> studyElementDefs;
 
+    @XmlElement(name = "FormDef")
+    private List<FormDef> formDefs;
+
+    @XmlElement(name = "ItemGroupDef")
+    private List<ItemGroupDef> itemGroupDefs;
+
+    @XmlElement(name = "ItemDef")
+    private List<ItemDef> itemDefs;
+
 
     public String getOid() {
         return oid;
     }
 
-    public void setOid(String oid) {
+    public void setOid(final String oid) {
         this.oid = oid;
     }
 
@@ -33,7 +38,7 @@ public class MetaDataVersion {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -41,7 +46,31 @@ public class MetaDataVersion {
         return studyElementDefs;
     }
 
-    public void setStudyElementDefs(List<StudyEventDef> studyElementDefs) {
+    public void setStudyElementDefs(final List<StudyEventDef> studyElementDefs) {
         this.studyElementDefs = studyElementDefs;
+    }
+
+    public List<FormDef> getFormDefs() {
+        return formDefs;
+    }
+
+    public void setFormDefs(final List<FormDef> formDefs) {
+        this.formDefs = formDefs;
+    }
+
+    public List<ItemGroupDef> getItemGroupDefs() {
+        return itemGroupDefs;
+    }
+
+    public void setItemGroupDefs(final List<ItemGroupDef> itemGroupDefs) {
+        this.itemGroupDefs = itemGroupDefs;
+    }
+
+    public List<ItemDef> getItemDefs() {
+        return itemDefs;
+    }
+
+    public void setItemDefs(final List<ItemDef> itemDefs) {
+        this.itemDefs = itemDefs;
     }
 }

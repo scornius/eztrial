@@ -1,9 +1,5 @@
 package org.nerdizin.eztrial.xml.odm.admin;
 
-import org.nerdizin.eztrial.xml.Namespaces;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 
 
@@ -23,7 +19,7 @@ public class AdminData {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(final User user) {
         this.user = user;
     }
 
@@ -31,7 +27,7 @@ public class AdminData {
         return location;
     }
 
-    public void setLocation(Location location) {
+    public void setLocation(final Location location) {
         this.location = location;
     }
 
@@ -39,7 +35,7 @@ public class AdminData {
         return signatureDef;
     }
 
-    public void setSignatureDef(SignatureDef signatureDef) {
+    public void setSignatureDef(final SignatureDef signatureDef) {
         this.signatureDef = signatureDef;
     }
 }

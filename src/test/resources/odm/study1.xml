@@ -45,7 +45,7 @@
                     <TranslatedText xml:lang="en">Body height</TranslatedText>
                     <TranslatedText xml:lang="de">Körpergröße</TranslatedText>
                 </Question>
-                <ez:Script>foo</ez:Script>
+                <ez:Script Trigger="onChange">console.log('Servus !')</ez:Script>
             </ItemDef>
         </MetaDataVersion>
     </Study>

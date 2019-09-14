@@ -9,7 +9,15 @@
     <xs:import namespace="http://www.w3.org/1999/xlink"     schemaLocation="xlink.xsd"/>
     <xs:import namespace="http://www.cdisc.org/ns/odm/v1.3" schemaLocation="ODM1-3-2-foundation-ez.xsd"/>
 
-    <element name="Script">
-    </element>
+
+    <xs:element name="Script">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name="Trigger" type="xs:string" />
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
 
 </xs:schema>

@@ -1,9 +1,5 @@
 package org.nerdizin.eztrial.xml.odm.admin;
 
-import org.nerdizin.eztrial.xml.Namespaces;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
@@ -24,7 +20,7 @@ public class SignatureDef {
         return oid;
     }
 
-    public void setOid(String oid) {
+    public void setOid(final String oid) {
         this.oid = oid;
     }
 
@@ -32,7 +28,7 @@ public class SignatureDef {
         return meaning;
     }
 
-    public void setMeaning(String meaning) {
+    public void setMeaning(final String meaning) {
         this.meaning = meaning;
     }
 
@@ -40,7 +36,7 @@ public class SignatureDef {
         return legalReason;
     }
 
-    public void setLegalReason(String legalReason) {
+    public void setLegalReason(final String legalReason) {
         this.legalReason = legalReason;
     }
 }

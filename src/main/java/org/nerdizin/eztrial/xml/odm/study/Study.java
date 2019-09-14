@@ -1,7 +1,5 @@
 package org.nerdizin.eztrial.xml.odm.study;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
@@ -26,7 +24,7 @@ public class Study {
         return oid;
     }
 
-    public void setOid(String oid) {
+    public void setOid(final String oid) {
         this.oid = oid;
     }
 
@@ -34,7 +32,7 @@ public class Study {
         return globalVariables;
     }
 
-    public void setGlobalVariables(GlobalVariables globalVariables) {
+    public void setGlobalVariables(final GlobalVariables globalVariables) {
         this.globalVariables = globalVariables;
     }
 
@@ -42,7 +40,7 @@ public class Study {
         return basicDefinitions;
     }
 
-    public void setBasicDefinitions(BasicDefinitions basicDefinitions) {
+    public void setBasicDefinitions(final BasicDefinitions basicDefinitions) {
         this.basicDefinitions = basicDefinitions;
     }
 
@@ -50,7 +48,7 @@ public class Study {
         return metaDataVersions;
     }
 
-    public void setMetaDataVersions(List<MetaDataVersion> metaDataVersions) {
+    public void setMetaDataVersions(final List<MetaDataVersion> metaDataVersions) {
         this.metaDataVersions = metaDataVersions;
     }
 }

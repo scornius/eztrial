@@ -1,9 +1,5 @@
 package org.nerdizin.eztrial.xml.odm.admin;
 
-import org.nerdizin.eztrial.xml.Namespaces;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 
 
@@ -24,12 +20,11 @@ public class Address {
     @XmlElement(name = "PostalCode")
     private String postalCode;
 
-
     public String getStreetName() {
         return streetName;
     }
 
-    public void setStreetName(String streetName) {
+    public void setStreetName(final String streetName) {
         this.streetName = streetName;
     }
 
@@ -37,7 +32,7 @@ public class Address {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(final String city) {
         this.city = city;
     }
 
@@ -45,7 +40,7 @@ public class Address {
         return stateProv;
     }
 
-    public void setStateProv(String stateProv) {
+    public void setStateProv(final String stateProv) {
         this.stateProv = stateProv;
     }
 
@@ -53,7 +48,7 @@ public class Address {
         return country;
     }
 
-    public void setCountry(String country) {
+    public void setCountry(final String country) {
         this.country = country;
     }
 
@@ -61,7 +56,7 @@ public class Address {
         return postalCode;
     }
 
-    public void setPostalCode(String postalCode) {
+    public void setPostalCode(final String postalCode) {
         this.postalCode = postalCode;
     }
 }

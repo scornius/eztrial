@@ -2,8 +2,6 @@ package org.nerdizin.eztrial.xml.odm.admin;
 
 import org.nerdizin.eztrial.xml.adapter.LocationTypeAdapter;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -25,7 +23,7 @@ public class Location {
         return oid;
     }
 
-    public void setOid(String oid) {
+    public void setOid(final String oid) {
         this.oid = oid;
     }
 
@@ -33,7 +31,7 @@ public class Location {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -41,7 +39,7 @@ public class Location {
         return locationType;
     }
 
-    public void setLocationType(LocationType locationType) {
+    public void setLocationType(final LocationType locationType) {
         this.locationType = locationType;
     }
 }

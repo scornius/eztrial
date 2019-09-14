@@ -34,11 +34,12 @@ public class User {
     @XmlElement(name = "Phone")
     private String phone;
 
+
     public String getOid() {
         return oid;
     }
 
-    public void setOid(String oid) {
+    public void setOid(final String oid) {
         this.oid = oid;
     }
 
@@ -46,7 +47,7 @@ public class User {
         return userType;
     }
 
-    public void setUserType(UserType userType) {
+    public void setUserType(final UserType userType) {
         this.userType = userType;
     }
 
@@ -54,7 +55,7 @@ public class User {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public void setFirstName(final String firstName) {
         this.firstName = firstName;
     }
 
@@ -62,15 +63,23 @@ public class User {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    public void setLastName(final String lastName) {
         this.lastName = lastName;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(final Address address) {
+        this.address = address;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
         this.email = email;
     }
 
@@ -78,15 +87,7 @@ public class User {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(final String phone) {
         this.phone = phone;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 }

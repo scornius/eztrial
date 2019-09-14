@@ -15,7 +15,14 @@
             <ProtocolName>Protocol 1</ProtocolName>
         </GlobalVariables>
 
-        <BasicDefinitions/>
+        <BasicDefinitions>
+            <MeasurementUnit OID="mu.1" Name="mu 1">
+                <Symbol>
+                    <TranslatedText xml:lang="en">cm</TranslatedText>
+                    <TranslatedText xml:lang="de">cm</TranslatedText>
+                </Symbol>
+            </MeasurementUnit>
+        </BasicDefinitions>
 
         <MetaDataVersion OID="mdv.1" Name="Mdv 1">
             <Protocol>
@@ -23,6 +30,9 @@
             </Protocol>
             <StudyEventDef OID="event.1" Name="Event 1" Repeating="No" Type="Scheduled">
                 <FormRef FormOID="form.1" Mandatory="Yes"/>
+            </StudyEventDef>
+            <StudyEventDef OID="event.2" Name="Event 2" Repeating="Yes" Type="Common">
+                <FormRef FormOID="form.1" Mandatory="No"/>
             </StudyEventDef>
             <FormDef OID="form.1" Name="Form 1" Repeating="No">
                 <ItemGroupRef ItemGroupOID="itemgroup.1" Mandatory="No"/>

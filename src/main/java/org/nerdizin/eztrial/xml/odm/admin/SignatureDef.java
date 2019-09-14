@@ -1,22 +1,22 @@
 package org.nerdizin.eztrial.xml.odm.admin;
 
-import org.nerdizin.eztrial.xml.odm.Namespaces;
+import org.nerdizin.eztrial.xml.Namespaces;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
-@XmlAccessorType(XmlAccessType.FIELD)
+
 public class SignatureDef {
 
     @XmlAttribute(name = "OID")
     private String oid;
 
-    @XmlElement(name = "Meaning", namespace = Namespaces.ODM)
+    @XmlElement(name = "Meaning")
     private String meaning;
 
-    @XmlElement(name = "LegalReason", namespace = Namespaces.ODM)
+    @XmlElement(name = "LegalReason")
     private String legalReason;
 
 

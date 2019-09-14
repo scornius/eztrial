@@ -1,7 +1,7 @@
 package org.nerdizin.eztrial.xml.odm.admin;
 
 import org.nerdizin.eztrial.xml.adapter.UserTypeAdapter;
-import org.nerdizin.eztrial.xml.odm.Namespaces;
+import org.nerdizin.eztrial.xml.Namespaces;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-@XmlAccessorType(XmlAccessType.FIELD)
+
 public class User {
 
     @XmlAttribute(name = "OID")
@@ -19,19 +19,19 @@ public class User {
     @XmlJavaTypeAdapter(UserTypeAdapter.class)
     private UserType userType;
 
-    @XmlElement(name = "FirstName", namespace = Namespaces.ODM)
+    @XmlElement(name = "FirstName")
     private String firstName;
 
-    @XmlElement(name = "LastName", namespace = Namespaces.ODM)
+    @XmlElement(name = "LastName")
     private String lastName;
 
-    @XmlElement(name = "Address", namespace = Namespaces.ODM)
+    @XmlElement(name = "Address")
     private Address address;
 
-    @XmlElement(name = "Email", namespace = Namespaces.ODM)
+    @XmlElement(name = "Email")
     private String email;
 
-    @XmlElement(name = "Phone", namespace = Namespaces.ODM)
+    @XmlElement(name = "Phone")
     private String phone;
 
     public String getOid() {

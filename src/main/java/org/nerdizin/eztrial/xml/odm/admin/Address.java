@@ -1,27 +1,27 @@
 package org.nerdizin.eztrial.xml.odm.admin;
 
-import org.nerdizin.eztrial.xml.odm.Namespaces;
+import org.nerdizin.eztrial.xml.Namespaces;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 
-@XmlAccessorType(XmlAccessType.FIELD)
+
 public class Address {
 
-    @XmlElement(name = "StreetName", namespace = Namespaces.ODM)
+    @XmlElement(name = "StreetName")
     private String streetName;
 
-    @XmlElement(name = "City", namespace = Namespaces.ODM)
+    @XmlElement(name = "City")
     private String city;
 
-    @XmlElement(name = "StateProv", namespace = Namespaces.ODM)
+    @XmlElement(name = "StateProv")
     private String stateProv;
 
-    @XmlElement(name = "Country", namespace = Namespaces.ODM)
+    @XmlElement(name = "Country")
     private String country;
 
-    @XmlElement(name = "PostalCode", namespace = Namespaces.ODM)
+    @XmlElement(name = "PostalCode")
     private String postalCode;
 
 

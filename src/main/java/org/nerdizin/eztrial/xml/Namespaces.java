@@ -1,4 +1,4 @@
-package org.nerdizin.eztrial.xml.odm;
+package org.nerdizin.eztrial.xml;
 
 public interface Namespaces {
 

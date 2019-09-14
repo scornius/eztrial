@@ -1,21 +1,21 @@
 package org.nerdizin.eztrial.xml.odm.admin;
 
-import org.nerdizin.eztrial.xml.odm.Namespaces;
+import org.nerdizin.eztrial.xml.Namespaces;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 
-@XmlAccessorType(XmlAccessType.FIELD)
+
 public class AdminData {
 
-    @XmlElement(name = "User", namespace = Namespaces.ODM)
+    @XmlElement(name = "User")
     private User user;
 
-    @XmlElement(name = "Location", namespace = Namespaces.ODM)
+    @XmlElement(name = "Location")
     private Location location;
 
-    @XmlElement(name = "SignatureDef", namespace = Namespaces.ODM)
+    @XmlElement(name = "SignatureDef")
     private SignatureDef signatureDef;
 
 

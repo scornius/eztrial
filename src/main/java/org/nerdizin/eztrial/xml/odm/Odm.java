@@ -1,6 +1,7 @@
 package org.nerdizin.eztrial.xml.odm;
 
 import org.joda.time.DateTime;
+import org.nerdizin.eztrial.xml.Namespaces;
 import org.nerdizin.eztrial.xml.adapter.DateTimeAdapter;
 import org.nerdizin.eztrial.xml.adapter.FileTypeAdapter;
 import org.nerdizin.eztrial.xml.odm.admin.AdminData;
@@ -9,8 +10,7 @@ import org.nerdizin.eztrial.xml.odm.study.Study;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-@XmlRootElement(name = "ODM", namespace = Namespaces.ODM)
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "ODM")
 public class Odm {
 
     @XmlAttribute(name = "FileType")
@@ -24,10 +24,10 @@ public class Odm {
     @XmlJavaTypeAdapter(DateTimeAdapter.class)
     private DateTime creationDateTime;
 
-    @XmlElement(name = "Study", namespace = Namespaces.ODM)
+    @XmlElement(name = "Study")
     private Study study;
 
-    @XmlElement(name = "AdminData", namespace = Namespaces.ODM)
+    @XmlElement(name = "AdminData")
     private AdminData adminData;
 
 

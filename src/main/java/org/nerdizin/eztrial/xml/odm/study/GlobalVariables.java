@@ -1,21 +1,21 @@
 package org.nerdizin.eztrial.xml.odm.study;
 
-import org.nerdizin.eztrial.xml.odm.Namespaces;
+import org.nerdizin.eztrial.xml.Namespaces;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 
-@XmlAccessorType(XmlAccessType.FIELD)
+
 public class GlobalVariables {
 
-    @XmlElement(name = "StudyName", namespace = Namespaces.ODM)
+    @XmlElement(name = "StudyName")
     private String studyName;
 
-    @XmlElement(name = "StudyDescription", namespace = Namespaces.ODM)
+    @XmlElement(name = "StudyDescription")
     private String studyDescription;
 
-    @XmlElement(name = "ProtocolName", namespace = Namespaces.ODM)
+    @XmlElement(name = "ProtocolName")
     private String protocolName;
 
 

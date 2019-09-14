@@ -1,23 +1,24 @@
 package org.nerdizin.eztrial.xml.odm.study;
 
-import org.nerdizin.eztrial.xml.odm.Namespaces;
-
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
 
-@XmlAccessorType(XmlAccessType.FIELD)
+
 public class Study {
 
     @XmlAttribute(name = "OID")
     private String oid;
 
-    @XmlElement(name = "GlobalVariables", namespace = Namespaces.ODM)
+    @XmlElement(name = "GlobalVariables")
     private GlobalVariables globalVariables;
 
-    @XmlElement(name = "BasicDefinitions", namespace = Namespaces.ODM)
+    @XmlElement(name = "BasicDefinitions")
     private BasicDefinitions basicDefinitions;
 
-    @XmlElement(name = "MetaDataVersion", namespace = Namespaces.ODM)
+    @XmlElement(name = "MetaDataVersion")
     private List<MetaDataVersion> metaDataVersions;
 
 

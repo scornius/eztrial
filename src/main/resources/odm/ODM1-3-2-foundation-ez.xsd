@@ -1,6 +1,15 @@
-<xs:schema xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:odm="http://www.cdisc.org/ns/odm/v1.3" targetNamespace="http://www.cdisc.org/ns/odm/v1.3" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns="http://www.cdisc.org/ns/odm/v1.3"
+		   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		   xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+		   xmlns:xml="http://www.w3.org/XML/1998/namespace"
+		   xmlns:odm="http://www.cdisc.org/ns/odm/v1.3"
+		   xmlns:ez="http://nerdizin.org/eztrial/1.0"
+		   targetNamespace="http://www.cdisc.org/ns/odm/v1.3"
+		   elementFormDefault="qualified"
+		   attributeFormDefault="unqualified">
 	<xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
 	<xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
+	<xs:import namespace="http://nerdizin.org/eztrial/1.0" schemaLocation="eztrial.xsd"/>
 	<!--
         +===========================================================================+
         | ODM datatype definitions                                                  |
@@ -996,7 +1005,9 @@
 		<xs:sequence/>
 	</xs:group>
 	<xs:group name="ItemDefElementExtension">
-		<xs:sequence/>
+		<xs:sequence>
+			<xs:element ref="ez:Script" minOccurs="0"/>
+		</xs:sequence>
 	</xs:group>
 	<xs:group name="QuestionElementExtension">
 		<xs:sequence/>

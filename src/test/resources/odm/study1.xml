@@ -42,7 +42,17 @@
 
     <AdminData>
         <User OID="user.1" UserType="Investigator">
+            <FirstName>Sepp</FirstName>
+            <LastName>Laibach</LastName>
+            <Address>
+                <StreetName>Laibachweg 12</StreetName>
+                <City>München</City>
+                <StateProv>Bayern</StateProv>
+                <Country>Deutschland</Country>
+                <PostalCode>81234</PostalCode>
+            </Address>
             <Email>sepp.laibach@nerdizin.org</Email>
+            <Phone>089 32 16 8</Phone>
         </User>
         <Location OID="location.1" Name="Medizinische Hochschule Hannover" LocationType="Site">
             <MetaDataVersionRef StudyOID="study.1" MetaDataVersionOID="mdv.1" EffectiveDate="2019-09-14"/>

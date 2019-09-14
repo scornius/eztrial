@@ -1,0 +1,1 @@
+CREATE USER eztrial WITH PASSWORD 'eztrial123';

@@ -1,23 +1,18 @@
 package org.nerdizin.eztrial.xml.odm.study;
 
-import org.nerdizin.eztrial.xml.adapter.YesNoBooleanAdapter;
+import javax.xml.bind.annotation.XmlElement;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+public class FormDef extends AbstractRepeatingDef {
 
-public class FormDef extends AbstractDef {
-
-    @XmlAttribute(name = "Repeating")
-    @XmlJavaTypeAdapter(YesNoBooleanAdapter.class)
-    private Boolean repeating;
+	@XmlElement(name = "ItemGroupRef")
+	private ItemGroupRef itemGroupRef;
 
 
-    public boolean getRepeating() {
-        return repeating;
-    }
+	public ItemGroupRef getItemGroupRef() {
+		return itemGroupRef;
+	}
 
-    public void setRepeating(final boolean repeating) {
-        this.repeating = repeating;
-    }
-
+	public void setItemGroupRef(final ItemGroupRef itemGroupRef) {
+		this.itemGroupRef = itemGroupRef;
+	}
 }

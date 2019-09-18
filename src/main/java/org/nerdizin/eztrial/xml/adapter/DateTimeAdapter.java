@@ -11,12 +11,12 @@ public class DateTimeAdapter extends XmlAdapter<String, DateTime> {
     private DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss");
 
     @Override
-    public DateTime unmarshal(final String input) throws Exception {
+    public DateTime unmarshal(final String input) {
         return DateTime.parse(input);
     }
 
     @Override
-    public String marshal(final DateTime dateTime) throws Exception {
+    public String marshal(final DateTime dateTime) {
         return formatter.print(dateTime);
     }
 }

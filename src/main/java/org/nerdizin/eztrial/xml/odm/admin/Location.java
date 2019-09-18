@@ -3,6 +3,7 @@ package org.nerdizin.eztrial.xml.odm.admin;
 import org.nerdizin.eztrial.xml.adapter.LocationTypeAdapter;
 
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
@@ -17,6 +18,9 @@ public class Location {
     @XmlAttribute(name = "LocationType")
     @XmlJavaTypeAdapter(LocationTypeAdapter.class)
     private LocationType locationType;
+
+    @XmlElement(name = "MetaDataVersionRef")
+	private MetaDataVersionRef metaDataVersionRef;
 
 
     public String getOid() {
@@ -42,4 +46,12 @@ public class Location {
     public void setLocationType(final LocationType locationType) {
         this.locationType = locationType;
     }
+
+	public MetaDataVersionRef getMetaDataVersionRef() {
+		return metaDataVersionRef;
+	}
+
+	public void setMetaDataVersionRef(final MetaDataVersionRef metaDataVersionRef) {
+		this.metaDataVersionRef = metaDataVersionRef;
+	}
 }

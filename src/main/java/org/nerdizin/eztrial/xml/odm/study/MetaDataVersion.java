@@ -13,6 +13,9 @@ public class MetaDataVersion {
     @XmlAttribute(name = "Name")
     private String name;
 
+    @XmlElement(name = "Protocol")
+	private Protocol protocol;
+
     @XmlElement(name = "StudyEventDef")
     private List<StudyEventDef> studyElementDefs;
 
@@ -42,7 +45,15 @@ public class MetaDataVersion {
         this.name = name;
     }
 
-    public List<StudyEventDef> getStudyElementDefs() {
+	public Protocol getProtocol() {
+		return protocol;
+	}
+
+	public void setProtocol(final Protocol protocol) {
+		this.protocol = protocol;
+	}
+
+	public List<StudyEventDef> getStudyElementDefs() {
         return studyElementDefs;
     }
 

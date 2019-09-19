@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ODM xmlns="http://www.cdisc.org/ns/odm/v1.3"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -45,7 +45,7 @@
                     <TranslatedText xml:lang="en">Body height</TranslatedText>
                     <TranslatedText xml:lang="de">Körpergröße</TranslatedText>
                 </Question>
-                <ez:Script Trigger="onChange">console.log('Servus !')</ez:Script>
+                <ez:Script>console.log('Servus !')</ez:Script>
             </ItemDef>
         </MetaDataVersion>
     </Study>

@@ -1,11 +1,13 @@
 package org.nerdizin.eztrial.xml.odm.study;
 
+import org.nerdizin.eztrial.xml.odm.OdmElement;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
 
 
-public class MetaDataVersion {
+public class MetaDataVersion extends OdmElement {
 
     @XmlAttribute(name = "OID")
     private String oid;

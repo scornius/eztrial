@@ -24,6 +24,9 @@ public class Odm {
     @XmlJavaTypeAdapter(DateTimeAdapter.class)
     private DateTime creationDateTime;
 
+    @XmlAttribute(name = "ODMVersion")
+	private String odmVersion;
+
     @XmlElement(name = "Study")
     private Study study;
 
@@ -55,7 +58,15 @@ public class Odm {
         this.creationDateTime = creationDateTime;
     }
 
-    public Study getStudy() {
+	public String getOdmVersion() {
+		return odmVersion;
+	}
+
+	public void setOdmVersion(final String odmVersion) {
+		this.odmVersion = odmVersion;
+	}
+
+	public Study getStudy() {
         return study;
     }
 

@@ -2,6 +2,7 @@ package org.nerdizin.eztrial.xml.odm.admin;
 
 import org.nerdizin.eztrial.xml.adapter.UserTypeAdapter;
 import org.nerdizin.eztrial.xml.Namespaces;
+import org.nerdizin.eztrial.xml.odm.OdmElement;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -10,7 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
-public class User {
+public class User extends OdmElement {
 
     @XmlAttribute(name = "OID")
     private String oid;

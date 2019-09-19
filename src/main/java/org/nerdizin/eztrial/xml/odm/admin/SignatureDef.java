@@ -1,10 +1,12 @@
 package org.nerdizin.eztrial.xml.odm.admin;
 
+import org.nerdizin.eztrial.xml.odm.OdmElement;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
 
-public class SignatureDef {
+public class SignatureDef extends OdmElement {
 
     @XmlAttribute(name = "OID")
     private String oid;

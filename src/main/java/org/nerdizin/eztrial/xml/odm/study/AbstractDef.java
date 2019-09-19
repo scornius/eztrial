@@ -1,8 +1,10 @@
 package org.nerdizin.eztrial.xml.odm.study;
 
+import org.nerdizin.eztrial.xml.odm.OdmElement;
+
 import javax.xml.bind.annotation.XmlAttribute;
 
-public abstract class AbstractDef {
+public abstract class AbstractDef extends OdmElement {
 
     @XmlAttribute(name = "OID")
     private String oid;

@@ -1,6 +1,6 @@
 package org.nerdizin.eztrial.entities.base;
 
-import org.nerdizin.eztrial.entities.User;
+import org.nerdizin.eztrial.entities.admin.User;
 import org.nerdizin.eztrial.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.AuditorAware;

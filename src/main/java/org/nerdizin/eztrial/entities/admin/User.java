@@ -1,4 +1,4 @@
-package org.nerdizin.eztrial.entities;
+package org.nerdizin.eztrial.entities.admin;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.nerdizin.eztrial.entities.base.BaseEntity;
@@ -9,10 +9,23 @@ import javax.persistence.*;
 @Table(name = "users")
 public class User extends BaseEntity {
 
+	@Column(name = "user_name")
 	private String userName;
+
+	@Column(name = "first_name")
 	private String firstName;
+
+	@Column(name = "last_name")
 	private String lastName;
+
+	@Column(name = "email")
 	private String email;
+
+	@Column(name = "phone")
+	private String phone;
+
+	@OneToOne
+	private Address address;
 
 	protected User() {}
 
@@ -57,6 +70,22 @@ public class User extends BaseEntity {
 
 	public void setEmail(final String email) {
 		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(final String phone) {
+		this.phone = phone;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(final Address address) {
+		this.address = address;
 	}
 
 	@Override

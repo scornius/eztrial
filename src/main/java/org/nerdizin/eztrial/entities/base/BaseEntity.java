@@ -1,7 +1,6 @@
 package org.nerdizin.eztrial.entities.base;
 
-import org.joda.time.DateTime;
-import org.nerdizin.eztrial.entities.User;
+import org.nerdizin.eztrial.entities.admin.User;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;

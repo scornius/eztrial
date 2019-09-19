@@ -1,13 +1,14 @@
 package org.nerdizin.eztrial.xml.odm.admin;
 
 import org.nerdizin.eztrial.xml.adapter.LocationTypeAdapter;
+import org.nerdizin.eztrial.xml.odm.OdmElement;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
-public class Location {
+public class Location extends OdmElement {
 
     @XmlAttribute(name = "OID")
     private String oid;

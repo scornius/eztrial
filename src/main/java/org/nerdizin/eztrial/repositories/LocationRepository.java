@@ -1,6 +1,6 @@
 package org.nerdizin.eztrial.repositories;
 
-import org.nerdizin.eztrial.entities.Location;
+import org.nerdizin.eztrial.entities.admin.Location;
 import org.nerdizin.eztrial.entities.enums.LocationType;
 import org.springframework.data.repository.PagingAndSortingRepository;
 

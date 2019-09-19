@@ -1,4 +1,4 @@
-package org.nerdizin.eztrial.entities;
+package org.nerdizin.eztrial.entities.admin;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.nerdizin.eztrial.entities.base.BaseEntity;
@@ -19,7 +19,7 @@ public class Address extends BaseEntity {
 	private String postalCode;
 	private String country;
 
-	protected Address() {}
+	public Address() {}
 
 	public String getStreet() {
 		return street;

@@ -1,18 +1,19 @@
 package org.nerdizin.eztrial.xml.odm.study;
 
 import javax.xml.bind.annotation.XmlElement;
+import java.util.List;
 
 public class Protocol {
 
 	@XmlElement(name = "StudyEventRef")
-	private StudyEventRef studyEventRef;
+	private List<StudyEventRef> studyEventRefs;
 
 
-	public StudyEventRef getStudyEventRef() {
-		return studyEventRef;
+	public List<StudyEventRef> getStudyEventRefs() {
+		return studyEventRefs;
 	}
 
-	public void setStudyEventRef(final StudyEventRef studyEventRef) {
-		this.studyEventRef = studyEventRef;
+	public void setStudyEventRefs(final List<StudyEventRef> studyEventRefs) {
+		this.studyEventRefs = studyEventRefs;
 	}
 }

@@ -8,22 +8,22 @@ public enum LocationType {
 	LAB("Lab"),
 	OTHER("Other");
 
-	private String value;
+	private String code;
 
-	LocationType( final String value) {
-		this.value = value;
+	LocationType(final String code) {
+		this.code = code;
 	}
 
-	public String getValue() {
-		return value;
+	public String getCode() {
+		return code;
 	}
 
-	public static LocationType getByValue(final String value) {
+	public static LocationType getByCode(final String code) {
 		for (final LocationType locationType : values()) {
-			if (locationType.getValue().equalsIgnoreCase(value)) {
+			if (locationType.getCode().equalsIgnoreCase(code)) {
 				return locationType;
 			}
 		}
-		throw new IllegalArgumentException(String.format("Unknown Location value %s", value));
+		throw new IllegalArgumentException(String.format("Unknown Location code %s", code));
 	}
 }

@@ -1,41 +1,44 @@
 package org.nerdizin.eztrial.xml.odm.admin;
 
+import org.nerdizin.eztrial.xml.odm.OdmElement;
+
 import javax.xml.bind.annotation.XmlElement;
+import java.util.List;
 
 
 public class AdminData {
 
     @XmlElement(name = "User")
-    private User user;
+    private List<User> users;
 
     @XmlElement(name = "Location")
-    private Location location;
+    private List<Location> locations;
 
     @XmlElement(name = "SignatureDef")
-    private SignatureDef signatureDef;
+    private List<SignatureDef> signatureDefs;
 
 
-    public User getUser() {
-        return user;
-    }
+	public List<User> getUsers() {
+		return users;
+	}
 
-    public void setUser(final User user) {
-        this.user = user;
-    }
+	public void setUsers(final List<User> users) {
+		this.users = users;
+	}
 
-    public Location getLocation() {
-        return location;
-    }
+	public List<Location> getLocations() {
+		return locations;
+	}
 
-    public void setLocation(final Location location) {
-        this.location = location;
-    }
+	public void setLocations(final List<Location> locations) {
+		this.locations = locations;
+	}
 
-    public SignatureDef getSignatureDef() {
-        return signatureDef;
-    }
+	public List<SignatureDef> getSignatureDefs() {
+		return signatureDefs;
+	}
 
-    public void setSignatureDef(final SignatureDef signatureDef) {
-        this.signatureDef = signatureDef;
-    }
+	public void setSignatureDefs(final List<SignatureDef> signatureDefs) {
+		this.signatureDefs = signatureDefs;
+	}
 }

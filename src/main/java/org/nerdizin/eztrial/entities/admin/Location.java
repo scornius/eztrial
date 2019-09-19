@@ -1,19 +1,17 @@
-package org.nerdizin.eztrial.entities;
+package org.nerdizin.eztrial.entities.admin;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.nerdizin.eztrial.entities.base.BaseEntity;
 import org.nerdizin.eztrial.entities.enums.LocationType;
 import org.nerdizin.eztrial.entities.enums.LocationTypeConverter;
 
-import javax.persistence.Column;
-import javax.persistence.Convert;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "locations")
 public class Location extends BaseEntity {
 
-	@Column(name = "oid", nullable = false, updatable = false)
+	@Column(name = "oid", nullable = false, updatable = false, unique = true)
 	private String oid;
 
 	@Column(name = "name", length = 100, nullable = false)
@@ -33,7 +31,7 @@ public class Location extends BaseEntity {
 	private String affix;
 
 	@OneToOne
-	private Address addresses;
+	private Address address;
 
 	protected Location() {}
 
@@ -91,12 +89,12 @@ public class Location extends BaseEntity {
 		this.affix = affix;
 	}
 
-	public Address getAddresses() {
-		return addresses;
+	public Address getAddress() {
+		return address;
 	}
 
-	public void setAddresses(final Address addresses) {
-		this.addresses = addresses;
+	public void setAddress(final Address address) {
+		this.address = address;
 	}
 
 	@Override

@@ -5,4 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface MetaDataVersionRepository extends CrudRepository<MetaDataVersion,Long> {
 
+	MetaDataVersion findByOid(String oid);
+
 }

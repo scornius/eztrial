@@ -5,4 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface StudyRepository extends CrudRepository<Study,Long> {
 
+	Study findByOid(String oid);
+
 }

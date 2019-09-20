@@ -18,10 +18,11 @@ public class StudyDefPersistenceServiceImpl implements StudyDefPersistenceServic
 	private final UserRepository userRepository;
 	private final AddressRepository addressRepository;
 	private final SignatureDefRepository signatureDefRepository;
+	private final MetaDataVersionRefRepository metaDataVersionRefRepository;
+
 	private final StudyRepository studyRepository;
 	private final MeasurementUnitRepository measurementUnitRepository;
 	private final MetaDataVersionRepository metaDataVersionRepository;
-
 	private final ProtocolRepository protocolRepository;
 	private final EventDefRepository eventDefRepository;
 	private final FormDefRepository formDefRepository;
@@ -38,6 +39,7 @@ public class StudyDefPersistenceServiceImpl implements StudyDefPersistenceServic
 			final UserRepository userRepository,
 			final AddressRepository addressRepository,
 			final SignatureDefRepository signatureDefRepository,
+			final MetaDataVersionRefRepository metaDataVersionRefRepository,
 			final StudyRepository studyRepository,
 			final MeasurementUnitRepository measurementUnitRepository,
 			final MetaDataVersionRepository metaDataVersionRepository,
@@ -54,6 +56,7 @@ public class StudyDefPersistenceServiceImpl implements StudyDefPersistenceServic
 		this.userRepository = userRepository;
 		this.addressRepository = addressRepository;
 		this.signatureDefRepository = signatureDefRepository;
+		this.metaDataVersionRefRepository = metaDataVersionRefRepository;
 		this.studyRepository = studyRepository;
 		this.measurementUnitRepository = measurementUnitRepository;
 		this.metaDataVersionRepository = metaDataVersionRepository;
@@ -323,7 +326,18 @@ public class StudyDefPersistenceServiceImpl implements StudyDefPersistenceServic
 				if (location.getMetaDataVersionRefs() != null) {
 					for (final MetaDataVersionRef metaDataVersionRef : location.getMetaDataVersionRefs()) {
 
-						// TODO
+						final org.nerdizin.eztrial.entities.study.MetaDataVersion targetMetaDataVersion =
+								metaDataVersionRepository.findByOid(metaDataVersionRef.getMetaDataVersionOid());
+						final org.nerdizin.eztrial.entities.study.Study targetStudy =
+								studyRepository.findByOid(metaDataVersionRef.getStudyOid());
+
+						final org.nerdizin.eztrial.entities.admin.MetaDataVersionRef metaDataVersionRefEntity =
+								new org.nerdizin.eztrial.entities.admin.MetaDataVersionRef();
+						metaDataVersionRefEntity.setMetaDataVersion(targetMetaDataVersion);
+						metaDataVersionRefEntity.setStudy(targetStudy);
+						metaDataVersionRefEntity.setEffectiveDate(metaDataVersionRef.getEffectiveDate());
+						
+						metaDataVersionRefRepository.save(metaDataVersionRefEntity);
 					}
 				}
 			}

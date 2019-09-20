@@ -13,7 +13,7 @@ import java.util.List;
 @Table(name = "def_events")
 public class EventDef extends OidNameEntity {
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "mdv_id")
 	private MetaDataVersion metaDataVersion;
 

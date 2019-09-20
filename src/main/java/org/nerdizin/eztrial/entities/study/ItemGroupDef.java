@@ -11,7 +11,7 @@ import java.util.List;
 @Table(name = "def_item_groups")
 public class ItemGroupDef extends OidNameEntity {
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "mdv_id")
 	private MetaDataVersion metaDataVersion;
 

@@ -13,7 +13,7 @@ import java.util.Map;
 @Table(name = "def_items")
 public class ItemDef extends OidNameEntity {
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "mdv_id")
 	private MetaDataVersion metaDataVersion;
 

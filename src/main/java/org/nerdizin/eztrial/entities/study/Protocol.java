@@ -11,7 +11,7 @@ import java.util.List;
 @Table(name = "def_protocol")
 public class Protocol extends BaseEntity {
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "mdv_id")
 	private MetaDataVersion metaDataVersion;
 

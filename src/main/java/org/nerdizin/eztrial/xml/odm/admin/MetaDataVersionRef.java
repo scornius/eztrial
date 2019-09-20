@@ -1,10 +1,10 @@
 package org.nerdizin.eztrial.xml.odm.admin;
 
-import org.joda.time.LocalDate;
 import org.nerdizin.eztrial.xml.adapter.LocalDateAdapter;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.time.LocalDate;
 
 public class MetaDataVersionRef {
 

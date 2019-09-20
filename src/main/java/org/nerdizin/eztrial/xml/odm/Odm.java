@@ -1,14 +1,13 @@
 package org.nerdizin.eztrial.xml.odm;
 
-import org.joda.time.DateTime;
-import org.nerdizin.eztrial.xml.Namespaces;
-import org.nerdizin.eztrial.xml.adapter.DateTimeAdapter;
 import org.nerdizin.eztrial.xml.adapter.FileTypeAdapter;
+import org.nerdizin.eztrial.xml.adapter.LocalDateTimeAdapter;
 import org.nerdizin.eztrial.xml.odm.admin.AdminData;
 import org.nerdizin.eztrial.xml.odm.study.Study;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.time.LocalDateTime;
 
 @XmlRootElement(name = "ODM")
 public class Odm {
@@ -21,8 +20,8 @@ public class Odm {
     private String fileOid;
 
     @XmlAttribute(name = "CreationDateTime")
-    @XmlJavaTypeAdapter(DateTimeAdapter.class)
-    private DateTime creationDateTime;
+    @XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
+    private LocalDateTime creationDateTime;
 
     @XmlAttribute(name = "ODMVersion")
 	private String odmVersion;
@@ -50,11 +49,11 @@ public class Odm {
         this.fileOid = fileOid;
     }
 
-    public DateTime getCreationDateTime() {
+    public LocalDateTime getCreationDateTime() {
         return creationDateTime;
     }
 
-    public void setCreationDateTime(DateTime creationDateTime) {
+    public void setCreationDateTime(LocalDateTime creationDateTime) {
         this.creationDateTime = creationDateTime;
     }
 

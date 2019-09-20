@@ -1,14 +1,12 @@
 package org.nerdizin.eztrial.xml.adapter;
 
-import org.joda.time.LocalDate;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
-
 import javax.xml.bind.annotation.adapters.XmlAdapter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class LocalDateAdapter extends XmlAdapter<String,LocalDate> {
 
-	private DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
+	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 	@Override
 	public LocalDate unmarshal(final String input) {
@@ -17,6 +15,6 @@ public class LocalDateAdapter extends XmlAdapter<String,LocalDate> {
 
 	@Override
 	public String marshal(final LocalDate localDate) {
-		return formatter.print(localDate);
+		return formatter.format(localDate);
 	}
 }

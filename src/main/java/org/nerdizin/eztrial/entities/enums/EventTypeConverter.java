@@ -16,7 +16,7 @@ public class EventTypeConverter implements AttributeConverter<EventType,String> 
 
 	@Override
 	public EventType convertToEntityAttribute(final String code) {
-		if (code == null) {
+		if (code == null || "".equals(code)) {
 			return null;
 		}
 		return EventType.getByCode(code);

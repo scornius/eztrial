@@ -16,7 +16,7 @@ public class DataTypeConverter implements AttributeConverter<DataType,String> {
 
 	@Override
 	public DataType convertToEntityAttribute(final String code) {
-		if (code == null) {
+		if (code == null || "".equals(code)) {
 			return null;
 		}
 		return DataType.fromCode(code);

@@ -15,10 +15,10 @@ public class LocationTypeConverter implements AttributeConverter<LocationType,St
 	}
 
 	@Override
-	public LocationType convertToEntityAttribute(final String value) {
-		if (value == null) {
+	public LocationType convertToEntityAttribute(final String code) {
+		if (code == null || "".equals(code)) {
 			return null;
 		}
-		return LocationType.fromCode(value);
+		return LocationType.fromCode(code);
 	}
 }

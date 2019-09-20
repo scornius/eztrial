@@ -16,7 +16,7 @@ public class UserTypeConverter implements AttributeConverter<UserType,String> {
 
 	@Override
 	public UserType convertToEntityAttribute(final String code) {
-		if (code == null) {
+		if (code == null || "".equals(code)) {
 			return null;
 		}
 		return UserType.fromCode(code);

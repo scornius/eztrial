@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Table(name = "def_item_group_ref")
 public class ItemGroupRef extends RefEntity {
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "def_form_id")
 	private FormDef formDef;
 

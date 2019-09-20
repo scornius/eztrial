@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Table(name = "def_event_ref")
 public class EventRef extends RefEntity {
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "protocol_id")
 	private Protocol protocol;
 

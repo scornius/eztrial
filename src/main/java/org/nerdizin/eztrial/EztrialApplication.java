@@ -11,6 +11,7 @@ import org.nerdizin.eztrial.repositories.StudyRepository;
 import org.nerdizin.eztrial.repositories.UserRepository;
 import org.nerdizin.eztrial.services.xml.StudyDefPersistenceService;
 import org.nerdizin.eztrial.services.xml.StudyDefService;
+import org.nerdizin.eztrial.util.Constants;
 import org.nerdizin.eztrial.xml.odm.Odm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,7 +51,7 @@ public class EztrialApplication {
 			public void run(final String... args) throws Exception {
 
 				User admin = new User();
-				admin.setUserType(UserType.OTHER);
+				admin.setOid(Constants.ADMIN_OID);
 				admin.setFirstName("admin");
 				admin.setLastName("admin");
 				admin.setEmail("admin@foo.org");

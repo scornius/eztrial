@@ -20,18 +20,21 @@ public abstract class BaseEntity {
 	private Long id;
 
 	@CreatedBy
-	@ManyToOne
+	@ManyToOne(optional = false)
 	private User createdBy;
 
 	@CreatedDate
+	@Column(name = "created_on", nullable = false)
 	private LocalDateTime createdDate;
 
 	@LastModifiedBy
-	@ManyToOne
+	@ManyToOne(optional = false)
 	private User modifiedBy;
 
 	@LastModifiedDate
+	@Column(name = "modified_on", nullable = false)
 	private LocalDateTime modifiedDate;
+
 
 	public Long getId() {
 		return id;

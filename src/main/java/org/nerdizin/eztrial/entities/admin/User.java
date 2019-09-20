@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Table(name = "admin_users")
 public class User extends BaseEntity {
 
-	@Column(name = "oid")
+	@Column(name = "oid", nullable = false, updatable = false, unique = true)
 	private String oid;
 
 	@Column(name = "user_name")
@@ -29,7 +29,7 @@ public class User extends BaseEntity {
 	@Column(name = "phone")
 	private String phone;
 
-	@Column(name = "user_type", nullable = false)
+	@Column(name = "user_type")
 	@Convert(converter = UserTypeConverter.class)
 	private UserType userType;
 

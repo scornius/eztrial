@@ -11,7 +11,10 @@ public class LocationConverter implements OdmElement2EntityConverter<org.nerdizi
 		final Location result = new Location();
 		result.setOid(location.getOid());
 		result.setName(location.getName());
-		result.setType(LocationType.fromCode(location.getLocationType().getCode()));
+
+		if (location.getLocationType() != null) {
+			result.setType(LocationType.fromCode(location.getLocationType().getCode()));
+		}
 
 		return result;
 	}
@@ -23,7 +26,10 @@ public class LocationConverter implements OdmElement2EntityConverter<org.nerdizi
 				new org.nerdizin.eztrial.xml.odm.admin.Location();
 		result.setOid(location.getOid());
 		result.setName(location.getName());
-		result.setLocationType(org.nerdizin.eztrial.xml.odm.admin.LocationType.fromCode(location.getType().getCode()));
+
+		if (location.getType() != null) {
+			result.setLocationType(org.nerdizin.eztrial.xml.odm.admin.LocationType.fromCode(location.getType().getCode()));
+		}
 
 		return result;
 	}

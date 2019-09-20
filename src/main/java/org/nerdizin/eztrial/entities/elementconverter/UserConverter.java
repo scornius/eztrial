@@ -9,11 +9,15 @@ public class UserConverter implements OdmElement2EntityConverter<org.nerdizin.ez
 	public User convert2Entity(final org.nerdizin.eztrial.xml.odm.admin.User user) {
 
 		final User result = new User();
+		result.setOid(user.getOid());
 		result.setFirstName(user.getFirstName());
 		result.setLastName(user.getLastName());
 		result.setPhone(user.getPhone());
 		result.setEmail(user.getEmail());
-		result.setUserType(org.nerdizin.eztrial.entities.enums.UserType.fromCode(user.getUserType().getCode()));
+
+		if (user.getUserType() != null) {
+			result.setUserType(org.nerdizin.eztrial.entities.enums.UserType.fromCode(user.getUserType().getCode()));
+		}
 
 		if (user.getAddress() != null) {
 			final AddressConverter addressConverter = new AddressConverter();
@@ -32,7 +36,10 @@ public class UserConverter implements OdmElement2EntityConverter<org.nerdizin.ez
 		result.setLastName(user.getLastName());
 		result.setPhone(user.getPhone());
 		result.setEmail(user.getEmail());
-		result.setUserType(UserType.fromCode(user.getUserType().getCode()));
+
+		if (user.getUserType() != null) {
+			result.setUserType(UserType.fromCode(user.getUserType().getCode()));
+		}
 
 		if (user.getAddress() != null) {
 			final AddressConverter addressConverter = new AddressConverter();

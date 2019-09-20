@@ -14,20 +14,20 @@ public class Location extends BaseEntity {
 	@Column(name = "oid", nullable = false, updatable = false, unique = true)
 	private String oid;
 
-	@Column(name = "name", length = 100, nullable = false)
+	@Column(name = "name", nullable = false)
 	private String name;
 
-	@Column(name = "type", length = 10, nullable = false)
+	@Column(name = "type", length = 10)
 	@Convert(converter = LocationTypeConverter.class)
 	private LocationType type;
 
 	@Column(name = "is_active", nullable = false)
 	private boolean active;
 
-	@Column(name = "label", length = 100)
+	@Column(name = "label")
 	private String label;
 
-	@Column(name = "affix", length = 100)
+	@Column(name = "affix")
 	private String affix;
 
 	@OneToOne

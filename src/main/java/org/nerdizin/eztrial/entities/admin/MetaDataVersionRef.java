@@ -3,22 +3,24 @@ package org.nerdizin.eztrial.entities.admin;
 import org.nerdizin.eztrial.entities.base.BaseEntity;
 import org.nerdizin.eztrial.entities.study.MetaDataVersion;
 import org.nerdizin.eztrial.entities.study.Study;
-import org.nerdizin.eztrial.xml.adapter.LocalDateAdapter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "admin_metadata_version_ref")
 public class MetaDataVersionRef extends BaseEntity {
 
-	@OneToOne
+	@OneToOne(optional = false)
 	private Study study;
 
-	@OneToOne
+	@OneToOne(optional = false)
 	private MetaDataVersion metaDataVersion;
 
-	@Column(name = "effective_date")
+	@Column(name = "effective_date", nullable = false)
 	private LocalDate effectiveDate;
 
 

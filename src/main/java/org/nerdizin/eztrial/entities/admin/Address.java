@@ -13,10 +13,19 @@ public class Address extends BaseEntity {
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private Long id;
 
+	@Column(name = "street")
 	private String street;
+
+	@Column(name = "city")
 	private String city;
+
+	@Column(name = "region")
 	private String region;
+
+	@Column(name = "postal_code")
 	private String postalCode;
+
+	@Column(name = "country")
 	private String country;
 
 	public Address() {}

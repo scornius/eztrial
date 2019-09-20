@@ -22,9 +22,9 @@ public enum UserType {
     }
 
     public static UserType fromCode(final String code) {
-        for (final UserType fileType : values()) {
-            if (fileType.getCode().equals(code)) {
-                return fileType;
+        for (final UserType userType : values()) {
+            if (userType.getCode().equals(code)) {
+                return userType;
             }
         }
         throw new IllegalArgumentException("Unknown code: " + code);

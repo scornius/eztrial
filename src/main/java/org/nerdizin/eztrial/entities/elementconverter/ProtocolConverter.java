@@ -12,4 +12,14 @@ public class ProtocolConverter implements
 
 		return result;
 	}
+
+	@Override
+	public org.nerdizin.eztrial.xml.odm.study.Protocol convert2Element(final Protocol protocol) {
+
+		final org.nerdizin.eztrial.xml.odm.study.Protocol result =
+				new org.nerdizin.eztrial.xml.odm.study.Protocol();
+
+
+		return result;
+	}
 }

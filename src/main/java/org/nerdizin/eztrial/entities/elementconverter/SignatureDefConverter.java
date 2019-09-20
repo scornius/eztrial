@@ -14,4 +14,15 @@ public class SignatureDefConverter implements
 
 		return result;
 	}
+
+	@Override
+	public org.nerdizin.eztrial.xml.odm.admin.SignatureDef convert2Element(final SignatureDef signatureDef) {
+
+		final org.nerdizin.eztrial.xml.odm.admin.SignatureDef result =
+				new org.nerdizin.eztrial.xml.odm.admin.SignatureDef();
+		result.setLegalReason(signatureDef.getLegalReason());
+		result.setMeaning(signatureDef.getMeaning());
+
+		return result;
+	}
 }

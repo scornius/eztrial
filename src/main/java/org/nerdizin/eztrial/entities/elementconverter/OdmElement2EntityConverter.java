@@ -4,4 +4,5 @@ public interface OdmElement2EntityConverter<OdmElement,BaseEntity> {
 
 	BaseEntity convert2Entity(OdmElement odmElement);
 
+	OdmElement convert2Element(BaseEntity entity);
 }

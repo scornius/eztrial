@@ -18,7 +18,7 @@ public enum LocationType {
 		return code;
 	}
 
-	public static LocationType getByCode(final String code) {
+	public static LocationType fromCode(final String code) {
 		for (final LocationType locationType : values()) {
 			if (locationType.getCode().equalsIgnoreCase(code)) {
 				return locationType;

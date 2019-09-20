@@ -13,6 +13,6 @@ public class LocationTypeConverter implements AttributeConverter<LocationType,St
 
 	@Override
 	public LocationType convertToEntityAttribute(final String value) {
-		return LocationType.getByCode(value);
+		return LocationType.fromCode(value);
 	}
 }

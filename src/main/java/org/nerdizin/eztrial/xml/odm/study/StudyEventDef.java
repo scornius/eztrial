@@ -5,6 +5,7 @@ import org.nerdizin.eztrial.xml.adapter.EventTypeAdapter;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.util.ArrayList;
 import java.util.List;
 
 public class StudyEventDef extends AbstractRepeatingDef {
@@ -23,6 +24,13 @@ public class StudyEventDef extends AbstractRepeatingDef {
 
 	public void setFormRefs(final List<FormRef> formRefs) {
 		this.formRefs = formRefs;
+	}
+
+	public void addFormRef(final FormRef formRef) {
+		if (this.formRefs == null) {
+			this.formRefs = new ArrayList<>();
+		}
+		this.formRefs.add(formRef);
 	}
 
 	public EventType getEventType() {

@@ -33,13 +33,7 @@ public class Location extends BaseEntity {
 	@OneToOne
 	private Address address;
 
-	protected Location() {}
-
-	public Location(final String oid, final String name, final LocationType type) {
-		this.oid = oid;
-		this.name = name;
-		this.type = type;
-	}
+	public Location() {}
 
 	public String getOid() {
 		return oid;

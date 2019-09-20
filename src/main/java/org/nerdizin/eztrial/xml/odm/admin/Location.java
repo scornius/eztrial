@@ -6,6 +6,8 @@ import org.nerdizin.eztrial.xml.odm.OdmElement;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Location extends OdmElement {
@@ -21,7 +23,7 @@ public class Location extends OdmElement {
     private LocationType locationType;
 
     @XmlElement(name = "MetaDataVersionRef")
-	private MetaDataVersionRef metaDataVersionRef;
+	private List<MetaDataVersionRef> metaDataVersionRefs;
 
 
     public String getOid() {
@@ -48,11 +50,18 @@ public class Location extends OdmElement {
         this.locationType = locationType;
     }
 
-	public MetaDataVersionRef getMetaDataVersionRef() {
-		return metaDataVersionRef;
+	public List<MetaDataVersionRef> getMetaDataVersionRefs() {
+		return metaDataVersionRefs;
 	}
 
-	public void setMetaDataVersionRef(final MetaDataVersionRef metaDataVersionRef) {
-		this.metaDataVersionRef = metaDataVersionRef;
+	public void setMetaDataVersionRefs(final List<MetaDataVersionRef> metaDataVersionRefs) {
+		this.metaDataVersionRefs = metaDataVersionRefs;
+	}
+
+	public void addMetaDataVersionRef(final MetaDataVersionRef metaDataVersionRef) {
+    	if (this.metaDataVersionRefs == null) {
+    		this.metaDataVersionRefs = new ArrayList<>();
+		}
+    	this.metaDataVersionRefs.add(metaDataVersionRef);
 	}
 }

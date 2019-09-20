@@ -2,12 +2,17 @@ package org.nerdizin.eztrial.entities.admin;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.nerdizin.eztrial.entities.base.BaseEntity;
+import org.nerdizin.eztrial.entities.enums.UserType;
+import org.nerdizin.eztrial.entities.enums.UserTypeConverter;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity {
+
+	@Column(name = "oid")
+	private String oid;
 
 	@Column(name = "user_name")
 	private String userName;
@@ -24,20 +29,21 @@ public class User extends BaseEntity {
 	@Column(name = "phone")
 	private String phone;
 
+	@Column(name = "user_type", nullable = false)
+	@Convert(converter = UserTypeConverter.class)
+	private UserType userType;
+
 	@OneToOne
 	private Address address;
 
-	protected User() {}
+	public User() {}
 
-	public User(final String firstName, final String lastName) {
-		this.firstName = firstName;
-		this.lastName = lastName;
+	public String getOid() {
+		return oid;
 	}
 
-	public User(final String firstName, final String lastName, final String email) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
+	public void setOid(final String oid) {
+		this.oid = oid;
 	}
 
 	public String getUserName() {
@@ -78,6 +84,14 @@ public class User extends BaseEntity {
 
 	public void setPhone(final String phone) {
 		this.phone = phone;
+	}
+
+	public UserType getUserType() {
+		return userType;
+	}
+
+	public void setUserType(final UserType userType) {
+		this.userType = userType;
 	}
 
 	public Address getAddress() {

@@ -14,4 +14,15 @@ public class MetaDataVersionConverter implements
 
 		return result;
 	}
+
+	@Override
+	public org.nerdizin.eztrial.xml.odm.study.MetaDataVersion convert2Element(final MetaDataVersion metaDataVersion) {
+
+		final org.nerdizin.eztrial.xml.odm.study.MetaDataVersion result =
+				new org.nerdizin.eztrial.xml.odm.study.MetaDataVersion();
+		result.setOid(metaDataVersion.getOid());
+		result.setName(metaDataVersion.getName());
+
+		return result;
+	}
 }

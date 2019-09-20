@@ -3,6 +3,7 @@ package org.nerdizin.eztrial;
 import org.nerdizin.eztrial.entities.admin.Location;
 import org.nerdizin.eztrial.entities.admin.SignatureDef;
 import org.nerdizin.eztrial.entities.admin.User;
+import org.nerdizin.eztrial.entities.enums.UserType;
 import org.nerdizin.eztrial.entities.study.Study;
 import org.nerdizin.eztrial.repositories.LocationRepository;
 import org.nerdizin.eztrial.repositories.SignatureDefRepository;
@@ -48,7 +49,12 @@ public class EztrialApplication {
 			@Transactional
 			public void run(final String... args) throws Exception {
 
-				userRepository.save(new User("admin", "admin", "admin"));
+				User admin = new User();
+				admin.setUserType(UserType.OTHER);
+				admin.setFirstName("admin");
+				admin.setLastName("admin");
+				admin.setEmail("admin@foo.org");
+				userRepository.save(admin);
 
 				final File file = new File("/Users/ralf/dev/ws/eztrial/src/test/resources/odm/study1.xml");
 				final Odm odm = studyDefService.parse(new FileInputStream(file));

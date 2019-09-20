@@ -13,6 +13,12 @@ public class TranslatedText {
 	@XmlValue
 	private String text;
 
+	public TranslatedText() {}
+
+	public TranslatedText(final String language, final String text) {
+		this.language = language;
+		this.text = text;
+	}
 
 	public String getLanguage() {
 		return language;

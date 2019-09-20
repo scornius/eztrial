@@ -16,4 +16,17 @@ public class AddressConverter implements OdmElement2EntityConverter<org.nerdizin
 
 		return result;
 	}
+
+	@Override
+	public org.nerdizin.eztrial.xml.odm.admin.Address convert2Element(final Address address) {
+
+		final org.nerdizin.eztrial.xml.odm.admin.Address result = new org.nerdizin.eztrial.xml.odm.admin.Address();
+		result.setStreetName(address.getStreet());
+		result.setCity(address.getCity());
+		result.setStateProv(address.getRegion());
+		result.setCountry(address.getCountry());
+		result.setPostalCode(address.getPostalCode());
+
+		return result;
+	}
 }

@@ -6,13 +6,25 @@ import org.nerdizin.eztrial.entities.enums.LocationType;
 public class LocationConverter implements OdmElement2EntityConverter<org.nerdizin.eztrial.xml.odm.admin.Location,Location> {
 
 	@Override
-	public Location convert2Entity(final org.nerdizin.eztrial.xml.odm.admin.Location locationElement) {
+	public Location convert2Entity(final org.nerdizin.eztrial.xml.odm.admin.Location location) {
 
-		final Location result = new Location(locationElement.getOid(),
-				locationElement.getName(),
-				LocationType.getByCode(locationElement.getLocationType().getCode()));
+		final Location result = new Location();
+		result.setOid(location.getOid());
+		result.setName(location.getName());
+		result.setType(LocationType.fromCode(location.getLocationType().getCode()));
 
 		return result;
 	}
 
+	@Override
+	public org.nerdizin.eztrial.xml.odm.admin.Location convert2Element(final Location location) {
+
+		final org.nerdizin.eztrial.xml.odm.admin.Location result =
+				new org.nerdizin.eztrial.xml.odm.admin.Location();
+		result.setOid(location.getOid());
+		result.setName(location.getName());
+		result.setLocationType(org.nerdizin.eztrial.xml.odm.admin.LocationType.fromCode(location.getType().getCode()));
+
+		return result;
+	}
 }

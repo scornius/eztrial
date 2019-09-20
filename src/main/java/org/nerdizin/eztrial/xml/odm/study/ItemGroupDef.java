@@ -1,6 +1,7 @@
 package org.nerdizin.eztrial.xml.odm.study;
 
 import javax.xml.bind.annotation.XmlElement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ItemGroupDef extends AbstractRepeatingDef {
@@ -15,5 +16,12 @@ public class ItemGroupDef extends AbstractRepeatingDef {
 
 	public void setItemRefs(final List<ItemRef> itemRefs) {
 		this.itemRefs = itemRefs;
+	}
+
+	public void addItemRef(final ItemRef itemRef) {
+		if (this.itemRefs == null) {
+			this.itemRefs = new ArrayList<>();
+		}
+		this.itemRefs.add(itemRef);
 	}
 }

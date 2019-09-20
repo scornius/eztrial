@@ -1,6 +1,7 @@
 package org.nerdizin.eztrial.xml.odm.study;
 
 import javax.xml.bind.annotation.XmlElement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Question {
@@ -15,5 +16,12 @@ public class Question {
 
 	public void setTranslatedTexts(final List<TranslatedText> translatedTexts) {
 		this.translatedTexts = translatedTexts;
+	}
+
+	public void addTranslatedText(final TranslatedText translatedText) {
+		if (this.translatedTexts == null) {
+			this.translatedTexts = new ArrayList<>();
+		}
+		this.translatedTexts.add(translatedText);
 	}
 }

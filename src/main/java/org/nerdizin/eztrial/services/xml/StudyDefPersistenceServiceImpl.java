@@ -6,10 +6,7 @@ import org.nerdizin.eztrial.entities.study.EventDef;
 import org.nerdizin.eztrial.entities.study.EventRef;
 import org.nerdizin.eztrial.repositories.*;
 import org.nerdizin.eztrial.xml.odm.Odm;
-import org.nerdizin.eztrial.xml.odm.admin.AdminData;
-import org.nerdizin.eztrial.xml.odm.admin.Location;
-import org.nerdizin.eztrial.xml.odm.admin.SignatureDef;
-import org.nerdizin.eztrial.xml.odm.admin.User;
+import org.nerdizin.eztrial.xml.odm.admin.*;
 import org.nerdizin.eztrial.xml.odm.study.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -79,6 +76,9 @@ public class StudyDefPersistenceServiceImpl implements StudyDefPersistenceServic
 		}
 		if (odm.getStudy() != null) {
 			persistStudy(odm.getStudy());
+		}
+		if (odm.getAdminData() != null) {
+			persistAdminDataRefs(odm.getAdminData());
 		}
 	}
 
@@ -312,6 +312,20 @@ public class StudyDefPersistenceServiceImpl implements StudyDefPersistenceServic
 			final SignatureDefConverter signatureDefConverter = new SignatureDefConverter();
 			for (final SignatureDef signatureDef : adminData.getSignatureDefs()) {
 				signatureDefRepository.save(signatureDefConverter.convert2Entity(signatureDef));
+			}
+		}
+	}
+
+	private void persistAdminDataRefs(final AdminData adminData) {
+
+		if (adminData.getLocations() != null) {
+			for (final Location location : adminData.getLocations()) {
+				if (location.getMetaDataVersionRefs() != null) {
+					for (final MetaDataVersionRef metaDataVersionRef : location.getMetaDataVersionRefs()) {
+
+						// TODO
+					}
+				}
 			}
 		}
 	}

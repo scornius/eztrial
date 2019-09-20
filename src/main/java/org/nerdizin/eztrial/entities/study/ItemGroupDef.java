@@ -4,6 +4,8 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.nerdizin.eztrial.entities.base.OidNameEntity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "def_item_groups")
@@ -15,6 +17,9 @@ public class ItemGroupDef extends OidNameEntity {
 
 	@Column(name = "repeating")
 	private boolean repeating;
+
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "itemGroupDef")
+	private List<ItemRef> itemRefs;
 
 
 	public MetaDataVersion getMetaDataVersion() {
@@ -31,6 +36,21 @@ public class ItemGroupDef extends OidNameEntity {
 
 	public void setRepeating(final boolean repeating) {
 		this.repeating = repeating;
+	}
+
+	public List<ItemRef> getItemRefs() {
+		return itemRefs;
+	}
+
+	public void setItemRefs(final List<ItemRef> itemRefs) {
+		this.itemRefs = itemRefs;
+	}
+
+	public void addItemRef(final ItemRef itemRef) {
+		if (this.itemRefs == null) {
+			this.itemRefs = new ArrayList<>();
+		}
+		this.itemRefs.add(itemRef);
 	}
 
 	@Override

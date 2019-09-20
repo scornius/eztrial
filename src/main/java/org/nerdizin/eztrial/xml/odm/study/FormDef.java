@@ -1,18 +1,19 @@
 package org.nerdizin.eztrial.xml.odm.study;
 
 import javax.xml.bind.annotation.XmlElement;
+import java.util.List;
 
 public class FormDef extends AbstractRepeatingDef {
 
 	@XmlElement(name = "ItemGroupRef")
-	private ItemGroupRef itemGroupRef;
+	private List<ItemGroupRef> itemGroupRefs;
 
 
-	public ItemGroupRef getItemGroupRef() {
-		return itemGroupRef;
+	public List<ItemGroupRef> getItemGroupRefs() {
+		return itemGroupRefs;
 	}
 
-	public void setItemGroupRef(final ItemGroupRef itemGroupRef) {
-		this.itemGroupRef = itemGroupRef;
+	public void setItemGroupRefs(final List<ItemGroupRef> itemGroupRefs) {
+		this.itemGroupRefs = itemGroupRefs;
 	}
 }

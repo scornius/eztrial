@@ -123,51 +123,76 @@ public class StudyDefPersistenceServiceImpl implements StudyDefPersistenceServic
 		studyEntity.addMetaDataVersion(metaDataVersionEntity);
 
 		if (metaDataVersion.getProtocol() != null) {
-			final ProtocolConverter protocolConverter = new ProtocolConverter();
-			final org.nerdizin.eztrial.entities.study.Protocol protocolEntity =
-					protocolConverter.convert2Entity(metaDataVersion.getProtocol());
-			protocolEntity.setMetaDataVersion(metaDataVersionEntity);
-			protocolRepository.save(protocolEntity);
-			metaDataVersionEntity.setProtocol(protocolEntity);
+			persistProtocolDef(metaDataVersion, metaDataVersionEntity);
 		}
 		if (metaDataVersion.getStudyElementDefs() != null) {
-			final EventDefConverter eventDefConverter = new EventDefConverter();
-			for (final StudyEventDef studyElementDef : metaDataVersion.getStudyElementDefs()) {
-				final EventDef eventDefEntity = eventDefConverter.convert2Entity(studyElementDef);
-				eventDefEntity.setMetaDataVersion(metaDataVersionEntity);
-				eventDefRepository.save(eventDefEntity);
-				metaDataVersionEntity.addEventDef(eventDefEntity);
-			}
+			persistEventDef(metaDataVersion, metaDataVersionEntity);
 		}
 		if (metaDataVersion.getFormDefs() != null) {
-			final FormDefConverter formDefConverter = new FormDefConverter();
-			for (final FormDef formDef : metaDataVersion.getFormDefs()) {
-				final org.nerdizin.eztrial.entities.study.FormDef formDefEntity = formDefConverter.convert2Entity(formDef);
-				formDefEntity.setMetaDataVersion(metaDataVersionEntity);
-				formDefRepository.save(formDefEntity);
-				metaDataVersionEntity.addFormDef(formDefEntity);
-			}
+			persistFormDef(metaDataVersion, metaDataVersionEntity);
 		}
 		if (metaDataVersion.getItemGroupDefs() != null) {
-			final ItemGroupDefConverter itemGroupDefConverter = new ItemGroupDefConverter();
-			for (final ItemGroupDef itemGroupDef : metaDataVersion.getItemGroupDefs()) {
-				final org.nerdizin.eztrial.entities.study.ItemGroupDef itemGroupDefEntity =
-						itemGroupDefConverter.convert2Entity(itemGroupDef);
-				itemGroupDefEntity.setMetaDataVersion(metaDataVersionEntity);
-				itemGroupDefRepository.save(itemGroupDefEntity);
-				metaDataVersionEntity.addItemGroupDef(itemGroupDefEntity);
-			}
+			persistItemGroupDef(metaDataVersion, metaDataVersionEntity);
 		}
 		if (metaDataVersion.getItemDefs() != null) {
-			final ItemDefConverter itemDefConverter = new ItemDefConverter();
-			for (final ItemDef itemDef : metaDataVersion.getItemDefs()) {
-				final org.nerdizin.eztrial.entities.study.ItemDef itemDefEntity = itemDefConverter.convert2Entity(itemDef);
-				itemDefEntity.setMetaDataVersion(metaDataVersionEntity);
-				itemDefRepository.save(itemDefEntity);
-				metaDataVersionEntity.addItemDef(itemDefEntity);
-			}
+			persistItemDef(metaDataVersion, metaDataVersionEntity);
 		}
 		return metaDataVersionEntity;
+	}
+
+	private void persistItemDef(final MetaDataVersion metaDataVersion,
+			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
+		final ItemDefConverter itemDefConverter = new ItemDefConverter();
+		for (final ItemDef itemDef : metaDataVersion.getItemDefs()) {
+			final org.nerdizin.eztrial.entities.study.ItemDef itemDefEntity = itemDefConverter.convert2Entity(itemDef);
+			itemDefEntity.setMetaDataVersion(metaDataVersionEntity);
+			itemDefRepository.save(itemDefEntity);
+			metaDataVersionEntity.addItemDef(itemDefEntity);
+		}
+	}
+
+	private void persistItemGroupDef(final MetaDataVersion metaDataVersion,
+			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
+		final ItemGroupDefConverter itemGroupDefConverter = new ItemGroupDefConverter();
+		for (final ItemGroupDef itemGroupDef : metaDataVersion.getItemGroupDefs()) {
+			final org.nerdizin.eztrial.entities.study.ItemGroupDef itemGroupDefEntity =
+					itemGroupDefConverter.convert2Entity(itemGroupDef);
+			itemGroupDefEntity.setMetaDataVersion(metaDataVersionEntity);
+			itemGroupDefRepository.save(itemGroupDefEntity);
+			metaDataVersionEntity.addItemGroupDef(itemGroupDefEntity);
+		}
+	}
+
+	private void persistFormDef(final MetaDataVersion metaDataVersion,
+			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
+		final FormDefConverter formDefConverter = new FormDefConverter();
+		for (final FormDef formDef : metaDataVersion.getFormDefs()) {
+			final org.nerdizin.eztrial.entities.study.FormDef formDefEntity = formDefConverter.convert2Entity(formDef);
+			formDefEntity.setMetaDataVersion(metaDataVersionEntity);
+			formDefRepository.save(formDefEntity);
+			metaDataVersionEntity.addFormDef(formDefEntity);
+		}
+	}
+
+	private void persistEventDef(final MetaDataVersion metaDataVersion,
+			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
+		final EventDefConverter eventDefConverter = new EventDefConverter();
+		for (final StudyEventDef studyElementDef : metaDataVersion.getStudyElementDefs()) {
+			final EventDef eventDefEntity = eventDefConverter.convert2Entity(studyElementDef);
+			eventDefEntity.setMetaDataVersion(metaDataVersionEntity);
+			eventDefRepository.save(eventDefEntity);
+			metaDataVersionEntity.addEventDef(eventDefEntity);
+		}
+	}
+
+	private void persistProtocolDef(final MetaDataVersion metaDataVersion,
+			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
+		final ProtocolConverter protocolConverter = new ProtocolConverter();
+		final org.nerdizin.eztrial.entities.study.Protocol protocolEntity =
+				protocolConverter.convert2Entity(metaDataVersion.getProtocol());
+		protocolEntity.setMetaDataVersion(metaDataVersionEntity);
+		protocolRepository.save(protocolEntity);
+		metaDataVersionEntity.setProtocol(protocolEntity);
 	}
 
 	private void persistRefs(final org.nerdizin.eztrial.entities.study.Study studyEntity,
@@ -188,20 +213,75 @@ public class StudyDefPersistenceServiceImpl implements StudyDefPersistenceServic
 		}
 
 		if (metaDataVersion.getStudyElementDefs() != null) {
-			for (final StudyEventDef eventDef : metaDataVersion.getStudyElementDefs()) {
-				if (eventDef.getFormRefs() != null) {
-					final EventDef eventDefEntity = metaDataVersionEntity.findEventDefByOid(eventDef.getOid());
-					for (final FormRef formRef : eventDef.getFormRefs()) {
-						final org.nerdizin.eztrial.entities.study.FormDef targetFormDef =
-								metaDataVersionEntity.findFormDefByOid(formRef.getFormOid());
-						final org.nerdizin.eztrial.entities.study.FormRef formRefEntity =
-								new org.nerdizin.eztrial.entities.study.FormRef();
-						formRefEntity.setEventDef(eventDefEntity);
-						formRefEntity.setFormDef(targetFormDef);
-						formRefEntity.setMandatory(formRef.getMandatory());
-						formRefRepository.save(formRefEntity);
-						eventDefEntity.addFormRef(formRefEntity);
-					}
+			persistFormRefs(metaDataVersion, metaDataVersionEntity);
+		}
+		if (metaDataVersion.getFormDefs() != null) {
+			persistItemGroupRefs(metaDataVersion, metaDataVersionEntity);
+		}
+		if (metaDataVersion.getItemGroupDefs() != null) {
+			persistItemRefs(metaDataVersion, metaDataVersionEntity);
+		}
+	}
+
+	private void persistFormRefs(final MetaDataVersion metaDataVersion,
+			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
+
+		for (final StudyEventDef eventDef : metaDataVersion.getStudyElementDefs()) {
+			if (eventDef.getFormRefs() != null) {
+				final EventDef eventDefEntity = metaDataVersionEntity.findEventDefByOid(eventDef.getOid());
+				for (final FormRef formRef : eventDef.getFormRefs()) {
+					final org.nerdizin.eztrial.entities.study.FormDef targetFormDef =
+							metaDataVersionEntity.findFormDefByOid(formRef.getFormOid());
+					final org.nerdizin.eztrial.entities.study.FormRef formRefEntity =
+							new org.nerdizin.eztrial.entities.study.FormRef();
+					formRefEntity.setEventDef(eventDefEntity);
+					formRefEntity.setFormDef(targetFormDef);
+					formRefEntity.setMandatory(formRef.getMandatory());
+					formRefRepository.save(formRefEntity);
+					eventDefEntity.addFormRef(formRefEntity);
+				}
+			}
+		}
+	}
+
+	private void persistItemGroupRefs(final MetaDataVersion metaDataVersion,
+			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
+
+		for (final FormDef formDef : metaDataVersion.getFormDefs()) {
+			if (formDef.getItemGroupRefs() != null) {
+				final org.nerdizin.eztrial.entities.study.FormDef formDefEntity = metaDataVersionEntity.findFormDefByOid(formDef.getOid());
+				for (final ItemGroupRef itemGroupRef : formDef.getItemGroupRefs()) {
+					final org.nerdizin.eztrial.entities.study.ItemGroupDef targetItemGroupDef =
+							metaDataVersionEntity.findItemGroupDefByOid(itemGroupRef.getItemGroupOid());
+					final org.nerdizin.eztrial.entities.study.ItemGroupRef itemGroupRefEntity =
+							new org.nerdizin.eztrial.entities.study.ItemGroupRef();
+					itemGroupRefEntity.setFormDef(formDefEntity);
+					itemGroupRefEntity.setItemGroupDef(targetItemGroupDef);
+					itemGroupRefEntity.setMandatory(itemGroupRef.getMandatory());
+					itemGroupRefRepository.save(itemGroupRefEntity);
+					formDefEntity.addItemGroupRef(itemGroupRefEntity);
+				}
+			}
+		}
+	}
+
+	private void persistItemRefs(final MetaDataVersion metaDataVersion,
+			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
+
+		for (final ItemGroupDef itemGroupDef : metaDataVersion.getItemGroupDefs()) {
+			if (itemGroupDef.getItemRefs() != null) {
+				final org.nerdizin.eztrial.entities.study.ItemGroupDef itemGroupDefEntity =
+						metaDataVersionEntity.findItemGroupDefByOid(itemGroupDef.getOid());
+				for (final ItemRef itemRef : itemGroupDef.getItemRefs()) {
+					final org.nerdizin.eztrial.entities.study.ItemDef targetItemDef =
+							metaDataVersionEntity.findItemDefByOid(itemRef.getItemOid());
+					final org.nerdizin.eztrial.entities.study.ItemRef itemRefEntity =
+							new org.nerdizin.eztrial.entities.study.ItemRef();
+					itemRefEntity.setItemGroupDef(itemGroupDefEntity);
+					itemRefEntity.setItemDef(targetItemDef);
+					itemRefEntity.setMandatory(itemRef.getMandatory());
+					itemRefRepository.save(itemRefEntity);
+					itemGroupDefEntity.addItemRef(itemRefEntity);
 				}
 			}
 		}

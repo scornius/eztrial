@@ -4,6 +4,8 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.nerdizin.eztrial.entities.base.OidNameEntity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "def_forms")
@@ -15,6 +17,9 @@ public class FormDef extends OidNameEntity {
 
 	@Column(name = "repeating")
 	private boolean repeating;
+
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "formDef")
+	private List<ItemGroupRef> itemGroupRefs;
 
 
 	public MetaDataVersion getMetaDataVersion() {
@@ -31,6 +36,21 @@ public class FormDef extends OidNameEntity {
 
 	public void setRepeating(final boolean repeating) {
 		this.repeating = repeating;
+	}
+
+	public List<ItemGroupRef> getItemGroupRefs() {
+		return itemGroupRefs;
+	}
+
+	public void setItemGroupRefs(final List<ItemGroupRef> itemGroupRefs) {
+		this.itemGroupRefs = itemGroupRefs;
+	}
+
+	public void addItemGroupRef(final ItemGroupRef itemGroupRef) {
+		if (this.itemGroupRefs == null) {
+			this.itemGroupRefs = new ArrayList<>();
+		}
+		this.itemGroupRefs.add(itemGroupRef);
 	}
 
 	@Override

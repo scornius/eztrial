@@ -8,7 +8,7 @@ import org.nerdizin.eztrial.entities.enums.LocationTypeConverter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "locations")
+@Table(name = "admin_locations")
 public class Location extends BaseEntity {
 
 	@Column(name = "oid", nullable = false, updatable = false, unique = true)

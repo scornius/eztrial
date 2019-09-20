@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "def_signatures")
+@Table(name = "admin_signatures")
 public class SignatureDef extends BaseEntity {
 
 	@Column(name = "oid", nullable = false, updatable = false, unique = true)

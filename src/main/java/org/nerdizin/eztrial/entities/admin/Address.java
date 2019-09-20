@@ -6,7 +6,7 @@ import org.nerdizin.eztrial.entities.base.BaseEntity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "addresses")
+@Table(name = "admin_addresses")
 public class Address extends BaseEntity {
 
 	@Id

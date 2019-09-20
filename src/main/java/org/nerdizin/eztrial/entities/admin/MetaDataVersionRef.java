@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "metadata_version_ref")
+@Table(name = "admin_metadata_version_ref")
 public class MetaDataVersionRef extends BaseEntity {
 
 	@OneToOne

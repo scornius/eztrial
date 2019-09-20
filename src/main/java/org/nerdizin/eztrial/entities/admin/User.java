@@ -8,7 +8,7 @@ import org.nerdizin.eztrial.entities.enums.UserTypeConverter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "admin_users")
 public class User extends BaseEntity {
 
 	@Column(name = "oid")

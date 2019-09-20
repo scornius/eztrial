@@ -8,11 +8,17 @@ public class DataTypeConverter implements AttributeConverter<DataType,String> {
 
 	@Override
 	public String convertToDatabaseColumn(final DataType dataType) {
+		if (dataType == null) {
+			return null;
+		}
 		return dataType.getCode();
 	}
 
 	@Override
 	public DataType convertToEntityAttribute(final String code) {
+		if (code == null) {
+			return null;
+		}
 		return DataType.fromCode(code);
 	}
 }

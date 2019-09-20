@@ -8,11 +8,17 @@ public class LocationTypeConverter implements AttributeConverter<LocationType,St
 
 	@Override
 	public String convertToDatabaseColumn(final LocationType locationType) {
+		if (locationType == null) {
+			return null;
+		}
 		return locationType.getCode();
 	}
 
 	@Override
 	public LocationType convertToEntityAttribute(final String value) {
+		if (value == null) {
+			return null;
+		}
 		return LocationType.fromCode(value);
 	}
 }

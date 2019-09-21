@@ -1,7 +1,9 @@
 package org.nerdizin.eztrial.entities.study;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.nerdizin.eztrial.entities.base.DefEntity;
 import org.nerdizin.eztrial.entities.base.OidNameEntity;
+import org.nerdizin.eztrial.entities.base.RepeatingDefEntity;
 import org.nerdizin.eztrial.entities.enums.EventType;
 import org.nerdizin.eztrial.entities.enums.EventTypeConverter;
 
@@ -11,14 +13,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "def_events")
-public class EventDef extends OidNameEntity {
-
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "mdv_id")
-	private MetaDataVersion metaDataVersion;
-
-	@Column(name = "repeating")
-	private boolean repeating;
+public class EventDef extends RepeatingDefEntity {
 
 	@Column
 	@Convert(converter = EventTypeConverter.class)
@@ -27,22 +22,6 @@ public class EventDef extends OidNameEntity {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "eventDef")
 	private List<FormRef> formRefs;
 
-
-	public MetaDataVersion getMetaDataVersion() {
-		return metaDataVersion;
-	}
-
-	public void setMetaDataVersion(final MetaDataVersion metaDataVersion) {
-		this.metaDataVersion = metaDataVersion;
-	}
-
-	public boolean isRepeating() {
-		return repeating;
-	}
-
-	public void setRepeating(final boolean repeating) {
-		this.repeating = repeating;
-	}
 
 	public EventType getType() {
 		return type;

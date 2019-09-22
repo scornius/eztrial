@@ -128,7 +128,7 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 		if (metaDataVersion.getProtocol() != null) {
 			persistProtocolDef(metaDataVersion, metaDataVersionEntity);
 		}
-		if (metaDataVersion.getStudyElementDefs() != null) {
+		if (metaDataVersion.getStudyEventDefs() != null) {
 			persistEventDef(metaDataVersion, metaDataVersionEntity);
 		}
 		if (metaDataVersion.getFormDefs() != null) {
@@ -157,7 +157,7 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 	private void persistItemGroupDef(final MetaDataVersion metaDataVersion,
 			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
 		final ItemGroupDefConverter itemGroupDefConverter = new ItemGroupDefConverter();
-		for (final ItemGroupDefElement itemGroupDef : metaDataVersion.getItemGroupDefs()) {
+		for (final ItemGroupDef itemGroupDef : metaDataVersion.getItemGroupDefs()) {
 			final org.nerdizin.eztrial.entities.study.ItemGroupDef itemGroupDefEntity =
 					itemGroupDefConverter.convert2Entity(itemGroupDef);
 			itemGroupDefEntity.setMetaDataVersion(metaDataVersionEntity);
@@ -169,7 +169,7 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 	private void persistFormDef(final MetaDataVersion metaDataVersion,
 			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
 		final FormDefConverter formDefConverter = new FormDefConverter();
-		for (final FormDefElement formDef : metaDataVersion.getFormDefs()) {
+		for (final FormDef formDef : metaDataVersion.getFormDefs()) {
 			final org.nerdizin.eztrial.entities.study.FormDef formDefEntity = formDefConverter.convert2Entity(formDef);
 			formDefEntity.setMetaDataVersion(metaDataVersionEntity);
 			formDefRepository.save(formDefEntity);
@@ -180,7 +180,7 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 	private void persistEventDef(final MetaDataVersion metaDataVersion,
 			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
 		final EventDefConverter eventDefConverter = new EventDefConverter();
-		for (final StudyEventDefElement studyElementDef : metaDataVersion.getStudyElementDefs()) {
+		for (final StudyEventDef studyElementDef : metaDataVersion.getStudyEventDefs()) {
 			final EventDef eventDefEntity = eventDefConverter.convert2Entity(studyElementDef);
 			eventDefEntity.setMetaDataVersion(metaDataVersionEntity);
 			eventDefRepository.save(eventDefEntity);
@@ -203,7 +203,7 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
 
 		if (metaDataVersion.getProtocol() != null && metaDataVersion.getProtocol().getStudyEventRefs() != null) {
-			for (final StudyEventRefElement eventRef : metaDataVersion.getProtocol().getStudyEventRefs()) {
+			for (final StudyEventRef eventRef : metaDataVersion.getProtocol().getStudyEventRefs()) {
 				final org.nerdizin.eztrial.entities.study.Protocol protocolEntity = metaDataVersionEntity.getProtocol();
 				final EventDef targetEventDef = metaDataVersionEntity.findEventDefByOid(eventRef.getStudyEventOid());
 				final EventRef eventRefEntity = new EventRef();
@@ -215,7 +215,7 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 			}
 		}
 
-		if (metaDataVersion.getStudyElementDefs() != null) {
+		if (metaDataVersion.getStudyEventDefs() != null) {
 			persistFormRefs(metaDataVersion, metaDataVersionEntity);
 		}
 		if (metaDataVersion.getFormDefs() != null) {
@@ -229,10 +229,10 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 	private void persistFormRefs(final MetaDataVersion metaDataVersion,
 			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
 
-		for (final StudyEventDefElement eventDef : metaDataVersion.getStudyElementDefs()) {
+		for (final StudyEventDef eventDef : metaDataVersion.getStudyEventDefs()) {
 			if (eventDef.getFormRefs() != null) {
 				final EventDef eventDefEntity = metaDataVersionEntity.findEventDefByOid(eventDef.getOid());
-				for (final FormRefElement formRef : eventDef.getFormRefs()) {
+				for (final FormRef formRef : eventDef.getFormRefs()) {
 					final org.nerdizin.eztrial.entities.study.FormDef targetFormDef =
 							metaDataVersionEntity.findFormDefByOid(formRef.getFormOid());
 					final org.nerdizin.eztrial.entities.study.FormRef formRefEntity =
@@ -250,10 +250,10 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 	private void persistItemGroupRefs(final MetaDataVersion metaDataVersion,
 			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
 
-		for (final FormDefElement formDef : metaDataVersion.getFormDefs()) {
+		for (final FormDef formDef : metaDataVersion.getFormDefs()) {
 			if (formDef.getItemGroupRefs() != null) {
 				final org.nerdizin.eztrial.entities.study.FormDef formDefEntity = metaDataVersionEntity.findFormDefByOid(formDef.getOid());
-				for (final ItemGroupRefElement itemGroupRef : formDef.getItemGroupRefs()) {
+				for (final ItemGroupRef itemGroupRef : formDef.getItemGroupRefs()) {
 					final org.nerdizin.eztrial.entities.study.ItemGroupDef targetItemGroupDef =
 							metaDataVersionEntity.findItemGroupDefByOid(itemGroupRef.getItemGroupOid());
 					final org.nerdizin.eztrial.entities.study.ItemGroupRef itemGroupRefEntity =
@@ -271,7 +271,7 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 	private void persistItemRefs(final MetaDataVersion metaDataVersion,
 			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
 
-		for (final ItemGroupDefElement itemGroupDef : metaDataVersion.getItemGroupDefs()) {
+		for (final ItemGroupDef itemGroupDef : metaDataVersion.getItemGroupDefs()) {
 			if (itemGroupDef.getItemRefs() != null) {
 				final org.nerdizin.eztrial.entities.study.ItemGroupDef itemGroupDefEntity =
 						metaDataVersionEntity.findItemGroupDefByOid(itemGroupDef.getOid());
@@ -340,7 +340,8 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 						metaDataVersionRefEntity.setStudy(targetStudy);
 						metaDataVersionRefEntity.setEffectiveDate(metaDataVersionRef.getEffectiveDate());
 
-						metaDataVersionRefRepository.save(metaDataVersionRefEntity);
+						targetLocation.addMetaDataVersionRef(metaDataVersionRefEntity);
+						locationRepository.save(targetLocation);
 					}
 				}
 			}

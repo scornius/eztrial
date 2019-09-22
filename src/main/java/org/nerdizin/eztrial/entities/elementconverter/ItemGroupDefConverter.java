@@ -1,17 +1,16 @@
 package org.nerdizin.eztrial.entities.elementconverter;
 
-import org.nerdizin.eztrial.entities.study.ItemGroupDef;
 import org.nerdizin.eztrial.entities.study.ItemRef;
-import org.nerdizin.eztrial.xml.odm.study.ItemGroupDefElement;
+import org.nerdizin.eztrial.xml.odm.study.ItemGroupDef;
 import org.nerdizin.eztrial.xml.odm.study.ItemRefElement;
 
 public class ItemGroupDefConverter implements
-		OdmElement2EntityConverter<ItemGroupDefElement,ItemGroupDef> {
+		OdmElement2EntityConverter<ItemGroupDef,org.nerdizin.eztrial.entities.study.ItemGroupDef> {
 
 	@Override
-	public ItemGroupDef convert2Entity(final ItemGroupDefElement itemGroupDef) {
+	public org.nerdizin.eztrial.entities.study.ItemGroupDef convert2Entity(final ItemGroupDef itemGroupDef) {
 
-		final ItemGroupDef result = new ItemGroupDef();
+		final org.nerdizin.eztrial.entities.study.ItemGroupDef result = new org.nerdizin.eztrial.entities.study.ItemGroupDef();
 		result.setOid(itemGroupDef.getOid());
 		result.setName(itemGroupDef.getName());
 		result.setRepeating(itemGroupDef.getRepeating());
@@ -20,9 +19,9 @@ public class ItemGroupDefConverter implements
 	}
 
 	@Override
-	public ItemGroupDefElement convert2Element(final ItemGroupDef itemGroupDef) {
+	public ItemGroupDef convert2Element(final org.nerdizin.eztrial.entities.study.ItemGroupDef itemGroupDef) {
 
-		final ItemGroupDefElement result = new ItemGroupDefElement();
+		final ItemGroupDef result = new ItemGroupDef();
 		result.setOid(itemGroupDef.getOid());
 		result.setName(itemGroupDef.getName());
 		result.setRepeating(itemGroupDef.isRepeating());

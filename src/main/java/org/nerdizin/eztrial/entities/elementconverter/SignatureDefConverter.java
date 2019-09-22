@@ -8,7 +8,8 @@ public class SignatureDefConverter implements
 	@Override
 	public SignatureDef convert2Entity(final org.nerdizin.eztrial.xml.odm.admin.SignatureDef signatureDef) {
 
-		final SignatureDef result = new SignatureDef(signatureDef.getOid());
+		final SignatureDef result = new SignatureDef();
+		result.setOid(signatureDef.getOid());
 		result.setLegalReason(signatureDef.getLegalReason());
 		result.setMeaning(signatureDef.getMeaning());
 
@@ -20,6 +21,7 @@ public class SignatureDefConverter implements
 
 		final org.nerdizin.eztrial.xml.odm.admin.SignatureDef result =
 				new org.nerdizin.eztrial.xml.odm.admin.SignatureDef();
+		result.setOid(signatureDef.getOid());
 		result.setLegalReason(signatureDef.getLegalReason());
 		result.setMeaning(signatureDef.getMeaning());
 

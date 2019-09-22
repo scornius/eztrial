@@ -4,7 +4,7 @@ import org.nerdizin.eztrial.xml.odm.base.RefElement;
 
 import javax.xml.bind.annotation.XmlAttribute;
 
-public class StudyEventRefElement extends RefElement {
+public class StudyEventRef extends RefElement {
 
 	@XmlAttribute(name = "StudyEventOID")
 	private String studyEventOid;

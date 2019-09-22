@@ -1,16 +1,14 @@
 package org.nerdizin.eztrial.entities.elementconverter;
 
-import org.nerdizin.eztrial.entities.study.FormDef;
-import org.nerdizin.eztrial.entities.study.ItemGroupRef;
-import org.nerdizin.eztrial.xml.odm.study.FormDefElement;
-import org.nerdizin.eztrial.xml.odm.study.ItemGroupRefElement;
+import org.nerdizin.eztrial.xml.odm.study.FormDef;
+import org.nerdizin.eztrial.xml.odm.study.ItemGroupRef;
 
-public class FormDefConverter implements OdmElement2EntityConverter<FormDefElement,FormDef> {
+public class FormDefConverter implements OdmElement2EntityConverter<FormDef,org.nerdizin.eztrial.entities.study.FormDef> {
 
 	@Override
-	public FormDef convert2Entity(final FormDefElement formDef) {
+	public org.nerdizin.eztrial.entities.study.FormDef convert2Entity(final FormDef formDef) {
 
-		final FormDef result = new FormDef();
+		final org.nerdizin.eztrial.entities.study.FormDef result = new org.nerdizin.eztrial.entities.study.FormDef();
 		result.setOid(formDef.getOid());
 		result.setName(formDef.getName());
 		result.setRepeating(formDef.getRepeating());
@@ -19,17 +17,17 @@ public class FormDefConverter implements OdmElement2EntityConverter<FormDefEleme
 	}
 
 	@Override
-	public FormDefElement convert2Element(final FormDef formDef) {
+	public FormDef convert2Element(final org.nerdizin.eztrial.entities.study.FormDef formDef) {
 
-		final FormDefElement result = new FormDefElement();
+		final FormDef result = new FormDef();
 		result.setOid(formDef.getOid());
 		result.setName(formDef.getName());
 		result.setRepeating(formDef.isRepeating());
 
 		if (formDef.getItemGroupRefs() != null) {
-			for (final ItemGroupRef itemGroupRef : formDef.getItemGroupRefs()) {
-				final ItemGroupRefElement resultItemGroupRef =
-						new ItemGroupRefElement();
+			for (final org.nerdizin.eztrial.entities.study.ItemGroupRef itemGroupRef : formDef.getItemGroupRefs()) {
+				final ItemGroupRef resultItemGroupRef =
+						new ItemGroupRef();
 				resultItemGroupRef.setMandatory(itemGroupRef.isMandatory());
 				resultItemGroupRef.setItemGroupOid(itemGroupRef.getItemGroupDef().getOid());
 				result.addItemGroupRef(resultItemGroupRef);

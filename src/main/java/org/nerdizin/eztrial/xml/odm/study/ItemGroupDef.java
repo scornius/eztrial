@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemGroupDefElement extends RepeatingDefElement {
+public class ItemGroupDef extends RepeatingDefElement {
 
 	@XmlElement(name = "ItemRef")
     private List<ItemRefElement> itemRefs;

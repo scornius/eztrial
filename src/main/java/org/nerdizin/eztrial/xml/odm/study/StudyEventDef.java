@@ -9,25 +9,25 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudyEventDefElement extends RepeatingDefElement {
+public class StudyEventDef extends RepeatingDefElement {
 
 	@XmlElement(name = "FormRef")
-	private List<FormRefElement> formRefs;
+	private List<FormRef> formRefs;
 
 	@XmlAttribute(name = "Type")
 	@XmlJavaTypeAdapter(EventTypeAdapter.class)
 	private EventType eventType;
 
 
-	public List<FormRefElement> getFormRefs() {
+	public List<FormRef> getFormRefs() {
 		return formRefs;
 	}
 
-	public void setFormRefs(final List<FormRefElement> formRefs) {
+	public void setFormRefs(final List<FormRef> formRefs) {
 		this.formRefs = formRefs;
 	}
 
-	public void addFormRef(final FormRefElement formRef) {
+	public void addFormRef(final FormRef formRef) {
 		if (this.formRefs == null) {
 			this.formRefs = new ArrayList<>();
 		}

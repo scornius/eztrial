@@ -21,9 +21,7 @@ public class SignatureDef extends BaseEntity {
 	private String legalReason;
 
 
-	public SignatureDef(final String oid) {
-		this.oid = oid;
-	}
+	public SignatureDef() {}
 
 	public String getOid() {
 		return oid;

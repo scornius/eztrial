@@ -4,7 +4,7 @@ import org.nerdizin.eztrial.xml.odm.base.RefElement;
 
 import javax.xml.bind.annotation.XmlAttribute;
 
-public class FormRefElement extends RefElement {
+public class FormRef extends RefElement {
 
 	@XmlAttribute(name = "FormOID")
 	private String formOid;

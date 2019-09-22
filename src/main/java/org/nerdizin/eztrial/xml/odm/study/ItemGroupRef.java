@@ -4,7 +4,7 @@ import org.nerdizin.eztrial.xml.odm.base.RefElement;
 
 import javax.xml.bind.annotation.XmlAttribute;
 
-public class ItemGroupRefElement extends RefElement {
+public class ItemGroupRef extends RefElement {
 
 	@XmlAttribute(name = "ItemGroupOID")
 	private String itemGroupOid;

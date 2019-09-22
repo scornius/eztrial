@@ -5,10 +5,7 @@ import org.nerdizin.eztrial.entities.admin.MetaDataVersionRef;
 import org.nerdizin.eztrial.entities.admin.SignatureDef;
 import org.nerdizin.eztrial.entities.admin.User;
 import org.nerdizin.eztrial.entities.elementconverter.*;
-import org.nerdizin.eztrial.entities.study.EventDef;
-import org.nerdizin.eztrial.entities.study.MeasurementUnit;
-import org.nerdizin.eztrial.entities.study.MetaDataVersion;
-import org.nerdizin.eztrial.entities.study.Protocol;
+import org.nerdizin.eztrial.entities.study.*;
 import org.nerdizin.eztrial.repositories.*;
 import org.nerdizin.eztrial.util.Constants;
 import org.nerdizin.eztrial.xml.odm.FileType;
@@ -119,15 +116,17 @@ public class StudyDefExportServiceImpl implements StudyDefExportService {
 			study.setBasicDefinitions(basicDefinitions);
 		}
 
-		final Iterable<MetaDataVersion> metaDataVersions = metaDataVersionRepository.findAll();
+		final Iterable<MetaDataVersion> metaDataVersions = studyEntity.getMetaDataVersions();
 		if (metaDataVersions != null) {
-			loadMetaDataVersions(metaDataVersions);
+			loadMetaDataVersions(metaDataVersions, study);
 		}
 
 		return study;
 	}
 
-	private void loadMetaDataVersions(final Iterable<MetaDataVersion> metaDataVersions) {
+	private void loadMetaDataVersions(final Iterable<MetaDataVersion> metaDataVersions,
+			final Study study) {
+
 		for (final MetaDataVersion metaDataVersion : metaDataVersions) {
 			final org.nerdizin.eztrial.xml.odm.study.MetaDataVersion metaDataVersionElement =
 					new org.nerdizin.eztrial.xml.odm.study.MetaDataVersion();
@@ -137,12 +136,32 @@ public class StudyDefExportServiceImpl implements StudyDefExportService {
 				metaDataVersionElement.setProtocol(protocolConverter.convert2Element(protocol));
 			}
 
-			final List<EventDef> eventDefs = metaDataVersion.getEventDefs();
-			if (eventDefs != null) {
-				final EventDefConverter eventDefConverter = new EventDefConverter();
-				for (final EventDef eventDef : eventDefs) {
-					metaDataVersionElement.addStudyEventDef(eventDefConverter.convert2Element(eventDef));
-				}
+			loadEventDefs(metaDataVersion, metaDataVersionElement);
+			loadFormDefs(metaDataVersion, metaDataVersionElement);
+			study.addMetaDataVersion(metaDataVersionElement);
+		}
+	}
+
+	private void loadEventDefs(final MetaDataVersion metaDataVersion,
+			final org.nerdizin.eztrial.xml.odm.study.MetaDataVersion metaDataVersionElement) {
+
+		final Iterable<EventDef> eventDefs = eventDefRepository.findAllByMetaDataVersion(metaDataVersion);
+		if (eventDefs != null) {
+			final EventDefConverter eventDefConverter = new EventDefConverter();
+			for (final EventDef eventDef : eventDefs) {
+				metaDataVersionElement.addStudyEventDef(eventDefConverter.convert2Element(eventDef));
+			}
+		}
+	}
+
+	private void loadFormDefs(final MetaDataVersion metaDataVersion,
+			final org.nerdizin.eztrial.xml.odm.study.MetaDataVersion metaDataVersionElement) {
+
+		final Iterable<FormDef> formDefs = formDefRepository.findAllByMetaDataVersion(metaDataVersion);
+		if (formDefs != null) {
+			final FormDefConverter formDefConverter = new FormDefConverter();
+			for (final FormDef formDef : formDefs) {
+				metaDataVersionElement.addFormDef(formDefConverter.convert2Element(formDef));
 			}
 		}
 	}

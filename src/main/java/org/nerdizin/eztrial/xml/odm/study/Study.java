@@ -1,10 +1,9 @@
 package org.nerdizin.eztrial.xml.odm.study;
 
-import org.nerdizin.eztrial.xml.odm.base.OdmElement;
 import org.nerdizin.eztrial.xml.odm.base.OidElement;
 
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -43,4 +42,11 @@ public class Study extends OidElement {
     public void setMetaDataVersions(final List<MetaDataVersion> metaDataVersions) {
         this.metaDataVersions = metaDataVersions;
     }
+
+    public void addMetaDataVersion(final MetaDataVersion metaDataVersion) {
+    	if (this.metaDataVersions == null) {
+    		this.metaDataVersions = new ArrayList<>();
+		}
+    	this.metaDataVersions.add(metaDataVersion);
+	}
 }

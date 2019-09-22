@@ -26,6 +26,9 @@
 
         <MetaDataVersion OID="mdv.1" Name="Mdv 1">
             <Protocol>
+                <Description>
+                    <TranslatedText xml:lang="en">Protocol description</TranslatedText>
+                </Description>
                 <StudyEventRef StudyEventOID="event.1" Mandatory="No"/>
             </Protocol>
             <StudyEventDef OID="event.1" Name="Event 1" Repeating="No" Type="Scheduled">

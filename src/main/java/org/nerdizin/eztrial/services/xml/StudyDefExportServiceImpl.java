@@ -1,7 +1,6 @@
 package org.nerdizin.eztrial.services.xml;
 
 import org.nerdizin.eztrial.entities.admin.Location;
-import org.nerdizin.eztrial.entities.admin.MetaDataVersionRef;
 import org.nerdizin.eztrial.entities.admin.SignatureDef;
 import org.nerdizin.eztrial.entities.admin.User;
 import org.nerdizin.eztrial.entities.elementconverter.*;
@@ -13,9 +12,6 @@ import org.nerdizin.eztrial.xml.odm.Odm;
 import org.nerdizin.eztrial.xml.odm.admin.AdminData;
 import org.nerdizin.eztrial.xml.odm.study.BasicDefinitions;
 import org.nerdizin.eztrial.xml.odm.study.Study;
-import org.nerdizin.eztrial.xml.odm.study.StudyEventDef;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +21,6 @@ import java.util.UUID;
 
 @Service
 public class StudyDefExportServiceImpl implements StudyDefExportService {
-
-	private static final Logger LOG = LoggerFactory.getLogger(StudyDefExportServiceImpl.class);
 
 	private final LocationRepository locationRepository;
 	private final UserRepository userRepository;
@@ -127,9 +121,11 @@ public class StudyDefExportServiceImpl implements StudyDefExportService {
 	private void loadMetaDataVersions(final Iterable<MetaDataVersion> metaDataVersions,
 			final Study study) {
 
+		final MetaDataVersionConverter metaDataVersionConverter = new MetaDataVersionConverter();
 		for (final MetaDataVersion metaDataVersion : metaDataVersions) {
 			final org.nerdizin.eztrial.xml.odm.study.MetaDataVersion metaDataVersionElement =
-					new org.nerdizin.eztrial.xml.odm.study.MetaDataVersion();
+					metaDataVersionConverter.convert2Element(metaDataVersion);
+
 			final Protocol protocol = metaDataVersion.getProtocol();
 			if (protocol != null) {
 				final ProtocolConverter protocolConverter = new ProtocolConverter();

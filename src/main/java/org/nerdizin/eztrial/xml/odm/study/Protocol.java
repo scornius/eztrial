@@ -6,9 +6,20 @@ import java.util.List;
 
 public class Protocol {
 
+	@XmlElement(name = "Description")
+	private Description description;
+
 	@XmlElement(name = "StudyEventRef")
 	private List<StudyEventRef> studyEventRefs;
 
+
+	public Description getDescription() {
+		return description;
+	}
+
+	public void setDescription(final Description description) {
+		this.description = description;
+	}
 
 	public List<StudyEventRef> getStudyEventRefs() {
 		return studyEventRefs;

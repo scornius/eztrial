@@ -5,7 +5,9 @@ import org.nerdizin.eztrial.entities.base.BaseEntity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Table(name = "def_protocol")
@@ -15,8 +17,11 @@ public class Protocol extends BaseEntity {
 	@JoinColumn(name = "mdv_id")
 	private MetaDataVersion metaDataVersion;
 
-	@Column(name = "description")
-	private String description;
+	@ElementCollection
+	@MapKeyColumn(name = "language", unique = true)
+	@Column(name = "text")
+	@CollectionTable(name="def_protocol_translations", joinColumns=@JoinColumn(name="id"))
+	private Map<String,String> translations;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "protocol")
 	private List<EventRef> eventRefs;
@@ -30,12 +35,19 @@ public class Protocol extends BaseEntity {
 		this.metaDataVersion = metaDataVersion;
 	}
 
-	public String getDescription() {
-		return description;
+	public Map<String,String> getTranslations() {
+		return translations;
 	}
 
-	public void setDescription(final String description) {
-		this.description = description;
+	public void setTranslations(final Map<String,String> translations) {
+		this.translations = translations;
+	}
+
+	public void addTranslation(final String language, final String text) {
+		if (translations == null) {
+			translations = new HashMap<>();
+		}
+		this.translations.put(language, text);
 	}
 
 	public List<EventRef> getEventRefs() {

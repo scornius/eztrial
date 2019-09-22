@@ -138,6 +138,8 @@ public class StudyDefExportServiceImpl implements StudyDefExportService {
 
 			loadEventDefs(metaDataVersion, metaDataVersionElement);
 			loadFormDefs(metaDataVersion, metaDataVersionElement);
+			loadItemGroupDefs(metaDataVersion, metaDataVersionElement);
+			loadItemDefs(metaDataVersion, metaDataVersionElement);
 			study.addMetaDataVersion(metaDataVersionElement);
 		}
 	}
@@ -162,6 +164,30 @@ public class StudyDefExportServiceImpl implements StudyDefExportService {
 			final FormDefConverter formDefConverter = new FormDefConverter();
 			for (final FormDef formDef : formDefs) {
 				metaDataVersionElement.addFormDef(formDefConverter.convert2Element(formDef));
+			}
+		}
+	}
+
+	private void loadItemGroupDefs(final MetaDataVersion metaDataVersion,
+			final org.nerdizin.eztrial.xml.odm.study.MetaDataVersion metaDataVersionElement) {
+
+		final Iterable<ItemGroupDef> itemGroupDefs = itemGroupDefRepository.findAllByMetaDataVersion(metaDataVersion);
+		if (itemGroupDefs != null) {
+			final ItemGroupDefConverter itemGroupDefConverter = new ItemGroupDefConverter();
+			for (final ItemGroupDef itemGroupDef : itemGroupDefs) {
+				metaDataVersionElement.addItemGroupDef(itemGroupDefConverter.convert2Element(itemGroupDef));
+			}
+		}
+	}
+
+	private void loadItemDefs(final MetaDataVersion metaDataVersion,
+			final org.nerdizin.eztrial.xml.odm.study.MetaDataVersion metaDataVersionElement) {
+
+		final Iterable<ItemDef> itemDefs = itemDefRepository.findAllByMetaDataVersion(metaDataVersion);
+		if (itemDefs != null) {
+			final ItemDefConverter itemDefConverter = new ItemDefConverter();
+			for (final ItemDef itemDef : itemDefs) {
+				metaDataVersionElement.addItemDef(itemDefConverter.convert2Element(itemDef));
 			}
 		}
 	}

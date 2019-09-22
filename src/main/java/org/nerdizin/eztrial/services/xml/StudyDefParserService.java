@@ -8,7 +8,7 @@ import javax.xml.bind.ValidationEventHandler;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-public interface StudyDefService {
+public interface StudyDefParserService {
 
     Odm parse(InputStream is) throws JAXBException, SAXException;
 

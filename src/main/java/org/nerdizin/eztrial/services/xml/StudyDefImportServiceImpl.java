@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class StudyDefPersistenceServiceImpl implements StudyDefPersistenceService {
+public class StudyDefImportServiceImpl implements StudyDefImportService {
 
 	private final LocationRepository locationRepository;
 	private final UserRepository userRepository;
@@ -35,7 +35,7 @@ public class StudyDefPersistenceServiceImpl implements StudyDefPersistenceServic
 	private final ItemRefRepository itemRefRepository;
 
 	@Autowired
-	public StudyDefPersistenceServiceImpl(final LocationRepository locationRepository,
+	public StudyDefImportServiceImpl(final LocationRepository locationRepository,
 			final UserRepository userRepository,
 			final AddressRepository addressRepository,
 			final SignatureDefRepository signatureDefRepository,

@@ -4,15 +4,12 @@ import org.nerdizin.eztrial.xml.odm.Odm;
 import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
 
-import javax.xml.XMLConstants;
 import javax.xml.bind.*;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
 import java.io.InputStream;
 import java.io.OutputStream;
 
 @Service
-public class StudyDefServiceImpl implements StudyDefService {
+public class StudyDefParserServiceImpl implements StudyDefParserService {
 
     @Override
     public Odm parse(final InputStream is) throws JAXBException, SAXException {

@@ -1,16 +1,13 @@
 package org.nerdizin.eztrial;
 
 import org.nerdizin.eztrial.entities.admin.Location;
-import org.nerdizin.eztrial.entities.admin.SignatureDef;
 import org.nerdizin.eztrial.entities.admin.User;
-import org.nerdizin.eztrial.entities.enums.UserType;
-import org.nerdizin.eztrial.entities.study.Study;
 import org.nerdizin.eztrial.repositories.LocationRepository;
 import org.nerdizin.eztrial.repositories.SignatureDefRepository;
 import org.nerdizin.eztrial.repositories.StudyRepository;
 import org.nerdizin.eztrial.repositories.UserRepository;
-import org.nerdizin.eztrial.services.xml.StudyDefPersistenceService;
-import org.nerdizin.eztrial.services.xml.StudyDefService;
+import org.nerdizin.eztrial.services.xml.StudyDefImportService;
+import org.nerdizin.eztrial.services.xml.StudyDefParserService;
 import org.nerdizin.eztrial.util.Constants;
 import org.nerdizin.eztrial.xml.odm.Odm;
 import org.slf4j.Logger;
@@ -19,9 +16,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 
 import javax.transaction.Transactional;
 import java.io.File;
@@ -41,8 +35,8 @@ public class EztrialApplication {
 			UserRepository userRepository,
 			SignatureDefRepository signatureDefRepository,
 			StudyRepository studyRepository,
-			StudyDefPersistenceService studyDefPersistenceService,
-			StudyDefService studyDefService) {
+			StudyDefImportService studyDefImportService,
+			StudyDefParserService studyDefParserService) {
 
 		return new CommandLineRunner() {
 
@@ -58,8 +52,8 @@ public class EztrialApplication {
 				userRepository.save(admin);
 
 				final File file = new File("/Users/ralf/dev/ws/eztrial/src/test/resources/odm/study1.xml");
-				final Odm odm = studyDefService.parse(new FileInputStream(file));
-				studyDefPersistenceService.persistStudyDef(odm);
+				final Odm odm = studyDefParserService.parse(new FileInputStream(file));
+				studyDefImportService.persistStudyDef(odm);
 
 				LOG.info("locations");
 				for (Location location : locationRepository.findAll()) {

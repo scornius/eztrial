@@ -6,6 +6,8 @@ import org.nerdizin.eztrial.entities.enums.LocationType;
 import org.nerdizin.eztrial.entities.enums.LocationTypeConverter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "admin_locations")
@@ -30,8 +32,12 @@ public class Location extends BaseEntity {
 	@Column(name = "affix")
 	private String affix;
 
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "location")
+	private List<MetaDataVersionRef> metaDataVersionRefs;
+
 	@OneToOne
 	private Address address;
+
 
 	public Location() {}
 
@@ -81,6 +87,21 @@ public class Location extends BaseEntity {
 
 	public void setAffix(final String affix) {
 		this.affix = affix;
+	}
+
+	public List<MetaDataVersionRef> getMetaDataVersionRefs() {
+		return metaDataVersionRefs;
+	}
+
+	public void setMetaDataVersionRefs(final List<MetaDataVersionRef> metaDataVersionRefs) {
+		this.metaDataVersionRefs = metaDataVersionRefs;
+	}
+
+	public void addMetaDataVersionRef(final MetaDataVersionRef metaDataVersionRef) {
+		if (this.metaDataVersionRefs == null) {
+			this.metaDataVersionRefs = new ArrayList<>();
+		}
+		this.metaDataVersionRefs.add(metaDataVersionRef);
 	}
 
 	public Address getAddress() {

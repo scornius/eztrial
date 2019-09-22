@@ -4,5 +4,5 @@ import org.nerdizin.eztrial.xml.odm.Odm;
 
 public interface StudyDefImportService {
 
-	void persistStudyDef(Odm odm);
+	void importStudyDef(Odm odm);
 }

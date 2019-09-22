@@ -2,8 +2,8 @@ package org.nerdizin.eztrial.entities.enums;
 
 public enum LocationType {
 
-	SPONSOR("SPONSOR"),
-	SITE("SITE"),
+	SPONSOR("Sponsor"),
+	SITE("Site"),
 	CRO("CRO"),
 	LAB("Lab"),
 	OTHER("Other");

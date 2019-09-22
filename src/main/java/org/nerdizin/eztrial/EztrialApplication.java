@@ -6,9 +6,11 @@ import org.nerdizin.eztrial.repositories.LocationRepository;
 import org.nerdizin.eztrial.repositories.SignatureDefRepository;
 import org.nerdizin.eztrial.repositories.StudyRepository;
 import org.nerdizin.eztrial.repositories.UserRepository;
+import org.nerdizin.eztrial.services.xml.StudyDefExportService;
 import org.nerdizin.eztrial.services.xml.StudyDefImportService;
 import org.nerdizin.eztrial.services.xml.StudyDefParserService;
 import org.nerdizin.eztrial.util.Constants;
+import org.nerdizin.eztrial.xml.odm.FileType;
 import org.nerdizin.eztrial.xml.odm.Odm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,10 +33,8 @@ public class EztrialApplication {
 	}
 
 	@Bean
-	public CommandLineRunner locationDemo(LocationRepository locationRepository,
-			UserRepository userRepository,
-			SignatureDefRepository signatureDefRepository,
-			StudyRepository studyRepository,
+	public CommandLineRunner locationDemo(UserRepository userRepository,
+			StudyDefExportService studyDefExportService,
 			StudyDefImportService studyDefImportService,
 			StudyDefParserService studyDefParserService) {
 
@@ -53,12 +53,11 @@ public class EztrialApplication {
 
 				final File file = new File("/Users/ralf/dev/ws/eztrial/src/test/resources/odm/study1.xml");
 				final Odm odm = studyDefParserService.parse(new FileInputStream(file));
-				studyDefImportService.persistStudyDef(odm);
+				studyDefImportService.importStudyDef(odm);
 
-				LOG.info("locations");
-				for (Location location : locationRepository.findAll()) {
-					LOG.info(location.toString());
-				}
+				final Odm exportStudyDef = studyDefExportService.exportStudyDef(
+						odm.getStudy().getOid(), FileType.SNAPSHOT);
+				studyDefParserService.serialize(exportStudyDef, System.out);
 			}
 		};
 	}

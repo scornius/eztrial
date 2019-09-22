@@ -72,7 +72,7 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 	}
 
 	@Override
-	public void persistStudyDef(final Odm odm) {
+	public void importStudyDef(final Odm odm) {
 
 		if (odm.getAdminData() != null) {
 			persistAdminData(odm.getAdminData());
@@ -330,9 +330,12 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 								metaDataVersionRepository.findByOid(metaDataVersionRef.getMetaDataVersionOid());
 						final org.nerdizin.eztrial.entities.study.Study targetStudy =
 								studyRepository.findByOid(metaDataVersionRef.getStudyOid());
+						final org.nerdizin.eztrial.entities.admin.Location targetLocation =
+								locationRepository.findByOid(location.getOid());
 
 						final org.nerdizin.eztrial.entities.admin.MetaDataVersionRef metaDataVersionRefEntity =
 								new org.nerdizin.eztrial.entities.admin.MetaDataVersionRef();
+						metaDataVersionRefEntity.setLocation(targetLocation);
 						metaDataVersionRefEntity.setMetaDataVersion(targetMetaDataVersion);
 						metaDataVersionRefEntity.setStudy(targetStudy);
 						metaDataVersionRefEntity.setEffectiveDate(metaDataVersionRef.getEffectiveDate());

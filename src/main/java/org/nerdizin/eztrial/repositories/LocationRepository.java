@@ -8,8 +8,6 @@ import java.util.stream.Stream;
 
 public interface LocationRepository extends PagingAndSortingRepository<Location,Long> {
 
-	int countByType(LocationType locationType);
-
-	Stream<Location> findTop2ByType(LocationType locationType);
+	Location findByOid(String oid);
 
 }

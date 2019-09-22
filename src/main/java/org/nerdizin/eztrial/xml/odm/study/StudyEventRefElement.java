@@ -1,8 +1,10 @@
 package org.nerdizin.eztrial.xml.odm.study;
 
+import org.nerdizin.eztrial.xml.odm.base.RefElement;
+
 import javax.xml.bind.annotation.XmlAttribute;
 
-public class StudyEventRef extends AbstractRef {
+public class StudyEventRefElement extends RefElement {
 
 	@XmlAttribute(name = "StudyEventOID")
 	private String studyEventOid;

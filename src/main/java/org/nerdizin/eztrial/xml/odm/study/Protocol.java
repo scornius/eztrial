@@ -6,14 +6,14 @@ import java.util.List;
 public class Protocol {
 
 	@XmlElement(name = "StudyEventRef")
-	private List<StudyEventRef> studyEventRefs;
+	private List<StudyEventRefElement> studyEventRefs;
 
 
-	public List<StudyEventRef> getStudyEventRefs() {
+	public List<StudyEventRefElement> getStudyEventRefs() {
 		return studyEventRefs;
 	}
 
-	public void setStudyEventRefs(final List<StudyEventRef> studyEventRefs) {
+	public void setStudyEventRefs(final List<StudyEventRefElement> studyEventRefs) {
 		this.studyEventRefs = studyEventRefs;
 	}
 }

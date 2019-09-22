@@ -157,7 +157,7 @@ public class StudyDefPersistenceServiceImpl implements StudyDefPersistenceServic
 	private void persistItemGroupDef(final MetaDataVersion metaDataVersion,
 			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
 		final ItemGroupDefConverter itemGroupDefConverter = new ItemGroupDefConverter();
-		for (final ItemGroupDef itemGroupDef : metaDataVersion.getItemGroupDefs()) {
+		for (final ItemGroupDefElement itemGroupDef : metaDataVersion.getItemGroupDefs()) {
 			final org.nerdizin.eztrial.entities.study.ItemGroupDef itemGroupDefEntity =
 					itemGroupDefConverter.convert2Entity(itemGroupDef);
 			itemGroupDefEntity.setMetaDataVersion(metaDataVersionEntity);
@@ -169,7 +169,7 @@ public class StudyDefPersistenceServiceImpl implements StudyDefPersistenceServic
 	private void persistFormDef(final MetaDataVersion metaDataVersion,
 			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
 		final FormDefConverter formDefConverter = new FormDefConverter();
-		for (final FormDef formDef : metaDataVersion.getFormDefs()) {
+		for (final FormDefElement formDef : metaDataVersion.getFormDefs()) {
 			final org.nerdizin.eztrial.entities.study.FormDef formDefEntity = formDefConverter.convert2Entity(formDef);
 			formDefEntity.setMetaDataVersion(metaDataVersionEntity);
 			formDefRepository.save(formDefEntity);
@@ -180,7 +180,7 @@ public class StudyDefPersistenceServiceImpl implements StudyDefPersistenceServic
 	private void persistEventDef(final MetaDataVersion metaDataVersion,
 			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
 		final EventDefConverter eventDefConverter = new EventDefConverter();
-		for (final StudyEventDef studyElementDef : metaDataVersion.getStudyElementDefs()) {
+		for (final StudyEventDefElement studyElementDef : metaDataVersion.getStudyElementDefs()) {
 			final EventDef eventDefEntity = eventDefConverter.convert2Entity(studyElementDef);
 			eventDefEntity.setMetaDataVersion(metaDataVersionEntity);
 			eventDefRepository.save(eventDefEntity);
@@ -203,7 +203,7 @@ public class StudyDefPersistenceServiceImpl implements StudyDefPersistenceServic
 			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
 
 		if (metaDataVersion.getProtocol() != null && metaDataVersion.getProtocol().getStudyEventRefs() != null) {
-			for (final StudyEventRef eventRef : metaDataVersion.getProtocol().getStudyEventRefs()) {
+			for (final StudyEventRefElement eventRef : metaDataVersion.getProtocol().getStudyEventRefs()) {
 				final org.nerdizin.eztrial.entities.study.Protocol protocolEntity = metaDataVersionEntity.getProtocol();
 				final EventDef targetEventDef = metaDataVersionEntity.findEventDefByOid(eventRef.getStudyEventOid());
 				final EventRef eventRefEntity = new EventRef();
@@ -229,10 +229,10 @@ public class StudyDefPersistenceServiceImpl implements StudyDefPersistenceServic
 	private void persistFormRefs(final MetaDataVersion metaDataVersion,
 			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
 
-		for (final StudyEventDef eventDef : metaDataVersion.getStudyElementDefs()) {
+		for (final StudyEventDefElement eventDef : metaDataVersion.getStudyElementDefs()) {
 			if (eventDef.getFormRefs() != null) {
 				final EventDef eventDefEntity = metaDataVersionEntity.findEventDefByOid(eventDef.getOid());
-				for (final FormRef formRef : eventDef.getFormRefs()) {
+				for (final FormRefElement formRef : eventDef.getFormRefs()) {
 					final org.nerdizin.eztrial.entities.study.FormDef targetFormDef =
 							metaDataVersionEntity.findFormDefByOid(formRef.getFormOid());
 					final org.nerdizin.eztrial.entities.study.FormRef formRefEntity =
@@ -250,10 +250,10 @@ public class StudyDefPersistenceServiceImpl implements StudyDefPersistenceServic
 	private void persistItemGroupRefs(final MetaDataVersion metaDataVersion,
 			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
 
-		for (final FormDef formDef : metaDataVersion.getFormDefs()) {
+		for (final FormDefElement formDef : metaDataVersion.getFormDefs()) {
 			if (formDef.getItemGroupRefs() != null) {
 				final org.nerdizin.eztrial.entities.study.FormDef formDefEntity = metaDataVersionEntity.findFormDefByOid(formDef.getOid());
-				for (final ItemGroupRef itemGroupRef : formDef.getItemGroupRefs()) {
+				for (final ItemGroupRefElement itemGroupRef : formDef.getItemGroupRefs()) {
 					final org.nerdizin.eztrial.entities.study.ItemGroupDef targetItemGroupDef =
 							metaDataVersionEntity.findItemGroupDefByOid(itemGroupRef.getItemGroupOid());
 					final org.nerdizin.eztrial.entities.study.ItemGroupRef itemGroupRefEntity =
@@ -271,11 +271,11 @@ public class StudyDefPersistenceServiceImpl implements StudyDefPersistenceServic
 	private void persistItemRefs(final MetaDataVersion metaDataVersion,
 			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
 
-		for (final ItemGroupDef itemGroupDef : metaDataVersion.getItemGroupDefs()) {
+		for (final ItemGroupDefElement itemGroupDef : metaDataVersion.getItemGroupDefs()) {
 			if (itemGroupDef.getItemRefs() != null) {
 				final org.nerdizin.eztrial.entities.study.ItemGroupDef itemGroupDefEntity =
 						metaDataVersionEntity.findItemGroupDefByOid(itemGroupDef.getOid());
-				for (final ItemRef itemRef : itemGroupDef.getItemRefs()) {
+				for (final ItemRefElement itemRef : itemGroupDef.getItemRefs()) {
 					final org.nerdizin.eztrial.entities.study.ItemDef targetItemDef =
 							metaDataVersionEntity.findItemDefByOid(itemRef.getItemOid());
 					final org.nerdizin.eztrial.entities.study.ItemRef itemRefEntity =
@@ -336,7 +336,7 @@ public class StudyDefPersistenceServiceImpl implements StudyDefPersistenceServic
 						metaDataVersionRefEntity.setMetaDataVersion(targetMetaDataVersion);
 						metaDataVersionRefEntity.setStudy(targetStudy);
 						metaDataVersionRefEntity.setEffectiveDate(metaDataVersionRef.getEffectiveDate());
-						
+
 						metaDataVersionRefRepository.save(metaDataVersionRefEntity);
 					}
 				}

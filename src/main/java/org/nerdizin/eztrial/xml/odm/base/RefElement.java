@@ -1,11 +1,11 @@
-package org.nerdizin.eztrial.xml.odm.study;
+package org.nerdizin.eztrial.xml.odm.base;
 
 import org.nerdizin.eztrial.xml.adapter.YesNoBooleanAdapter;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-public abstract class AbstractRef {
+public abstract class RefElement {
 
 	@XmlAttribute(name = "Mandatory")
 	@XmlJavaTypeAdapter(YesNoBooleanAdapter.class)

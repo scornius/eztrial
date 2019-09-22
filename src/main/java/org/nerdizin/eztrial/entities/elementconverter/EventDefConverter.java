@@ -3,12 +3,13 @@ package org.nerdizin.eztrial.entities.elementconverter;
 import org.nerdizin.eztrial.entities.enums.EventType;
 import org.nerdizin.eztrial.entities.study.EventDef;
 import org.nerdizin.eztrial.entities.study.FormRef;
-import org.nerdizin.eztrial.xml.odm.study.StudyEventDef;
+import org.nerdizin.eztrial.xml.odm.study.FormRefElement;
+import org.nerdizin.eztrial.xml.odm.study.StudyEventDefElement;
 
-public class EventDefConverter implements OdmElement2EntityConverter<StudyEventDef,EventDef> {
+public class EventDefConverter implements OdmElement2EntityConverter<StudyEventDefElement,EventDef> {
 
 	@Override
-	public EventDef convert2Entity(final StudyEventDef studyEventDef) {
+	public EventDef convert2Entity(final StudyEventDefElement studyEventDef) {
 
 		final EventDef result = new EventDef();
 		result.setOid(studyEventDef.getOid());
@@ -20,9 +21,9 @@ public class EventDefConverter implements OdmElement2EntityConverter<StudyEventD
 	}
 
 	@Override
-	public StudyEventDef convert2Element(final EventDef eventDef) {
+	public StudyEventDefElement convert2Element(final EventDef eventDef) {
 
-		final StudyEventDef result = new StudyEventDef();
+		final StudyEventDefElement result = new StudyEventDefElement();
 		result.setOid(eventDef.getOid());
 		result.setName(eventDef.getName());
 		result.setRepeating(eventDef.isRepeating());
@@ -30,7 +31,7 @@ public class EventDefConverter implements OdmElement2EntityConverter<StudyEventD
 
 		if (eventDef.getFormRefs() != null) {
 			for (final FormRef formRef : eventDef.getFormRefs()) {
-				final org.nerdizin.eztrial.xml.odm.study.FormRef resultFormRef = new org.nerdizin.eztrial.xml.odm.study.FormRef();
+				final FormRefElement resultFormRef = new FormRefElement();
 				resultFormRef.setMandatory(formRef.isMandatory());
 				resultFormRef.setFormOid(formRef.getFormDef().getOid());
 				result.addFormRef(resultFormRef);

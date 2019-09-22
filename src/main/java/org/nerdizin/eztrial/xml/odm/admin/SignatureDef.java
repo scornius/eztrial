@@ -1,15 +1,13 @@
 package org.nerdizin.eztrial.xml.odm.admin;
 
-import org.nerdizin.eztrial.xml.odm.OdmElement;
+import org.nerdizin.eztrial.xml.odm.base.OdmElement;
+import org.nerdizin.eztrial.xml.odm.base.OidElement;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
 
-public class SignatureDef extends OdmElement {
-
-    @XmlAttribute(name = "OID")
-    private String oid;
+public class SignatureDef extends OidElement {
 
     @XmlElement(name = "Meaning")
     private String meaning;
@@ -17,14 +15,6 @@ public class SignatureDef extends OdmElement {
     @XmlElement(name = "LegalReason")
     private String legalReason;
 
-
-    public String getOid() {
-        return oid;
-    }
-
-    public void setOid(final String oid) {
-        this.oid = oid;
-    }
 
     public String getMeaning() {
         return meaning;

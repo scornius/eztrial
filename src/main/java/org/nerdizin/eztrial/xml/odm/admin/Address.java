@@ -1,11 +1,11 @@
 package org.nerdizin.eztrial.xml.odm.admin;
 
-import org.nerdizin.eztrial.xml.odm.OdmElement;
+import org.nerdizin.eztrial.xml.odm.base.OdmElement;
 
 import javax.xml.bind.annotation.XmlElement;
 
 
-public class Address extends OdmElement {
+public class Address implements OdmElement {
 
     @XmlElement(name = "StreetName")
     private String streetName;

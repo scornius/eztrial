@@ -1,24 +1,26 @@
 package org.nerdizin.eztrial.xml.odm.study;
 
+import org.nerdizin.eztrial.xml.odm.base.RepeatingDefElement;
+
 import javax.xml.bind.annotation.XmlElement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FormDef extends AbstractRepeatingDef {
+public class FormDefElement extends RepeatingDefElement {
 
 	@XmlElement(name = "ItemGroupRef")
-	private List<ItemGroupRef> itemGroupRefs;
+	private List<ItemGroupRefElement> itemGroupRefs;
 
 
-	public List<ItemGroupRef> getItemGroupRefs() {
+	public List<ItemGroupRefElement> getItemGroupRefs() {
 		return itemGroupRefs;
 	}
 
-	public void setItemGroupRefs(final List<ItemGroupRef> itemGroupRefs) {
+	public void setItemGroupRefs(final List<ItemGroupRefElement> itemGroupRefs) {
 		this.itemGroupRefs = itemGroupRefs;
 	}
 
-	public void addItemGroupRef(final ItemGroupRef itemGroupRef) {
+	public void addItemGroupRef(final ItemGroupRefElement itemGroupRef) {
 		if (this.itemGroupRefs == null) {
 			this.itemGroupRefs = new ArrayList<>();
 		}

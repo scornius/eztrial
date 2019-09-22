@@ -1,7 +1,5 @@
 package org.nerdizin.eztrial.xml.odm.admin;
 
-import org.nerdizin.eztrial.xml.odm.OdmElement;
-
 import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
 

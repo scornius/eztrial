@@ -1,8 +1,10 @@
 package org.nerdizin.eztrial.xml.odm.study;
 
+import org.nerdizin.eztrial.xml.odm.base.RefElement;
+
 import javax.xml.bind.annotation.XmlAttribute;
 
-public class ItemRef extends AbstractRef {
+public class ItemRefElement extends RefElement {
 
 	@XmlAttribute(name = "ItemOID")
 	private String itemOid;

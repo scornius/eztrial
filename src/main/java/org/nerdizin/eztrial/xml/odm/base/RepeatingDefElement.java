@@ -1,11 +1,11 @@
-package org.nerdizin.eztrial.xml.odm.study;
+package org.nerdizin.eztrial.xml.odm.base;
 
 import org.nerdizin.eztrial.xml.adapter.YesNoBooleanAdapter;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-public abstract class AbstractRepeatingDef extends AbstractDef {
+public abstract class RepeatingDefElement extends DefElement {
 
 	@XmlAttribute(name = "Repeating")
 	@XmlJavaTypeAdapter(YesNoBooleanAdapter.class)

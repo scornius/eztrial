@@ -1,16 +1,14 @@
 package org.nerdizin.eztrial.xml.odm.study;
 
-import org.nerdizin.eztrial.xml.odm.OdmElement;
+import org.nerdizin.eztrial.xml.odm.base.OdmElement;
+import org.nerdizin.eztrial.xml.odm.base.OidElement;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
 
 
-public class Study extends OdmElement {
-
-    @XmlAttribute(name = "OID")
-    private String oid;
+public class Study extends OidElement {
 
     @XmlElement(name = "GlobalVariables")
     private GlobalVariables globalVariables;
@@ -21,14 +19,6 @@ public class Study extends OdmElement {
     @XmlElement(name = "MetaDataVersion")
     private List<MetaDataVersion> metaDataVersions;
 
-
-    public String getOid() {
-        return oid;
-    }
-
-    public void setOid(final String oid) {
-        this.oid = oid;
-    }
 
     public GlobalVariables getGlobalVariables() {
         return globalVariables;

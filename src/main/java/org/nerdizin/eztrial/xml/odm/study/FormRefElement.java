@@ -1,8 +1,10 @@
 package org.nerdizin.eztrial.xml.odm.study;
 
+import org.nerdizin.eztrial.xml.odm.base.RefElement;
+
 import javax.xml.bind.annotation.XmlAttribute;
 
-public class FormRef extends AbstractRef {
+public class FormRefElement extends RefElement {
 
 	@XmlAttribute(name = "FormOID")
 	private String formOid;

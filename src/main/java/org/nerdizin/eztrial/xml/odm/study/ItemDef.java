@@ -2,12 +2,13 @@ package org.nerdizin.eztrial.xml.odm.study;
 
 import org.nerdizin.eztrial.xml.Namespaces;
 import org.nerdizin.eztrial.xml.adapter.DataTypeAdapter;
+import org.nerdizin.eztrial.xml.odm.base.DefElement;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-public class ItemDef extends AbstractDef {
+public class ItemDef extends DefElement {
 
 	@XmlElement(name = "Question")
 	private Question question;

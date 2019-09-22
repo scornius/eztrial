@@ -1,51 +1,28 @@
 package org.nerdizin.eztrial.xml.odm.study;
 
-import org.nerdizin.eztrial.xml.odm.OdmElement;
+import org.nerdizin.eztrial.xml.odm.base.OidNameElement;
 
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
 
 
-public class MetaDataVersion extends OdmElement {
-
-    @XmlAttribute(name = "OID")
-    private String oid;
-
-    @XmlAttribute(name = "Name")
-    private String name;
+public class MetaDataVersion extends OidNameElement {
 
     @XmlElement(name = "Protocol")
 	private Protocol protocol;
 
     @XmlElement(name = "StudyEventDef")
-    private List<StudyEventDef> studyElementDefs;
+    private List<StudyEventDefElement> studyElementDefs;
 
     @XmlElement(name = "FormDef")
-    private List<FormDef> formDefs;
+    private List<FormDefElement> formDefs;
 
     @XmlElement(name = "ItemGroupDef")
-    private List<ItemGroupDef> itemGroupDefs;
+    private List<ItemGroupDefElement> itemGroupDefs;
 
     @XmlElement(name = "ItemDef")
     private List<ItemDef> itemDefs;
 
-
-    public String getOid() {
-        return oid;
-    }
-
-    public void setOid(final String oid) {
-        this.oid = oid;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
 
 	public Protocol getProtocol() {
 		return protocol;
@@ -55,27 +32,27 @@ public class MetaDataVersion extends OdmElement {
 		this.protocol = protocol;
 	}
 
-	public List<StudyEventDef> getStudyElementDefs() {
+	public List<StudyEventDefElement> getStudyElementDefs() {
         return studyElementDefs;
     }
 
-    public void setStudyElementDefs(final List<StudyEventDef> studyElementDefs) {
+    public void setStudyElementDefs(final List<StudyEventDefElement> studyElementDefs) {
         this.studyElementDefs = studyElementDefs;
     }
 
-    public List<FormDef> getFormDefs() {
+    public List<FormDefElement> getFormDefs() {
         return formDefs;
     }
 
-    public void setFormDefs(final List<FormDef> formDefs) {
+    public void setFormDefs(final List<FormDefElement> formDefs) {
         this.formDefs = formDefs;
     }
 
-    public List<ItemGroupDef> getItemGroupDefs() {
+    public List<ItemGroupDefElement> getItemGroupDefs() {
         return itemGroupDefs;
     }
 
-    public void setItemGroupDefs(final List<ItemGroupDef> itemGroupDefs) {
+    public void setItemGroupDefs(final List<ItemGroupDefElement> itemGroupDefs) {
         this.itemGroupDefs = itemGroupDefs;
     }
 

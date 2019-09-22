@@ -1,7 +1,8 @@
 package org.nerdizin.eztrial.xml.odm.admin;
 
 import org.nerdizin.eztrial.xml.adapter.LocationTypeAdapter;
-import org.nerdizin.eztrial.xml.odm.OdmElement;
+import org.nerdizin.eztrial.xml.odm.base.OdmElement;
+import org.nerdizin.eztrial.xml.odm.base.OidNameElement;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -10,13 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Location extends OdmElement {
-
-    @XmlAttribute(name = "OID")
-    private String oid;
-
-    @XmlAttribute(name = "Name")
-    private String name;
+public class Location extends OidNameElement {
 
     @XmlAttribute(name = "LocationType")
     @XmlJavaTypeAdapter(LocationTypeAdapter.class)
@@ -25,22 +20,6 @@ public class Location extends OdmElement {
     @XmlElement(name = "MetaDataVersionRef")
 	private List<MetaDataVersionRef> metaDataVersionRefs;
 
-
-    public String getOid() {
-        return oid;
-    }
-
-    public void setOid(final String oid) {
-        this.oid = oid;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
 
     public LocationType getLocationType() {
         return locationType;

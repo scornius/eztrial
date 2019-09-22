@@ -1,8 +1,10 @@
 package org.nerdizin.eztrial.xml.odm.study;
 
+import org.nerdizin.eztrial.xml.odm.base.RefElement;
+
 import javax.xml.bind.annotation.XmlAttribute;
 
-public class ItemGroupRef extends AbstractRef {
+public class ItemGroupRefElement extends RefElement {
 
 	@XmlAttribute(name = "ItemGroupOID")
 	private String itemGroupOid;

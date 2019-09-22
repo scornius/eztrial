@@ -1,20 +1,15 @@
 package org.nerdizin.eztrial.xml.odm.admin;
 
 import org.nerdizin.eztrial.xml.adapter.UserTypeAdapter;
-import org.nerdizin.eztrial.xml.Namespaces;
-import org.nerdizin.eztrial.xml.odm.OdmElement;
+import org.nerdizin.eztrial.xml.odm.base.OdmElement;
+import org.nerdizin.eztrial.xml.odm.base.OidElement;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
-public class User extends OdmElement {
-
-    @XmlAttribute(name = "OID")
-    private String oid;
+public class User extends OidElement {
 
     @XmlAttribute(name = "UserType")
     @XmlJavaTypeAdapter(UserTypeAdapter.class)
@@ -35,14 +30,6 @@ public class User extends OdmElement {
     @XmlElement(name = "Phone")
     private String phone;
 
-
-    public String getOid() {
-        return oid;
-    }
-
-    public void setOid(final String oid) {
-        this.oid = oid;
-    }
 
     public UserType getUserType() {
         return userType;

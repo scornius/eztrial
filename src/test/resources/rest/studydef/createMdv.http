@@ -1,0 +1,13 @@
+POST http://{{host}}/mdvs
+Authorization: Basic {{username}} {{password}}
+Content-Type: application/json
+Accept: */*
+Cache-Control: no-cache
+X-XSRF-TOKEN: responseCookies["XSRF-TOKEN"].value
+
+{
+  "oid": "mdv.2",
+  "name": "Second Mdv"
+}
+
+###

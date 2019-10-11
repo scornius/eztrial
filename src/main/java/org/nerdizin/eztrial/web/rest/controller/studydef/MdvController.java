@@ -2,14 +2,16 @@ package org.nerdizin.eztrial.web.rest.controller.studydef;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.nerdizin.eztrial.entities.study.MetaDataVersion;
 import org.nerdizin.eztrial.repositories.MetaDataVersionRepository;
 import org.nerdizin.eztrial.web.rest.controller.util.PagingParameters;
 import org.nerdizin.eztrial.web.rest.converter.MetaDataVersionConverter;
+import org.nerdizin.eztrial.web.rest.model.MetaDataVersion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -37,12 +39,25 @@ public class MdvController {
 			pagingParameters.setProperties(new String[]{"oid"});
 		}
 
-		final Page<MetaDataVersion> page = metaDataVersionRepository.findAll(
+		final Page<org.nerdizin.eztrial.entities.study.MetaDataVersion> page = metaDataVersionRepository.findAll(
 				PageRequest.of(pagingParameters.getPage(),
 						pagingParameters.getSize(),
 						pagingParameters.getSortDirection(),
 						pagingParameters.getProperties()));
 
 		return page.stream().map(metaDataVersionConverter::convertToUiModel).collect(Collectors.toList());
+	}
+
+	@PostMapping("/mdvs")
+	public MetaDataVersion createMdv(@RequestBody final MetaDataVersion mdv) {
+
+		try {
+			final org.nerdizin.eztrial.entities.study.MetaDataVersion savedMdv =
+					metaDataVersionRepository.save(metaDataVersionConverter.convertToEntity(mdv));
+			return metaDataVersionConverter.convertToUiModel(savedMdv);
+		} catch (Exception e) {
+			log.error(e);
+			throw new RuntimeException(e);
+		}
 	}
 }

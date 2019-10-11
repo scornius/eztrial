@@ -39,8 +39,6 @@ public class UserController {
 						pagingParameters.getSize(),
 						pagingParameters.getSortDirection(),
 						"oid", "userName"));
-		log.info("totalElements: " + page.getTotalElements());
-		log.info("totalPages: " + page.getTotalPages());
 
 		return page.stream().map(userConverter::convertToUiModel).collect(Collectors.toList());
 	}

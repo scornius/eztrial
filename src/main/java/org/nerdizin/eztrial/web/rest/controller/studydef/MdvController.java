@@ -33,13 +33,15 @@ public class MdvController {
 	public List<org.nerdizin.eztrial.web.rest.model.MetaDataVersion> getMdvs(
 			final PagingParameters pagingParameters) {
 
+		if (pagingParameters.getProperties() == null) {
+			pagingParameters.setProperties(new String[]{"oid"});
+		}
+
 		final Page<MetaDataVersion> page = metaDataVersionRepository.findAll(
 				PageRequest.of(pagingParameters.getPage(),
 						pagingParameters.getSize(),
 						pagingParameters.getSortDirection(),
 						pagingParameters.getProperties()));
-		log.info("totalElements: " + page.getTotalElements());
-		log.info("totalPages: " + page.getTotalPages());
 
 		return page.stream().map(metaDataVersionConverter::convertToUiModel).collect(Collectors.toList());
 	}

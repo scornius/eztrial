@@ -1,0 +1,7 @@
+GET http://{{host}}/mdvs?page=0&size=10
+Authorization: Basic {{username}} {{password}}
+Content-Type: application/json
+Accept: */*
+Cache-Control: no-cache
+
+###

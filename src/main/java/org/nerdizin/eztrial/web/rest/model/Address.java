@@ -1,29 +1,11 @@
-package org.nerdizin.eztrial.entities.admin;
+package org.nerdizin.eztrial.web.rest.model;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.nerdizin.eztrial.entities.base.BaseEntity;
+public class Address implements UiModel {
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "admin_addresses")
-public class Address extends BaseEntity {
-
-	@Column(name = "street")
 	private String street;
-
-	@Column(name = "city")
 	private String city;
-
-	@Column(name = "region")
 	private String region;
-
-	@Column(name = "postal_code")
 	private String postalCode;
-
-	@Column(name = "country")
 	private String country;
 
 	public String getStreet() {
@@ -64,10 +46,5 @@ public class Address extends BaseEntity {
 
 	public void setCountry(final String country) {
 		this.country = country;
-	}
-
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
 	}
 }

@@ -5,11 +5,10 @@ import org.nerdizin.eztrial.xml.odm.study.Description;
 import org.nerdizin.eztrial.xml.odm.study.StudyEventRef;
 import org.nerdizin.eztrial.xml.odm.study.TranslatedText;
 
-public class ProtocolConverter implements
-		OdmElement2EntityConverter<org.nerdizin.eztrial.xml.odm.study.Protocol,Protocol> {
+public class ProtocolConverter implements OdmElementToEntityConverter<org.nerdizin.eztrial.xml.odm.study.Protocol,Protocol> {
 
 	@Override
-	public Protocol convert2Entity(final org.nerdizin.eztrial.xml.odm.study.Protocol protocol) {
+	public Protocol convertToEntity(final org.nerdizin.eztrial.xml.odm.study.Protocol protocol) {
 
 		final Protocol result = new Protocol();
 
@@ -23,7 +22,7 @@ public class ProtocolConverter implements
 	}
 
 	@Override
-	public org.nerdizin.eztrial.xml.odm.study.Protocol convert2Element(final Protocol protocol) {
+	public org.nerdizin.eztrial.xml.odm.study.Protocol convertToElement(final Protocol protocol) {
 
 		final org.nerdizin.eztrial.xml.odm.study.Protocol result =
 				new org.nerdizin.eztrial.xml.odm.study.Protocol();

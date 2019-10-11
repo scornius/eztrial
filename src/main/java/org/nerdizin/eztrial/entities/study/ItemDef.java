@@ -2,7 +2,6 @@ package org.nerdizin.eztrial.entities.study;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.nerdizin.eztrial.entities.base.DefEntity;
-import org.nerdizin.eztrial.entities.base.OidNameEntity;
 import org.nerdizin.eztrial.entities.enums.DataType;
 import org.nerdizin.eztrial.entities.enums.DataTypeConverter;
 
@@ -19,11 +18,35 @@ public class ItemDef extends DefEntity {
 	private DataType dataType;
 
 	@ElementCollection
-	@MapKeyColumn(name = "language", unique = true)
+	@MapKeyColumn(name = "language")
 	@Column(name = "text")
-	@CollectionTable(name="def_item_translations", joinColumns=@JoinColumn(name="id"))
-	private Map<String,String> translations;
+	@CollectionTable(name="def_items_questions",
+			joinColumns=@JoinColumn(name="id"),
+			uniqueConstraints = @UniqueConstraint(columnNames={"id", "language"}))
+	private Map<String,String> questions;
 
+	@ElementCollection
+	@MapKeyColumn(name = "language")
+	@Column(name = "text")
+	@CollectionTable(name="def_items_descriptions",
+			joinColumns=@JoinColumn(name="id"),
+			uniqueConstraints = @UniqueConstraint(columnNames={"id", "language"}))
+	private Map<String,String> descriptions;
+
+
+	public void addQuestion(final String language, final String text) {
+		if (questions == null) {
+			questions = new HashMap<>();
+		}
+		this.questions.put(language, text);
+	}
+
+	public void addDescription(final String language, final String text) {
+		if (descriptions == null) {
+			descriptions = new HashMap<>();
+		}
+		this.descriptions.put(language, text);
+	}
 
 	public DataType getDataType() {
 		return dataType;
@@ -33,19 +56,22 @@ public class ItemDef extends DefEntity {
 		this.dataType = dataType;
 	}
 
-	public Map<String,String> getTranslations() {
-		return translations;
+	public Map<String,String> getQuestions() {
+		return questions;
 	}
 
-	public void setTranslations(final Map<String,String> translations) {
-		this.translations = translations;
+	public void setQuestions(final Map<String,String> questions) {
+		this.questions = questions;
 	}
 
-	public void addTranslation(final String language, final String text) {
-		if (translations == null) {
-			translations = new HashMap<>();
-		}
-		this.translations.put(language, text);
+	@Override
+	public Map<String,String> getDescriptions() {
+		return descriptions;
+	}
+
+	@Override
+	public void setDescriptions(final Map<String,String> descriptions) {
+		this.descriptions = descriptions;
 	}
 
 	@Override

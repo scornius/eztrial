@@ -1,15 +1,9 @@
 package org.nerdizin.eztrial.repositories;
 
 import org.nerdizin.eztrial.entities.admin.User;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-import java.util.List;
-
-public interface UserRepository extends CrudRepository<User, Long> {
-
-	List<User> findByEmail(String email);
-
-	List<User> findByEmailAndFirstName(String email, String firstName);
+public interface UserRepository extends PagingAndSortingRepository<User, Long> {
 
 	User findByUserName(String userName);
 

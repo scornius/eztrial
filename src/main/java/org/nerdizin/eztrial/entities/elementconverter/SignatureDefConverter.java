@@ -2,11 +2,10 @@ package org.nerdizin.eztrial.entities.elementconverter;
 
 import org.nerdizin.eztrial.entities.admin.SignatureDef;
 
-public class SignatureDefConverter implements
-		OdmElement2EntityConverter<org.nerdizin.eztrial.xml.odm.admin.SignatureDef,SignatureDef> {
+public class SignatureDefConverter implements OdmElementToEntityConverter<org.nerdizin.eztrial.xml.odm.admin.SignatureDef,SignatureDef> {
 
 	@Override
-	public SignatureDef convert2Entity(final org.nerdizin.eztrial.xml.odm.admin.SignatureDef signatureDef) {
+	public SignatureDef convertToEntity(final org.nerdizin.eztrial.xml.odm.admin.SignatureDef signatureDef) {
 
 		final SignatureDef result = new SignatureDef();
 		result.setOid(signatureDef.getOid());
@@ -17,7 +16,7 @@ public class SignatureDefConverter implements
 	}
 
 	@Override
-	public org.nerdizin.eztrial.xml.odm.admin.SignatureDef convert2Element(final SignatureDef signatureDef) {
+	public org.nerdizin.eztrial.xml.odm.admin.SignatureDef convertToElement(final SignatureDef signatureDef) {
 
 		final org.nerdizin.eztrial.xml.odm.admin.SignatureDef result =
 				new org.nerdizin.eztrial.xml.odm.admin.SignatureDef();

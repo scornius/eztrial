@@ -4,10 +4,10 @@ package org.nerdizin.eztrial.entities.elementconverter;
 import org.nerdizin.eztrial.entities.study.Study;
 import org.nerdizin.eztrial.xml.odm.study.GlobalVariables;
 
-public class StudyConverter implements OdmElement2EntityConverter<org.nerdizin.eztrial.xml.odm.study.Study,Study> {
+public class StudyConverter implements OdmElementToEntityConverter<org.nerdizin.eztrial.xml.odm.study.Study,Study> {
 
 	@Override
-	public Study convert2Entity(final org.nerdizin.eztrial.xml.odm.study.Study study) {
+	public Study convertToEntity(final org.nerdizin.eztrial.xml.odm.study.Study study) {
 
 		final Study result = new Study();
 		result.setOid(study.getOid());
@@ -22,7 +22,7 @@ public class StudyConverter implements OdmElement2EntityConverter<org.nerdizin.e
 	}
 
 	@Override
-	public org.nerdizin.eztrial.xml.odm.study.Study convert2Element(final Study study) {
+	public org.nerdizin.eztrial.xml.odm.study.Study convertToElement(final Study study) {
 
 		final org.nerdizin.eztrial.xml.odm.study.Study result =
 				new org.nerdizin.eztrial.xml.odm.study.Study();

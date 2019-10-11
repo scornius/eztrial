@@ -5,20 +5,20 @@ import org.nerdizin.eztrial.entities.study.ItemDef;
 import org.nerdizin.eztrial.xml.odm.study.Question;
 import org.nerdizin.eztrial.xml.odm.study.TranslatedText;
 
-public class ItemDefConverter implements
-		OdmElement2EntityConverter<org.nerdizin.eztrial.xml.odm.study.ItemDef,ItemDef> {
+public class ItemDefConverter implements OdmElementToEntityConverter<org.nerdizin.eztrial.xml.odm.study.ItemDef,ItemDef> {
 
 	@Override
-	public ItemDef convert2Entity(final org.nerdizin.eztrial.xml.odm.study.ItemDef itemDef) {
+	public ItemDef convertToEntity(final org.nerdizin.eztrial.xml.odm.study.ItemDef element) {
 
 		final ItemDef result = new ItemDef();
-		result.setOid(itemDef.getOid());
-		result.setName(itemDef.getName());
-		result.setDataType(DataType.fromCode(itemDef.getDataType().getCode()));
+		result.setOid(element.getOid());
+		result.setName(element.getName());
+		result.setDataType(DataType.fromCode(element.getDataType().getCode()));
+		DescriptionConverterUtil.convertElementDescription(element, result);
 
-		if (itemDef.getQuestion().getTranslatedTexts() != null) {
-			for (final TranslatedText translatedText : itemDef.getQuestion().getTranslatedTexts()) {
-				result.addTranslation(translatedText.getLanguage(), translatedText.getText());
+		if (element.getQuestion().getTranslatedTexts() != null) {
+			for (final TranslatedText translatedText : element.getQuestion().getTranslatedTexts()) {
+				result.addQuestion(translatedText.getLanguage(), translatedText.getText());
 			}
 		}
 
@@ -26,17 +26,18 @@ public class ItemDefConverter implements
 	}
 
 	@Override
-	public org.nerdizin.eztrial.xml.odm.study.ItemDef convert2Element(final ItemDef itemDef) {
+	public org.nerdizin.eztrial.xml.odm.study.ItemDef convertToElement(final ItemDef entity) {
 
 		final org.nerdizin.eztrial.xml.odm.study.ItemDef result = new org.nerdizin.eztrial.xml.odm.study.ItemDef();
-		result.setOid(itemDef.getOid());
-		result.setName(itemDef.getName());
-		result.setDataType(org.nerdizin.eztrial.xml.odm.study.DataType.fromCode(itemDef.getDataType().getCode()));
+		result.setOid(entity.getOid());
+		result.setName(entity.getName());
+		result.setDataType(org.nerdizin.eztrial.xml.odm.study.DataType.fromCode(entity.getDataType().getCode()));
+		DescriptionConverterUtil.convertEntityDescription(entity, result);
 
-		if (itemDef.getTranslations() != null) {
+		if (entity.getQuestions() != null) {
 			final Question question = new Question();
-			for (final String language : itemDef.getTranslations().keySet()) {
-				question.addTranslatedText(new TranslatedText(language, itemDef.getTranslations().get(language)));
+			for (final String language : entity.getQuestions().keySet()) {
+				question.addTranslatedText(new TranslatedText(language, entity.getQuestions().get(language)));
 			}
 			result.setQuestion(question);
 		}

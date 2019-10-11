@@ -16,7 +16,6 @@ public class FormRef extends RefEntity {
 	@OneToOne
 	private FormDef formDef;
 
-
 	public EventDef getEventDef() {
 		return eventDef;
 	}

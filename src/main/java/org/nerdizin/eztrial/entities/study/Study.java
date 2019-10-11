@@ -27,6 +27,20 @@ public class Study extends OidEntity {
 	private List<MetaDataVersion> metaDataVersions;
 
 
+	public void addMeasurementUnit(final MeasurementUnit measurementUnit) {
+		if (this.measurementUnits == null) {
+			this.measurementUnits = new ArrayList<>();
+		}
+		measurementUnits.add(measurementUnit);
+	}
+
+	public void addMetaDataVersion(final MetaDataVersion metaDataVersion) {
+		if (this.metaDataVersions == null) {
+			this.metaDataVersions = new ArrayList<>();
+		}
+		this.metaDataVersions.add(metaDataVersion);
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -59,26 +73,12 @@ public class Study extends OidEntity {
 		this.measurementUnits = measurementUnits;
 	}
 
-	public void addMeasurementUnit(final MeasurementUnit measurementUnit) {
-		if (this.measurementUnits == null) {
-			this.measurementUnits = new ArrayList<>();
-		}
-		measurementUnits.add(measurementUnit);
-	}
-
 	public List<MetaDataVersion> getMetaDataVersions() {
 		return metaDataVersions;
 	}
 
 	public void setMetaDataVersions(final List<MetaDataVersion> metaDataVersions) {
 		this.metaDataVersions = metaDataVersions;
-	}
-
-	public void addMetaDataVersion(final MetaDataVersion metaDataVersion) {
-		if (this.metaDataVersions == null) {
-			this.metaDataVersions = new ArrayList<>();
-		}
-		this.metaDataVersions.add(metaDataVersion);
 	}
 
 	@Override

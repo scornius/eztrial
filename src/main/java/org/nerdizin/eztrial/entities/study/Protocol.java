@@ -26,6 +26,19 @@ public class Protocol extends BaseEntity {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "protocol")
 	private List<EventRef> eventRefs;
 
+	public void addTranslation(final String language, final String text) {
+		if (translations == null) {
+			translations = new HashMap<>();
+		}
+		this.translations.put(language, text);
+	}
+
+	public void addEventRef(final EventRef eventRef) {
+		if (this.eventRefs == null) {
+			this.eventRefs = new ArrayList<>();
+		}
+		this.eventRefs.add(eventRef);
+	}
 
 	public MetaDataVersion getMetaDataVersion() {
 		return metaDataVersion;
@@ -43,26 +56,12 @@ public class Protocol extends BaseEntity {
 		this.translations = translations;
 	}
 
-	public void addTranslation(final String language, final String text) {
-		if (translations == null) {
-			translations = new HashMap<>();
-		}
-		this.translations.put(language, text);
-	}
-
 	public List<EventRef> getEventRefs() {
 		return eventRefs;
 	}
 
 	public void setEventRefs(final List<EventRef> eventRefs) {
 		this.eventRefs = eventRefs;
-	}
-
-	public void addEventRef(final EventRef eventRef) {
-		if (this.eventRefs == null) {
-			this.eventRefs = new ArrayList<>();
-		}
-		this.eventRefs.add(eventRef);
 	}
 
 	@Override

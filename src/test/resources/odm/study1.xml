@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ODM xmlns="http://www.cdisc.org/ns/odm/v1.3"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
-     xmlns:xlink="http://www.w3.org/1999/xlink"
-     xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
-     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
      xmlns:ez="http://nerdizin.org/eztrial/1.0"
      FileType="Snapshot" FileOID="1" CreationDateTime="2019-09-14T12:34:56" ODMVersion="1.3.2">
 
@@ -32,18 +29,33 @@
                 <StudyEventRef StudyEventOID="event.1" Mandatory="No"/>
             </Protocol>
             <StudyEventDef OID="event.1" Name="Event 1" Repeating="No" Type="Scheduled">
+                <Description>
+                    <TranslatedText xml:lang="en">Event 1 description</TranslatedText>
+                </Description>
                 <FormRef FormOID="form.1" Mandatory="Yes"/>
             </StudyEventDef>
             <StudyEventDef OID="event.2" Name="Event 2" Repeating="Yes" Type="Common">
+                <Description>
+                    <TranslatedText xml:lang="en">Event 2 description</TranslatedText>
+                </Description>
                 <FormRef FormOID="form.1" Mandatory="No"/>
             </StudyEventDef>
             <FormDef OID="form.1" Name="Form 1" Repeating="No">
+                <Description>
+                    <TranslatedText xml:lang="en">Form 1 description</TranslatedText>
+                </Description>
                 <ItemGroupRef ItemGroupOID="itemgroup.1" Mandatory="No"/>
             </FormDef>
             <ItemGroupDef OID="itemgroup.1" Name="ItemGroup 1" Repeating="No">
+                <Description>
+                    <TranslatedText xml:lang="en">ItemGroup 1 description</TranslatedText>
+                </Description>
                 <ItemRef ItemOID="item.1" Mandatory="No"/>
             </ItemGroupDef>
             <ItemDef OID="item.1" Name="Item 1" DataType="integer">
+                <Description>
+                    <TranslatedText xml:lang="en">Item 1 description</TranslatedText>
+                </Description>
                 <Question>
                     <TranslatedText xml:lang="en">Body height</TranslatedText>
                     <TranslatedText xml:lang="de">Körpergröße</TranslatedText>

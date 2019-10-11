@@ -2,11 +2,10 @@ package org.nerdizin.eztrial.entities.elementconverter;
 
 import org.nerdizin.eztrial.entities.study.MetaDataVersion;
 
-public class MetaDataVersionConverter implements
-		OdmElement2EntityConverter<org.nerdizin.eztrial.xml.odm.study.MetaDataVersion,MetaDataVersion> {
+public class MetaDataVersionConverter implements OdmElementToEntityConverter<org.nerdizin.eztrial.xml.odm.study.MetaDataVersion,MetaDataVersion> {
 
 	@Override
-	public MetaDataVersion convert2Entity(final org.nerdizin.eztrial.xml.odm.study.MetaDataVersion metaDataVersion) {
+	public MetaDataVersion convertToEntity(final org.nerdizin.eztrial.xml.odm.study.MetaDataVersion metaDataVersion) {
 
 		final MetaDataVersion result = new MetaDataVersion();
 		result.setOid(metaDataVersion.getOid());
@@ -16,7 +15,7 @@ public class MetaDataVersionConverter implements
 	}
 
 	@Override
-	public org.nerdizin.eztrial.xml.odm.study.MetaDataVersion convert2Element(final MetaDataVersion metaDataVersion) {
+	public org.nerdizin.eztrial.xml.odm.study.MetaDataVersion convertToElement(final MetaDataVersion metaDataVersion) {
 
 		final org.nerdizin.eztrial.xml.odm.study.MetaDataVersion result =
 				new org.nerdizin.eztrial.xml.odm.study.MetaDataVersion();

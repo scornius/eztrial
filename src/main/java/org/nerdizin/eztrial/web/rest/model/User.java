@@ -1,39 +1,14 @@
-package org.nerdizin.eztrial.entities.admin;
+package org.nerdizin.eztrial.web.rest.model;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.nerdizin.eztrial.entities.base.BaseEntity;
-import org.nerdizin.eztrial.entities.enums.UserType;
-import org.nerdizin.eztrial.entities.enums.UserTypeConverter;
+public class User implements UiModel {
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "admin_users")
-public class User extends BaseEntity {
-
-	@Column(name = "oid", nullable = false, updatable = false, unique = true)
 	private String oid;
-
-	@Column(name = "user_name")
 	private String userName;
-
-	@Column(name = "first_name")
 	private String firstName;
-
-	@Column(name = "last_name")
 	private String lastName;
-
-	@Column(name = "email")
 	private String email;
-
-	@Column(name = "phone")
 	private String phone;
-
-	@Column(name = "user_type")
-	@Convert(converter = UserTypeConverter.class)
-	private UserType userType;
-
-	@OneToOne
+	private String userType;
 	private Address address;
 
 	public String getOid() {
@@ -84,11 +59,11 @@ public class User extends BaseEntity {
 		this.phone = phone;
 	}
 
-	public UserType getUserType() {
+	public String getUserType() {
 		return userType;
 	}
 
-	public void setUserType(final UserType userType) {
+	public void setUserType(final String userType) {
 		this.userType = userType;
 	}
 
@@ -98,10 +73,5 @@ public class User extends BaseEntity {
 
 	public void setAddress(final Address address) {
 		this.address = address;
-	}
-
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
 	}
 }

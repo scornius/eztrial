@@ -4,11 +4,10 @@ import org.nerdizin.eztrial.entities.study.MeasurementUnit;
 import org.nerdizin.eztrial.xml.odm.study.Symbol;
 import org.nerdizin.eztrial.xml.odm.study.TranslatedText;
 
-public class MeasurementUnitConverter implements
-		OdmElement2EntityConverter<org.nerdizin.eztrial.xml.odm.study.MeasurementUnit,MeasurementUnit> {
+public class MeasurementUnitConverter implements OdmElementToEntityConverter<org.nerdizin.eztrial.xml.odm.study.MeasurementUnit,MeasurementUnit> {
 
 	@Override
-	public MeasurementUnit convert2Entity(final org.nerdizin.eztrial.xml.odm.study.MeasurementUnit measurementUnit) {
+	public MeasurementUnit convertToEntity(final org.nerdizin.eztrial.xml.odm.study.MeasurementUnit measurementUnit) {
 
 		final MeasurementUnit result = new MeasurementUnit();
 		result.setOid(measurementUnit.getOid());
@@ -26,7 +25,7 @@ public class MeasurementUnitConverter implements
 	}
 
 	@Override
-	public org.nerdizin.eztrial.xml.odm.study.MeasurementUnit convert2Element(final MeasurementUnit measurementUnit) {
+	public org.nerdizin.eztrial.xml.odm.study.MeasurementUnit convertToElement(final MeasurementUnit measurementUnit) {
 
 		final org.nerdizin.eztrial.xml.odm.study.MeasurementUnit result =
 				new org.nerdizin.eztrial.xml.odm.study.MeasurementUnit();

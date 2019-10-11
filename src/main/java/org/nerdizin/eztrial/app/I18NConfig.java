@@ -13,7 +13,7 @@ public class I18NConfig {
 	@Primary
 	public MessageSource messageSource() {
 
-		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+		final ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
 		messageSource.addBasenames("messages.error");
 		messageSource.setDefaultEncoding("UTF-8");
 

@@ -16,7 +16,6 @@ public class EventRef extends RefEntity {
 	@OneToOne
 	private EventDef eventDef;
 
-
 	public Protocol getProtocol() {
 		return protocol;
 	}

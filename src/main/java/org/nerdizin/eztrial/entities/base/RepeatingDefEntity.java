@@ -1,10 +1,12 @@
 package org.nerdizin.eztrial.entities.base;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public class RepeatingDefEntity extends DefEntity {
+public abstract class RepeatingDefEntity extends DefEntity {
 
 	@Column(name = "repeating")
 	private boolean repeating;
@@ -15,5 +17,10 @@ public class RepeatingDefEntity extends DefEntity {
 
 	public void setRepeating(final boolean repeating) {
 		this.repeating = repeating;
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 }

@@ -2,10 +2,10 @@ package org.nerdizin.eztrial.entities.elementconverter;
 
 import org.nerdizin.eztrial.entities.admin.Address;
 
-public class AddressConverter implements OdmElement2EntityConverter<org.nerdizin.eztrial.xml.odm.admin.Address,Address> {
+public class AddressConverter implements OdmElementToEntityConverter<org.nerdizin.eztrial.xml.odm.admin.Address,Address> {
 
 	@Override
-	public Address convert2Entity(final org.nerdizin.eztrial.xml.odm.admin.Address address) {
+	public Address convertToEntity(final org.nerdizin.eztrial.xml.odm.admin.Address address) {
 
 		final Address result = new Address();
 		result.setStreet(address.getStreetName());
@@ -18,7 +18,7 @@ public class AddressConverter implements OdmElement2EntityConverter<org.nerdizin
 	}
 
 	@Override
-	public org.nerdizin.eztrial.xml.odm.admin.Address convert2Element(final Address address) {
+	public org.nerdizin.eztrial.xml.odm.admin.Address convertToElement(final Address address) {
 
 		final org.nerdizin.eztrial.xml.odm.admin.Address result = new org.nerdizin.eztrial.xml.odm.admin.Address();
 		result.setStreetName(address.getStreet());

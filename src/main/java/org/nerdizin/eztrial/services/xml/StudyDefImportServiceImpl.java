@@ -88,7 +88,7 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 	private void persistStudy(final Study study) {
 
 		final StudyConverter studyConverter = new StudyConverter();
-		final org.nerdizin.eztrial.entities.study.Study studyEntity = studyConverter.convert2Entity(study);
+		final org.nerdizin.eztrial.entities.study.Study studyEntity = studyConverter.convertToEntity(study);
 		studyRepository.save(studyEntity);
 
 		if (study.getBasicDefinitions() != null) {
@@ -96,7 +96,7 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 				final MeasurementUnitConverter measurementUnitConverter = new MeasurementUnitConverter();
 				for (final MeasurementUnit measurementUnit : study.getBasicDefinitions().getMeasurementUnits()) {
 					final org.nerdizin.eztrial.entities.study.MeasurementUnit measurementEntity =
-							measurementUnitConverter.convert2Entity(measurementUnit);
+							measurementUnitConverter.convertToEntity(measurementUnit);
 					measurementEntity.setStudy(studyEntity);
 					measurementUnitRepository.save(measurementEntity);
 					studyEntity.addMeasurementUnit(measurementEntity);
@@ -120,7 +120,7 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 		final MetaDataVersionConverter metaDataVersionConverter = new MetaDataVersionConverter();
 
 		final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity =
-				metaDataVersionConverter.convert2Entity(metaDataVersion);
+				metaDataVersionConverter.convertToEntity(metaDataVersion);
 		metaDataVersionEntity.setStudy(studyEntity);
 		metaDataVersionRepository.save(metaDataVersionEntity);
 		studyEntity.addMetaDataVersion(metaDataVersionEntity);
@@ -147,7 +147,7 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
 		final ItemDefConverter itemDefConverter = new ItemDefConverter();
 		for (final ItemDef itemDef : metaDataVersion.getItemDefs()) {
-			final org.nerdizin.eztrial.entities.study.ItemDef itemDefEntity = itemDefConverter.convert2Entity(itemDef);
+			final org.nerdizin.eztrial.entities.study.ItemDef itemDefEntity = itemDefConverter.convertToEntity(itemDef);
 			itemDefEntity.setMetaDataVersion(metaDataVersionEntity);
 			itemDefRepository.save(itemDefEntity);
 			metaDataVersionEntity.addItemDef(itemDefEntity);
@@ -159,7 +159,7 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 		final ItemGroupDefConverter itemGroupDefConverter = new ItemGroupDefConverter();
 		for (final ItemGroupDef itemGroupDef : metaDataVersion.getItemGroupDefs()) {
 			final org.nerdizin.eztrial.entities.study.ItemGroupDef itemGroupDefEntity =
-					itemGroupDefConverter.convert2Entity(itemGroupDef);
+					itemGroupDefConverter.convertToEntity(itemGroupDef);
 			itemGroupDefEntity.setMetaDataVersion(metaDataVersionEntity);
 			itemGroupDefRepository.save(itemGroupDefEntity);
 			metaDataVersionEntity.addItemGroupDef(itemGroupDefEntity);
@@ -170,7 +170,7 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
 		final FormDefConverter formDefConverter = new FormDefConverter();
 		for (final FormDef formDef : metaDataVersion.getFormDefs()) {
-			final org.nerdizin.eztrial.entities.study.FormDef formDefEntity = formDefConverter.convert2Entity(formDef);
+			final org.nerdizin.eztrial.entities.study.FormDef formDefEntity = formDefConverter.convertToEntity(formDef);
 			formDefEntity.setMetaDataVersion(metaDataVersionEntity);
 			formDefRepository.save(formDefEntity);
 			metaDataVersionEntity.addFormDef(formDefEntity);
@@ -181,7 +181,7 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
 		final EventDefConverter eventDefConverter = new EventDefConverter();
 		for (final StudyEventDef studyElementDef : metaDataVersion.getStudyEventDefs()) {
-			final EventDef eventDefEntity = eventDefConverter.convert2Entity(studyElementDef);
+			final EventDef eventDefEntity = eventDefConverter.convertToEntity(studyElementDef);
 			eventDefEntity.setMetaDataVersion(metaDataVersionEntity);
 			eventDefRepository.save(eventDefEntity);
 			metaDataVersionEntity.addEventDef(eventDefEntity);
@@ -192,7 +192,7 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
 		final ProtocolConverter protocolConverter = new ProtocolConverter();
 		final org.nerdizin.eztrial.entities.study.Protocol protocolEntity =
-				protocolConverter.convert2Entity(metaDataVersion.getProtocol());
+				protocolConverter.convertToEntity(metaDataVersion.getProtocol());
 		protocolEntity.setMetaDataVersion(metaDataVersionEntity);
 		protocolRepository.save(protocolEntity);
 		metaDataVersionEntity.setProtocol(protocolEntity);
@@ -295,16 +295,16 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 		if (adminData.getLocations() != null) {
 			final LocationConverter locationConverter = new LocationConverter();
 			for (final Location location : adminData.getLocations()) {
-				locationRepository.save(locationConverter.convert2Entity(location));
+				locationRepository.save(locationConverter.convertToEntity(location));
 			}
 		}
 		if (adminData.getUsers() != null) {
 			final UserConverter userConverter = new UserConverter();
 			for (final User user : adminData.getUsers()) {
-				final org.nerdizin.eztrial.entities.admin.User userEntity = userConverter.convert2Entity(user);
+				final org.nerdizin.eztrial.entities.admin.User userEntity = userConverter.convertToEntity(user);
 				if (user.getAddress() != null) {
 					final AddressConverter addressConverter = new AddressConverter();
-					final Address address = addressConverter.convert2Entity(user.getAddress());
+					final Address address = addressConverter.convertToEntity(user.getAddress());
 					addressRepository.save(address);
 					userEntity.setAddress(address);
 				}
@@ -314,7 +314,7 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 		if (adminData.getSignatureDefs() != null) {
 			final SignatureDefConverter signatureDefConverter = new SignatureDefConverter();
 			for (final SignatureDef signatureDef : adminData.getSignatureDefs()) {
-				signatureDefRepository.save(signatureDefConverter.convert2Entity(signatureDef));
+				signatureDefRepository.save(signatureDefConverter.convertToEntity(signatureDef));
 			}
 		}
 	}

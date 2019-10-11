@@ -98,14 +98,14 @@ public class StudyDefExportServiceImpl implements StudyDefExportService {
 
 		final org.nerdizin.eztrial.entities.study.Study studyEntity = studyRepository.findByOid(oid);
 		final StudyConverter studyConverter = new StudyConverter();
-		final Study study = studyConverter.convert2Element(studyEntity);
+		final Study study = studyConverter.convertToElement(studyEntity);
 
 		final List<MeasurementUnit> measurementUnits = measurementUnitRepository.findAllByStudy(studyEntity);
 		if (measurementUnits != null) {
 			final BasicDefinitions basicDefinitions = new BasicDefinitions();
 			final MeasurementUnitConverter measurementUnitConverter = new MeasurementUnitConverter();
 			for (final MeasurementUnit measurementUnit : measurementUnits) {
-				basicDefinitions.addMeasurementUnit(measurementUnitConverter.convert2Element(measurementUnit));
+				basicDefinitions.addMeasurementUnit(measurementUnitConverter.convertToElement(measurementUnit));
 			}
 			study.setBasicDefinitions(basicDefinitions);
 		}
@@ -124,12 +124,12 @@ public class StudyDefExportServiceImpl implements StudyDefExportService {
 		final MetaDataVersionConverter metaDataVersionConverter = new MetaDataVersionConverter();
 		for (final MetaDataVersion metaDataVersion : metaDataVersions) {
 			final org.nerdizin.eztrial.xml.odm.study.MetaDataVersion metaDataVersionElement =
-					metaDataVersionConverter.convert2Element(metaDataVersion);
+					metaDataVersionConverter.convertToElement(metaDataVersion);
 
 			final Protocol protocol = metaDataVersion.getProtocol();
 			if (protocol != null) {
 				final ProtocolConverter protocolConverter = new ProtocolConverter();
-				metaDataVersionElement.setProtocol(protocolConverter.convert2Element(protocol));
+				metaDataVersionElement.setProtocol(protocolConverter.convertToElement(protocol));
 			}
 
 			loadEventDefs(metaDataVersion, metaDataVersionElement);
@@ -147,7 +147,7 @@ public class StudyDefExportServiceImpl implements StudyDefExportService {
 		if (eventDefs != null) {
 			final EventDefConverter eventDefConverter = new EventDefConverter();
 			for (final EventDef eventDef : eventDefs) {
-				metaDataVersionElement.addStudyEventDef(eventDefConverter.convert2Element(eventDef));
+				metaDataVersionElement.addStudyEventDef(eventDefConverter.convertToElement(eventDef));
 			}
 		}
 	}
@@ -159,7 +159,7 @@ public class StudyDefExportServiceImpl implements StudyDefExportService {
 		if (formDefs != null) {
 			final FormDefConverter formDefConverter = new FormDefConverter();
 			for (final FormDef formDef : formDefs) {
-				metaDataVersionElement.addFormDef(formDefConverter.convert2Element(formDef));
+				metaDataVersionElement.addFormDef(formDefConverter.convertToElement(formDef));
 			}
 		}
 	}
@@ -171,7 +171,7 @@ public class StudyDefExportServiceImpl implements StudyDefExportService {
 		if (itemGroupDefs != null) {
 			final ItemGroupDefConverter itemGroupDefConverter = new ItemGroupDefConverter();
 			for (final ItemGroupDef itemGroupDef : itemGroupDefs) {
-				metaDataVersionElement.addItemGroupDef(itemGroupDefConverter.convert2Element(itemGroupDef));
+				metaDataVersionElement.addItemGroupDef(itemGroupDefConverter.convertToElement(itemGroupDef));
 			}
 		}
 	}
@@ -183,7 +183,7 @@ public class StudyDefExportServiceImpl implements StudyDefExportService {
 		if (itemDefs != null) {
 			final ItemDefConverter itemDefConverter = new ItemDefConverter();
 			for (final ItemDef itemDef : itemDefs) {
-				metaDataVersionElement.addItemDef(itemDefConverter.convert2Element(itemDef));
+				metaDataVersionElement.addItemDef(itemDefConverter.convertToElement(itemDef));
 			}
 		}
 	}
@@ -213,21 +213,21 @@ public class StudyDefExportServiceImpl implements StudyDefExportService {
 	private void loadUsers(final Iterable<User> users, final AdminData adminData) {
 		final UserConverter userConverter = new UserConverter();
 		for (final User user : users) {
-			adminData.addUser(userConverter.convert2Element(user));
+			adminData.addUser(userConverter.convertToElement(user));
 		}
 	}
 
 	private void loadLocations(final Iterable<Location> locations, final AdminData adminData) {
 		final LocationConverter locationConverter = new LocationConverter();
 		for (final Location location : locations) {
-			adminData.addLocation(locationConverter.convert2Element(location));
+			adminData.addLocation(locationConverter.convertToElement(location));
 		}
 	}
 
 	private void loadSignatureDefs(final Iterable<SignatureDef> signatureDefs, final AdminData adminData) {
 		final SignatureDefConverter signatureDefConverter = new SignatureDefConverter();
 		for (final SignatureDef signatureDef : signatureDefs) {
-			adminData.addSignatureDef(signatureDefConverter.convert2Element(signatureDef));
+			adminData.addSignatureDef(signatureDefConverter.convertToElement(signatureDef));
 		}
 	}
 }

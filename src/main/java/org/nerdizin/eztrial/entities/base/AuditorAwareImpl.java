@@ -1,7 +1,6 @@
 package org.nerdizin.eztrial.entities.base;
 
 import org.nerdizin.eztrial.entities.admin.User;
-import org.nerdizin.eztrial.entities.enums.UserType;
 import org.nerdizin.eztrial.repositories.UserRepository;
 import org.nerdizin.eztrial.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;

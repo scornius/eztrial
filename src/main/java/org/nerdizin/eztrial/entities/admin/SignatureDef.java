@@ -20,9 +20,6 @@ public class SignatureDef extends BaseEntity {
 	@Column(name = "legal_reason")
 	private String legalReason;
 
-
-	public SignatureDef() {}
-
 	public String getOid() {
 		return oid;
 	}

@@ -1,5 +1,6 @@
 package org.nerdizin.eztrial.entities.admin;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.nerdizin.eztrial.entities.base.BaseEntity;
 import org.nerdizin.eztrial.entities.study.MetaDataVersion;
 import org.nerdizin.eztrial.entities.study.Study;
@@ -23,7 +24,6 @@ public class MetaDataVersionRef extends BaseEntity {
 
 	@Column(name = "effective_date", nullable = false)
 	private LocalDate effectiveDate;
-
 
 	public Study getStudy() {
 		return study;
@@ -55,5 +55,10 @@ public class MetaDataVersionRef extends BaseEntity {
 
 	public void setEffectiveDate(final LocalDate effectiveDate) {
 		this.effectiveDate = effectiveDate;
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 }

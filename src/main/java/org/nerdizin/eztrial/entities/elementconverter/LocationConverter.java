@@ -2,12 +2,11 @@ package org.nerdizin.eztrial.entities.elementconverter;
 
 import org.nerdizin.eztrial.entities.admin.Location;
 import org.nerdizin.eztrial.entities.enums.LocationType;
-import org.nerdizin.eztrial.xml.odm.admin.MetaDataVersionRef;
 
-public class LocationConverter implements OdmElement2EntityConverter<org.nerdizin.eztrial.xml.odm.admin.Location,Location> {
+public class LocationConverter implements OdmElementToEntityConverter<org.nerdizin.eztrial.xml.odm.admin.Location,Location> {
 
 	@Override
-	public Location convert2Entity(final org.nerdizin.eztrial.xml.odm.admin.Location location) {
+	public Location convertToEntity(final org.nerdizin.eztrial.xml.odm.admin.Location location) {
 
 		final Location result = new Location();
 		result.setOid(location.getOid());
@@ -21,7 +20,7 @@ public class LocationConverter implements OdmElement2EntityConverter<org.nerdizi
 	}
 
 	@Override
-	public org.nerdizin.eztrial.xml.odm.admin.Location convert2Element(final Location location) {
+	public org.nerdizin.eztrial.xml.odm.admin.Location convertToElement(final Location location) {
 
 		final org.nerdizin.eztrial.xml.odm.admin.Location result =
 				new org.nerdizin.eztrial.xml.odm.admin.Location();

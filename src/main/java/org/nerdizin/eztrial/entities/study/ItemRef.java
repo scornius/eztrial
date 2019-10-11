@@ -16,7 +16,6 @@ public class ItemRef extends RefEntity {
 	@OneToOne
 	private ItemDef itemDef;
 
-
 	public ItemGroupDef getItemGroupDef() {
 		return itemGroupDef;
 	}

@@ -22,6 +22,13 @@ public class MeasurementUnit extends OidNameEntity {
 	private Map<String,String> translations;
 
 
+	public void addTranslation(final String language, final String text) {
+		if (translations == null) {
+			translations = new HashMap<>();
+		}
+		this.translations.put(language, text);
+	}
+
 	public Study getStudy() {
 		return study;
 	}
@@ -36,13 +43,6 @@ public class MeasurementUnit extends OidNameEntity {
 
 	public void setTranslations(final Map<String,String> translations) {
 		this.translations = translations;
-	}
-
-	public void addTranslation(final String language, final String text) {
-		if (translations == null) {
-			translations = new HashMap<>();
-		}
-		this.translations.put(language, text);
 	}
 
 	@Override

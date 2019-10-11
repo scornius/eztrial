@@ -30,44 +30,11 @@ public class MetaDataVersion extends OidNameEntity {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "metaDataVersion")
 	private List<ItemDef> itemDefs;
 
-
-	public Study getStudy() {
-		return study;
-	}
-
-	public void setStudy(final Study study) {
-		this.study = study;
-	}
-
-	public Protocol getProtocol() {
-		return protocol;
-	}
-
-	public void setProtocol(final Protocol protocol) {
-		this.protocol = protocol;
-	}
-
-	public List<EventDef> getEventDefs() {
-		return eventDefs;
-	}
-
-	public void setEventDefs(final List<EventDef> eventDefs) {
-		this.eventDefs = eventDefs;
-	}
-
 	public void addEventDef(final EventDef eventDef) {
 		if (this.eventDefs == null) {
 			this.eventDefs = new ArrayList<>();
 		}
 		this.eventDefs.add(eventDef);
-	}
-
-	public List<FormDef> getFormDefs() {
-		return formDefs;
-	}
-
-	public void setFormDefs(final List<FormDef> formDefs) {
-		this.formDefs = formDefs;
 	}
 
 	public void addFormDef(final FormDef formDef) {
@@ -77,27 +44,11 @@ public class MetaDataVersion extends OidNameEntity {
 		this.formDefs.add(formDef);
 	}
 
-	public List<ItemGroupDef> getItemGroupDefs() {
-		return itemGroupDefs;
-	}
-
-	public void setItemGroupDefs(final List<ItemGroupDef> itemGroupDefs) {
-		this.itemGroupDefs = itemGroupDefs;
-	}
-
 	public void addItemGroupDef(final ItemGroupDef itemGroupDef) {
 		if (this.itemGroupDefs == null) {
 			this.itemGroupDefs = new ArrayList<>();
 		}
 		this.itemGroupDefs.add(itemGroupDef);
-	}
-
-	public List<ItemDef> getItemDefs() {
-		return itemDefs;
-	}
-
-	public void setItemDefs(final List<ItemDef> itemDefs) {
-		this.itemDefs = itemDefs;
 	}
 
 	public void addItemDef(final ItemDef itemDef) {
@@ -141,6 +92,54 @@ public class MetaDataVersion extends OidNameEntity {
 			}
 		}
 		throw new IllegalArgumentException(String.format("No ItemDef found with oid %s", oid));
+	}
+
+	public Study getStudy() {
+		return study;
+	}
+
+	public void setStudy(final Study study) {
+		this.study = study;
+	}
+
+	public Protocol getProtocol() {
+		return protocol;
+	}
+
+	public void setProtocol(final Protocol protocol) {
+		this.protocol = protocol;
+	}
+
+	public List<EventDef> getEventDefs() {
+		return eventDefs;
+	}
+
+	public void setEventDefs(final List<EventDef> eventDefs) {
+		this.eventDefs = eventDefs;
+	}
+
+	public List<FormDef> getFormDefs() {
+		return formDefs;
+	}
+
+	public void setFormDefs(final List<FormDef> formDefs) {
+		this.formDefs = formDefs;
+	}
+
+	public List<ItemGroupDef> getItemGroupDefs() {
+		return itemGroupDefs;
+	}
+
+	public void setItemGroupDefs(final List<ItemGroupDef> itemGroupDefs) {
+		this.itemGroupDefs = itemGroupDefs;
+	}
+
+	public List<ItemDef> getItemDefs() {
+		return itemDefs;
+	}
+
+	public void setItemDefs(final List<ItemDef> itemDefs) {
+		this.itemDefs = itemDefs;
 	}
 
 	@Override

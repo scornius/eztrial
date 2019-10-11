@@ -1,12 +1,12 @@
 package org.nerdizin.eztrial.entities.base;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.nerdizin.eztrial.entities.admin.User;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -34,7 +34,6 @@ public abstract class BaseEntity {
 	@LastModifiedDate
 	@Column(name = "modified_on", nullable = false)
 	private LocalDateTime modifiedDate;
-
 
 	public Long getId() {
 		return id;
@@ -76,4 +75,8 @@ public abstract class BaseEntity {
 		this.modifiedDate = modifiedDate;
 	}
 
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
 }

@@ -1,21 +1,44 @@
 package org.nerdizin.eztrial.entities.study;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.nerdizin.eztrial.entities.base.DefEntity;
-import org.nerdizin.eztrial.entities.base.OidNameEntity;
 import org.nerdizin.eztrial.entities.base.RepeatingDefEntity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Entity
-@Table(name = "def_item_groups")
+@Table(name = "def_itemgroups")
 public class ItemGroupDef extends RepeatingDefEntity {
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "itemGroupDef")
 	private List<ItemRef> itemRefs;
 
+	@ElementCollection
+	@MapKeyColumn(name = "language")
+	@Column(name = "text")
+	@CollectionTable(name="def_itemgroups_descriptions",
+			joinColumns=@JoinColumn(name="id"),
+			uniqueConstraints = @UniqueConstraint(columnNames={"id", "language"})
+	)
+	private Map<String,String> descriptions;
+
+
+	public void addItemRef(final ItemRef itemRef) {
+		if (this.itemRefs == null) {
+			this.itemRefs = new ArrayList<>();
+		}
+		this.itemRefs.add(itemRef);
+	}
+
+	public void addDescription(final String language, final String text) {
+		if (descriptions == null) {
+			descriptions = new HashMap<>();
+		}
+		this.descriptions.put(language, text);
+	}
 
 	public List<ItemRef> getItemRefs() {
 		return itemRefs;
@@ -25,11 +48,12 @@ public class ItemGroupDef extends RepeatingDefEntity {
 		this.itemRefs = itemRefs;
 	}
 
-	public void addItemRef(final ItemRef itemRef) {
-		if (this.itemRefs == null) {
-			this.itemRefs = new ArrayList<>();
-		}
-		this.itemRefs.add(itemRef);
+	public Map<String,String> getDescriptions() {
+		return descriptions;
+	}
+
+	public void setDescriptions(final Map<String,String> descriptions) {
+		this.descriptions = descriptions;
 	}
 
 	@Override

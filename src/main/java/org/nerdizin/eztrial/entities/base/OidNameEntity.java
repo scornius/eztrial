@@ -1,5 +1,7 @@
 package org.nerdizin.eztrial.entities.base;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
@@ -15,5 +17,10 @@ public abstract class OidNameEntity extends OidEntity {
 
 	public void setName(final String name) {
 		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 }

@@ -38,8 +38,12 @@ public class Location extends BaseEntity {
 	@OneToOne
 	private Address address;
 
-
-	public Location() {}
+	public void addMetaDataVersionRef(final MetaDataVersionRef metaDataVersionRef) {
+		if (this.metaDataVersionRefs == null) {
+			this.metaDataVersionRefs = new ArrayList<>();
+		}
+		this.metaDataVersionRefs.add(metaDataVersionRef);
+	}
 
 	public String getOid() {
 		return oid;
@@ -95,13 +99,6 @@ public class Location extends BaseEntity {
 
 	public void setMetaDataVersionRefs(final List<MetaDataVersionRef> metaDataVersionRefs) {
 		this.metaDataVersionRefs = metaDataVersionRefs;
-	}
-
-	public void addMetaDataVersionRef(final MetaDataVersionRef metaDataVersionRef) {
-		if (this.metaDataVersionRefs == null) {
-			this.metaDataVersionRefs = new ArrayList<>();
-		}
-		this.metaDataVersionRefs.add(metaDataVersionRef);
 	}
 
 	public Address getAddress() {

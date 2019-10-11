@@ -16,7 +16,6 @@ public class ItemGroupRef extends RefEntity {
 	@OneToOne
 	private ItemGroupDef itemGroupDef;
 
-
 	public FormDef getFormDef() {
 		return formDef;
 	}

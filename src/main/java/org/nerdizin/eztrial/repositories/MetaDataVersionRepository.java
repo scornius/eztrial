@@ -2,9 +2,9 @@ package org.nerdizin.eztrial.repositories;
 
 import org.nerdizin.eztrial.entities.study.MetaDataVersion;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface MetaDataVersionRepository extends CrudRepository<MetaDataVersion,Long> {
+public interface MetaDataVersionRepository extends PagingAndSortingRepository<MetaDataVersion,Long> {
 
 	MetaDataVersion findByOid(String oid);
 

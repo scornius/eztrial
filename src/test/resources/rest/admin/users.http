@@ -1,0 +1,9 @@
+GET http://{{host}}/users?page=0&size=2
+Authorization: Basic {{username}} {{password}}
+Content-Type: application/json
+Accept: */*
+Cache-Control: no-cache
+
+
+###
+

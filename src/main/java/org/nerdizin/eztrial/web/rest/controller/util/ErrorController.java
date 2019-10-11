@@ -1,4 +1,4 @@
-package org.nerdizin.eztrial.web.rest.controller;
+package org.nerdizin.eztrial.web.rest.controller.util;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

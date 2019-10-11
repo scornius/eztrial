@@ -1,5 +1,7 @@
 package org.nerdizin.eztrial.web.rest.model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class MetaDataVersion implements UiModel {
 
 	private String oid;
@@ -22,5 +24,10 @@ public class MetaDataVersion implements UiModel {
 	public MetaDataVersion setName(final String name) {
 		this.name = name;
 		return this;
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 }

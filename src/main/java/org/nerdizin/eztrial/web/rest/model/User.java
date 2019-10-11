@@ -1,5 +1,7 @@
 package org.nerdizin.eztrial.web.rest.model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class User implements UiModel {
 
 	private String oid;
@@ -73,5 +75,10 @@ public class User implements UiModel {
 
 	public void setAddress(final Address address) {
 		this.address = address;
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 }

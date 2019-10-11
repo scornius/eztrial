@@ -1,5 +1,7 @@
 package org.nerdizin.eztrial.web.rest.model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class Address implements UiModel {
 
 	private String street;
@@ -46,5 +48,10 @@ public class Address implements UiModel {
 
 	public void setCountry(final String country) {
 		this.country = country;
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 }

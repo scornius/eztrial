@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,6 +31,12 @@ public class UserController {
 		this.userRepository = userRepository;
 	}
 
+
+	@GetMapping("/current")
+	public Principal getCurrentUser(final Principal user) {
+
+		return user;
+	}
 
 	@GetMapping("/users")
 	public List<User> getUsers(final PagingParameters pagingParameters) {

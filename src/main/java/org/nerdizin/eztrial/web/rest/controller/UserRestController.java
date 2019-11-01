@@ -3,6 +3,7 @@ package org.nerdizin.eztrial.web.rest.controller;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.nerdizin.eztrial.repositories.UserRepository;
+import org.nerdizin.eztrial.web.rest.base.AbstractRestController;
 import org.nerdizin.eztrial.web.rest.base.UserNotFoundException;
 import org.nerdizin.eztrial.web.rest.controller.util.PagingParameters;
 import org.nerdizin.eztrial.web.rest.converter.UserConverter;
@@ -12,7 +13,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
@@ -20,8 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/rest")
-public class UserRestController {
+public class UserRestController extends AbstractRestController {
 
 	private final static Log log = LogFactory.getLog(UserRestController.class);
 

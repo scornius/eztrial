@@ -8,7 +8,7 @@
     <title th:text="#{location.administration}">The center admin page</title>
 </head>
 
-<div th:replace="navigation">
+<div th:replace="~{admin/navigation :: navigation}">
     <a href="users.html">User administration</a>
     <a href="locations.html">Location administration</a>
 </div>

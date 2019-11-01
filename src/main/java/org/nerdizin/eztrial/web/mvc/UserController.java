@@ -1,5 +1,7 @@
 package org.nerdizin.eztrial.web.mvc;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.nerdizin.eztrial.entities.admin.User;
 import org.nerdizin.eztrial.repositories.UserRepository;
 import org.nerdizin.eztrial.web.converter.UserConverter;
@@ -10,13 +12,16 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController {
+
+	private final static Log log = LogFactory.getLog(UserController.class);
 
 	private final UserRepository userRepository;
 	private static final UserConverter userConverter = new UserConverter();
@@ -42,7 +47,16 @@ public class UserController {
 
 		model.addAttribute("users",
 				page.stream().map(userConverter::convertToUiModel).collect(Collectors.toList()));
-		return "users.html";
+		return "/admin/users.html";
+	}
+
+	@GetMapping("/{id}/deleteUser")
+	public String deleteUser(final Model model,
+			@PathVariable final Long id) {
+
+		log.info("deleteUser " + id);
+
+		return "forward:/user/listUsers";
 	}
 
 }

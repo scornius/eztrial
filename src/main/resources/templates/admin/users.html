@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<div th:replace="navigation">
+<div th:replace="~{admin/navigation :: navigation}">
     <a href="users.html">User administration</a>
     <a href="locations.html">Location administration</a>
 </div>
@@ -24,6 +24,7 @@
         <th th:text="#{user.lastName}">Last name</th>
         <th th:text="#{user.type}">Type</th>
         <th th:text="#{user.address}">Address</th>
+        <th></th>
     </tr>
     <tr th:each="user: ${users}">
         <td th:text="${user.oid}">16</td>
@@ -33,6 +34,9 @@
         <td th:text="${user.lastName}">Lastname</td>
         <td th:text="${user.userType}">Usertype 1</td>
         <td th:text="${user.address}">My Town 1</td>
+        <td>
+            <a th:href="@{/user/{id}/deleteUser(id=${user.id})}">delete</a>
+        </td>
     </tr>
     <tr th:remove="all">
         <td>17</td>
@@ -42,6 +46,9 @@
         <td>Lastname</td>
         <td>Usertype 2</td>
         <td>Some address 2</td>
+        <td>
+
+        </td>
     </tr>
 </table>
 

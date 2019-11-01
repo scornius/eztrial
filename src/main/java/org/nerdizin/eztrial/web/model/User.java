@@ -4,6 +4,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class User implements UiModel {
 
+	private long id;
 	private String oid;
 	private String userName;
 	private String firstName;
@@ -12,6 +13,15 @@ public class User implements UiModel {
 	private String phone;
 	private String userType;
 	private Address address;
+
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(final long id) {
+		this.id = id;
+	}
 
 	public String getOid() {
 		return oid;

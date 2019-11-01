@@ -1,5 +1,7 @@
 package org.nerdizin.eztrial.web.mvc;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.nerdizin.eztrial.entities.admin.Location;
 import org.nerdizin.eztrial.repositories.LocationRepository;
 import org.nerdizin.eztrial.web.converter.LocationConverter;
@@ -15,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping("/locations")
+@RequestMapping("/location")
 public class LocationController {
+
+	private final static Log log = LogFactory.getLog(LocationController.class);
 
 	private final LocationRepository locationRepository;
 	private final LocationConverter locationConverter = new LocationConverter();
@@ -41,6 +45,6 @@ public class LocationController {
 
 		model.addAttribute("locations",
 				page.stream().map(locationConverter::convertToUiModel).collect(Collectors.toList()));
-		return "locations.html";
+		return "admin/locations.html";
 	}
 }

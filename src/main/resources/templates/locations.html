@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="https://www.thymeleaf.org">
+
+<head>
+    <title th:text="#{location.administration}">The center admin page</title>
+</head>
+
+<body>
+<table>
+    <!--/*@thymesVar id="locations" type="java.util.List"*/-->
+    <!--/*@thymesVar id="location" type="org.nerdizin.eztrial.web.rest.model.Location"*/-->
+    <tr>
+        <th th:text="#{location.oid}">Oid</th>
+        <th th:text="#{location.name}">Name</th>
+        <th th:text="#{location.label}">Label</th>
+        <th th:text="#{location.active}">Active</th>
+        <th th:text="#{location.type}">Type</th>
+        <th th:text="#{location.affix}">Affix</th>
+        <th th:text="#{location.address}">Address</th>
+    </tr>
+    <tr th:each="location: ${locations}">
+        <td th:text="${location.oid}">1</td>
+        <td th:text="${location.name}">center 1</td>
+        <td th:text="${location.label}">centger label 1</td>
+        <td th:text="${location.active}">true</td>
+        <td th:text="${location.type}">OTHER</td>
+        <td th:text="${location.affix}">center 1 affix</td>
+        <td th:text="${location.address}">Park alley 1</td>
+    </tr>
+    <tr th:remove="all">
+        <td>2</td>
+        <td>center 2</td>
+        <td>center label 2</td>
+        <td>false</td>
+        <td>ADMIN</td>
+        <td>center 2 affix</td>
+        <td>Some street 112</td>
+    </tr>
+</table>
+</body>
+
+</html>

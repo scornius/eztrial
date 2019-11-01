@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="https://www.thymeleaf.org">
+<head>
+    <title th:text="#{user.administration}">The user admin page</title>
+</head>
+<body>
+
+<table>
+    <!--/*@thymesVar id="users" type="java.util.List"*/-->
+    <!--/*@thymesVar id="user" type="org.nerdizin.eztrial.web.rest.model.User"*/-->
+    <tr>
+        <th th:text="#{user.oid}">Oid</th>
+        <th th:text="#{user.userName}">User name</th>
+        <th th:text="#{user.email}">Email</th>
+        <th th:text="#{user.firstName}">First name</th>
+        <th th:text="#{user.lastName}">Last name</th>
+        <th th:text="#{user.type}">Type</th>
+        <th th:text="#{user.address}">Address</th>
+    </tr>
+    <tr th:each="user: ${users}">
+        <td th:text="${user.oid}">16</td>
+        <td th:text="${user.userName}">username1</td>
+        <td th:text="${user.email}">some.one@somewhere.net</td>
+        <td th:text="${user.firstName}">Firstname</td>
+        <td th:text="${user.lastName}">Lastname</td>
+        <td th:text="${user.userType}">Usertype 1</td>
+        <td th:text="${user.address}">My Town 1</td>
+    </tr>
+    <tr th:remove="all">
+        <td>17</td>
+        <td>username2</td>
+        <td>some.two@somewhere.net</td>
+        <td>Firstname</td>
+        <td>Lastname</td>
+        <td>Usertype 2</td>
+        <td>Some address 2</td>
+    </tr>
+</table>
+
+</body>
+</html>

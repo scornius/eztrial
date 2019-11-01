@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="https://www.thymeleaf.org">
+
+<body>
+<div th:fragment="navigation">
+    <a href="/users/listUsers" th:text="#{user.administration}">User administration</a>
+    <a href="/locations/listLocations" th:text="#{location.administration}">Location administration</a>
+</div>
+</body>
+
+</html>

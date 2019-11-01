@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
@@ -19,15 +20,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-public class UserController {
+@RequestMapping("/rest")
+public class UserRestController {
 
-	private final static Log log = LogFactory.getLog(UserController.class);
+	private final static Log log = LogFactory.getLog(UserRestController.class);
 
 	private final UserRepository userRepository;
 	private static final UserConverter userConverter = new UserConverter();
 
 	@Autowired
-	public UserController(final UserRepository userRepository) {
+	public UserRestController(final UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
 

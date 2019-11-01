@@ -29,3 +29,4 @@ build/
 ### VS Code ###
 .vscode/
 /src/test/resources/rest/rest-client.private.env.json
+/src/main/resources/public_/*

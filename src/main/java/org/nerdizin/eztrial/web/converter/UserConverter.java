@@ -1,14 +1,14 @@
-package org.nerdizin.eztrial.web.rest.converter;
+package org.nerdizin.eztrial.web.converter;
 
 import org.nerdizin.eztrial.entities.admin.User;
 
-public class UserConverter implements Entity2UiModelConverter<User,org.nerdizin.eztrial.web.rest.model.User> {
+public class UserConverter implements Entity2UiModelConverter<User,org.nerdizin.eztrial.web.model.User> {
 
 	@Override
-	public org.nerdizin.eztrial.web.rest.model.User convertToUiModel(final User entity) {
+	public org.nerdizin.eztrial.web.model.User convertToUiModel(final User entity) {
 
-		final org.nerdizin.eztrial.web.rest.model.User result =
-				new org.nerdizin.eztrial.web.rest.model.User();
+		final org.nerdizin.eztrial.web.model.User result =
+				new org.nerdizin.eztrial.web.model.User();
 		result.setOid(entity.getOid());
 		result.setFirstName(entity.getFirstName());
 		result.setLastName(entity.getLastName());
@@ -28,7 +28,7 @@ public class UserConverter implements Entity2UiModelConverter<User,org.nerdizin.
 	}
 
 	@Override
-	public User convertToEntity(final org.nerdizin.eztrial.web.rest.model.User user) {
+	public User convertToEntity(final org.nerdizin.eztrial.web.model.User user) {
 		return null;
 	}
 }

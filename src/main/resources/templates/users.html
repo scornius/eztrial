@@ -8,9 +8,14 @@
 </head>
 <body>
 
+<div th:replace="navigation">
+    <a href="users.html">User administration</a>
+    <a href="locations.html">Location administration</a>
+</div>
+
 <table>
     <!--/*@thymesVar id="users" type="java.util.List"*/-->
-    <!--/*@thymesVar id="user" type="org.nerdizin.eztrial.web.rest.model.User"*/-->
+    <!--/*@thymesVar id="user" type="org.nerdizin.eztrial.web.model.User"*/-->
     <tr>
         <th th:text="#{user.oid}">Oid</th>
         <th th:text="#{user.userName}">User name</th>

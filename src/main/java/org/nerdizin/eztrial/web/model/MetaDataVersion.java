@@ -1,4 +1,4 @@
-package org.nerdizin.eztrial.web.rest.model;
+package org.nerdizin.eztrial.web.model;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 

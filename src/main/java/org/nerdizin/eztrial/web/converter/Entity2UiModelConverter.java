@@ -1,4 +1,4 @@
-package org.nerdizin.eztrial.web.rest.converter;
+package org.nerdizin.eztrial.web.converter;
 
 public interface Entity2UiModelConverter<UiModel,BaseEntity> {
 

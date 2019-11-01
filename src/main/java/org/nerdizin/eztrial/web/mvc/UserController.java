@@ -2,8 +2,8 @@ package org.nerdizin.eztrial.web.mvc;
 
 import org.nerdizin.eztrial.entities.admin.User;
 import org.nerdizin.eztrial.repositories.UserRepository;
+import org.nerdizin.eztrial.web.converter.UserConverter;
 import org.nerdizin.eztrial.web.rest.controller.util.PagingParameters;
-import org.nerdizin.eztrial.web.rest.converter.UserConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

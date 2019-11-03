@@ -12,10 +12,12 @@ import java.time.LocalDate;
 @Table(name = "admin_metadata_version_ref")
 public class MetaDataVersionRef extends BaseEntity {
 
-	@OneToOne(optional = false)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "study_id")
 	private Study study;
 
-	@OneToOne(optional = false)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "mdv_id")
 	private MetaDataVersion metaDataVersion;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)

@@ -79,13 +79,26 @@
             <Email>sepp.laibach@nerdizin.org</Email>
             <Phone>089 32 16 8</Phone>
         </User>
-        <Location OID="location.1" Name="Medizinische Hochschule Hannover" LocationType="Site">
+        <Location OID="location.1" Name="Medizinische Hochschule Schlumpfhausen" LocationType="Site">
+            <MetaDataVersionRef StudyOID="study.1" MetaDataVersionOID="mdv.1" EffectiveDate="2019-09-14"/>
+        </Location>
+        <Location OID="location.2" Name="Some CRO" LocationType="CRO">
             <MetaDataVersionRef StudyOID="study.1" MetaDataVersionOID="mdv.1" EffectiveDate="2019-09-14"/>
         </Location>
         <SignatureDef OID="signature.1">
             <Meaning>Signature 1</Meaning>
             <LegalReason>Signed</LegalReason>
         </SignatureDef>
+        <ez:Role OID="role.monitor">
+            <ez:Description>The monitor role</ez:Description>
+            <ez:Privilege OID="user.create">false</ez:Privilege>
+            <ez:Privilege OID="user.edit">false</ez:Privilege>
+        </ez:Role>
+        <ez:Role OID="role.investigator">
+            <ez:Description>The investigator role</ez:Description>
+            <ez:Privilege OID="user.create">true</ez:Privilege>
+            <ez:Privilege OID="user.edit">true</ez:Privilege>
+        </ez:Role>
     </AdminData>
 
 </ODM>

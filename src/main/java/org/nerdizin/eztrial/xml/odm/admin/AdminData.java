@@ -1,7 +1,8 @@
 package org.nerdizin.eztrial.xml.odm.admin;
 
+import org.nerdizin.eztrial.xml.Namespaces;
+
 import javax.xml.bind.annotation.XmlElement;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,9 @@ public class AdminData {
 
     @XmlElement(name = "SignatureDef")
     private List<SignatureDef> signatureDefs;
+
+    @XmlElement(name = "Role", namespace = Namespaces.EZTRIAL)
+	private List<Role> roles;
 
 
 	public List<User> getUsers() {
@@ -61,5 +65,20 @@ public class AdminData {
 			this.signatureDefs = new ArrayList<>();
 		}
 		this.signatureDefs.add(signatureDef);
+	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(final List<Role> roles) {
+		this.roles = roles;
+	}
+
+	public void addRole(final Role role) {
+		if (this.roles == null) {
+			this.roles = new ArrayList<>();
+		}
+		this.roles.add(role);
 	}
 }

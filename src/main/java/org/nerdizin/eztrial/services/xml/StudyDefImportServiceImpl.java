@@ -1,5 +1,7 @@
 package org.nerdizin.eztrial.services.xml;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.nerdizin.eztrial.entities.admin.Address;
 import org.nerdizin.eztrial.entities.elementconverter.*;
 import org.nerdizin.eztrial.entities.study.EventDef;
@@ -14,11 +16,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class StudyDefImportServiceImpl implements StudyDefImportService {
 
+	private final static Log log = LogFactory.getLog(StudyDefImportServiceImpl.class);
+
 	private final LocationRepository locationRepository;
 	private final UserRepository userRepository;
 	private final AddressRepository addressRepository;
 	private final SignatureDefRepository signatureDefRepository;
 	private final MetaDataVersionRefRepository metaDataVersionRefRepository;
+	private final RoleRepository roleRepository;
+	private final PrivilegeRepository privilegeRepository;
 
 	private final StudyRepository studyRepository;
 	private final MeasurementUnitRepository measurementUnitRepository;
@@ -40,6 +46,8 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 			final AddressRepository addressRepository,
 			final SignatureDefRepository signatureDefRepository,
 			final MetaDataVersionRefRepository metaDataVersionRefRepository,
+			final RoleRepository roleRepository,
+			final PrivilegeRepository privilegeRepository,
 			final StudyRepository studyRepository,
 			final MeasurementUnitRepository measurementUnitRepository,
 			final MetaDataVersionRepository metaDataVersionRepository,
@@ -57,6 +65,8 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 		this.addressRepository = addressRepository;
 		this.signatureDefRepository = signatureDefRepository;
 		this.metaDataVersionRefRepository = metaDataVersionRefRepository;
+		this.roleRepository = roleRepository;
+		this.privilegeRepository = privilegeRepository;
 		this.studyRepository = studyRepository;
 		this.measurementUnitRepository = measurementUnitRepository;
 		this.metaDataVersionRepository = metaDataVersionRepository;
@@ -108,6 +118,7 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 			for (final MetaDataVersion metaDataVersion : study.getMetaDataVersions()) {
 				final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity =
 						persistDefs(studyEntity, metaDataVersion);
+				metaDataVersionRepository.save(metaDataVersionEntity);
 				persistRefs(studyEntity, metaDataVersion, metaDataVersionEntity);
 			}
 		}
@@ -315,6 +326,22 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 			final SignatureDefConverter signatureDefConverter = new SignatureDefConverter();
 			for (final SignatureDef signatureDef : adminData.getSignatureDefs()) {
 				signatureDefRepository.save(signatureDefConverter.convertToEntity(signatureDef));
+			}
+		}
+		if (adminData.getRoles() != null) {
+			final RoleConverter roleConverter = new RoleConverter();
+			for (final Role role : adminData.getRoles()) {
+				final PrivilegeConverter privilegeConverter = new PrivilegeConverter();
+				org.nerdizin.eztrial.entities.admin.Role roleEntity = roleConverter.convertToEntity(role);
+				if (role.getPrivileges() != null) {
+					for (final Privilege privilege : role.getPrivileges()) {
+						final org.nerdizin.eztrial.entities.admin.Privilege privilegeEntity =
+								privilegeConverter.convertToEntity(privilege);
+						roleEntity.addPrivilege(privilegeEntity);
+						privilegeRepository.save(privilegeEntity);
+					}
+				}
+				roleRepository.save(roleEntity);
 			}
 		}
 	}

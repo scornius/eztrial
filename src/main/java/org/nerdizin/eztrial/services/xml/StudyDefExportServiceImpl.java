@@ -196,7 +196,7 @@ public class StudyDefExportServiceImpl implements StudyDefExportService {
 
 		final AdminData result = new AdminData();
 
-		final Iterable<User> users = userRepository.findAll();
+		final Iterable<User> users = userRepository.findAllByOrderByOid();
 		if (users != null) {
 			loadUsers(users, result);
 		}
@@ -206,12 +206,12 @@ public class StudyDefExportServiceImpl implements StudyDefExportService {
 			loadRoles(roles, result);
 		}
 
-		final Iterable<Location> locations = locationRepository.findAll();
+		final Iterable<Location> locations = locationRepository.findAllByOrderByOid();
 		if (locations != null) {
 			loadLocations(locations, result);
 		}
 
-		final Iterable<SignatureDef> signatureDefs = signatureDefRepository.findAll();
+		final Iterable<SignatureDef> signatureDefs = signatureDefRepository.findAllByOrderByOid();
 		if (signatureDefs != null) {
 			loadSignatureDefs(signatureDefs, result);
 		}

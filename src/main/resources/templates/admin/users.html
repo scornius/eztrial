@@ -3,8 +3,10 @@
       xmlns:th="https://www.thymeleaf.org"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="https://www.thymeleaf.org">
+<!--/*@thymesVar id="users" type="java.util.List"*/-->
+<!--/*@thymesVar id="user" type="org.nerdizin.eztrial.web.model.User"*/-->
 <head>
-    <title th:text="#{user.administration}">The user admin page</title>
+    <title th:text="#{user.administration}">The user administration</title>
 </head>
 <body>
 
@@ -14,8 +16,6 @@
 </div>
 
 <table>
-    <!--/*@thymesVar id="users" type="java.util.List"*/-->
-    <!--/*@thymesVar id="user" type="org.nerdizin.eztrial.web.model.User"*/-->
     <tr>
         <th th:text="#{user.oid}">Oid</th>
         <th th:text="#{user.userName}">User name</th>
@@ -35,6 +35,7 @@
         <td th:text="${user.userType}">Usertype 1</td>
         <td th:text="${user.address}">My Town 1</td>
         <td>
+            <a th:href="@{/user/{id}(id=${user.id})}">edit</a>
             <a th:href="@{/user/{id}/deleteUser(id=${user.id})}">delete</a>
         </td>
     </tr>

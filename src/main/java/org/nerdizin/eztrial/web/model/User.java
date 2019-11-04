@@ -2,6 +2,9 @@ package org.nerdizin.eztrial.web.model;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class User implements UiModel {
 
 	private long id;
@@ -13,7 +16,7 @@ public class User implements UiModel {
 	private String phone;
 	private String userType;
 	private Address address;
-
+	private Set<String> roles;
 
 	public long getId() {
 		return id;
@@ -85,6 +88,21 @@ public class User implements UiModel {
 
 	public void setAddress(final Address address) {
 		this.address = address;
+	}
+
+	public Set<String> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(final Set<String> roles) {
+		this.roles = roles;
+	}
+
+	public void addRole(final String role) {
+		if (this.roles == null) {
+			this.roles = new HashSet<>();
+		}
+		this.roles.add(role);
 	}
 
 	@Override

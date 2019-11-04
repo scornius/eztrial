@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="https://www.thymeleaf.org">
+<!--/*@thymesVar id="user" type="org.nerdizin.eztrial.web.model.User"*/-->
+
+<head>
+    <title th:text="#{user.administration}">The user administration</title>
+</head>
+<body>
+
+    <table>
+        <tr>
+            <td th:text="#{user.oid}">Oid</td>
+            <td th:text="${user.oid}">oid.4711</td>
+        </tr>
+        <tr>
+            <td th:text="#{user.userName}">Oid</td>
+            <td th:text="${user.userName}">oid.4711</td>
+        </tr>
+        <tr>
+            <td th:text="#{user.email}">Oid</td>
+            <td th:text="${user.email}">oid.4711</td>
+        </tr>
+        <tr>
+            <td th:text="#{user.type}">Oid</td>
+            <td th:text="${user.userType}">oid.4711</td>
+        </tr>
+    </table>
+
+    <table>
+        <tr th:each="role: ${user.roles}">
+            <td th:text="${role}">some role</td>
+        </tr>
+    </table>
+
+</body>
+</html>

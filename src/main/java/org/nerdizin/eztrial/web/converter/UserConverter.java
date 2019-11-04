@@ -1,5 +1,6 @@
 package org.nerdizin.eztrial.web.converter;
 
+import org.nerdizin.eztrial.entities.admin.Role;
 import org.nerdizin.eztrial.entities.admin.User;
 
 public class UserConverter implements Entity2UiModelConverter<User,org.nerdizin.eztrial.web.model.User> {
@@ -23,6 +24,12 @@ public class UserConverter implements Entity2UiModelConverter<User,org.nerdizin.
 		if (entity.getAddress() != null) {
 			final AddressConverter addressConverter = new AddressConverter();
 			result.setAddress(addressConverter.convertToUiModel(entity.getAddress()));
+		}
+
+		if (entity.getRoles() != null) {
+			for (final Role role : entity.getRoles()) {
+				result.addRole(role.getOid());
+			}
 		}
 
 		return result;

@@ -4,9 +4,11 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.nerdizin.eztrial.entities.base.BaseEntity;
 import org.nerdizin.eztrial.entities.enums.UserType;
 import org.nerdizin.eztrial.entities.enums.UserTypeConverter;
+import org.nerdizin.eztrial.util.Privilege;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -41,6 +43,20 @@ public class User extends BaseEntity {
 	@OneToMany(fetch = FetchType.EAGER)
 	private Set<Role> roles;
 
+
+	public boolean hasPrivilege(final Privilege privilege) {
+		for (final Role role : roles) {
+			final List<org.nerdizin.eztrial.entities.admin.Privilege> privileges = role.getPrivileges();
+			if (privileges != null) {
+				for (org.nerdizin.eztrial.entities.admin.Privilege tmpPriv : privileges) {
+					if (privilege.getKey().equals(tmpPriv.getOid())) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
 
 	public String getOid() {
 		return oid;

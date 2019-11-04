@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
@@ -48,6 +49,20 @@ public class UserController {
 		model.addAttribute("users",
 				page.stream().map(userConverter::convertToUiModel).collect(Collectors.toList()));
 		return "/admin/users.html";
+	}
+
+	@GetMapping("/{id}")
+	public String showUser(final Model model,
+			@PathVariable final Long id) {
+
+		final Optional<User> user = userRepository.findById(id);
+		if (user.isPresent()) {
+			model.addAttribute("user", userConverter.convertToUiModel(user.get()));
+		} else {
+			return "error";
+		}
+
+		return "/admin/user.html";
 	}
 
 	@GetMapping("/{id}/deleteUser")

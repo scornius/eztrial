@@ -7,6 +7,7 @@ import org.nerdizin.eztrial.entities.admin.User;
 import org.nerdizin.eztrial.entities.elementconverter.*;
 import org.nerdizin.eztrial.entities.study.*;
 import org.nerdizin.eztrial.repositories.*;
+import org.nerdizin.eztrial.repositories.admin.*;
 import org.nerdizin.eztrial.util.Constants;
 import org.nerdizin.eztrial.xml.odm.FileType;
 import org.nerdizin.eztrial.xml.odm.Odm;

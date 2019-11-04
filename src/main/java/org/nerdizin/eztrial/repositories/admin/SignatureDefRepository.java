@@ -1,4 +1,4 @@
-package org.nerdizin.eztrial.repositories;
+package org.nerdizin.eztrial.repositories.admin;
 
 import org.nerdizin.eztrial.entities.admin.SignatureDef;
 import org.springframework.data.repository.CrudRepository;

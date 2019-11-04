@@ -2,7 +2,7 @@ package org.nerdizin.eztrial.web.rest.controller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.nerdizin.eztrial.repositories.UserRepository;
+import org.nerdizin.eztrial.repositories.admin.UserRepository;
 import org.nerdizin.eztrial.web.converter.UserConverter;
 import org.nerdizin.eztrial.web.model.User;
 import org.nerdizin.eztrial.web.rest.base.AbstractRestController;

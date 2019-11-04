@@ -7,6 +7,7 @@ import org.nerdizin.eztrial.entities.elementconverter.*;
 import org.nerdizin.eztrial.entities.study.EventDef;
 import org.nerdizin.eztrial.entities.study.EventRef;
 import org.nerdizin.eztrial.repositories.*;
+import org.nerdizin.eztrial.repositories.admin.*;
 import org.nerdizin.eztrial.xml.odm.Odm;
 import org.nerdizin.eztrial.xml.odm.admin.*;
 import org.nerdizin.eztrial.xml.odm.study.*;

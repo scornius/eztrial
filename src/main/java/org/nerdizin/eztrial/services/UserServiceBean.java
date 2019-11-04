@@ -1,6 +1,6 @@
 package org.nerdizin.eztrial.services;
 
-import org.nerdizin.eztrial.repositories.UserRepository;
+import org.nerdizin.eztrial.repositories.admin.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

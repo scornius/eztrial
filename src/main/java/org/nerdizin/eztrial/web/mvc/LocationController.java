@@ -3,7 +3,7 @@ package org.nerdizin.eztrial.web.mvc;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.nerdizin.eztrial.entities.admin.Location;
-import org.nerdizin.eztrial.repositories.LocationRepository;
+import org.nerdizin.eztrial.repositories.admin.LocationRepository;
 import org.nerdizin.eztrial.web.converter.LocationConverter;
 import org.nerdizin.eztrial.web.rest.controller.util.PagingParameters;
 import org.springframework.beans.factory.annotation.Autowired;

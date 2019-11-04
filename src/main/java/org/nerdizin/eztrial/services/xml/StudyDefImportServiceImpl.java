@@ -326,23 +326,38 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 			}
 		}
 		if (adminData.getUsers() != null) {
-			final UserConverter userConverter = new UserConverter();
-			for (final User user : adminData.getUsers()) {
-				final org.nerdizin.eztrial.entities.admin.User userEntity = userConverter.convertToEntity(user);
-				if (user.getAddress() != null) {
-					final AddressConverter addressConverter = new AddressConverter();
-					final Address address = addressConverter.convertToEntity(user.getAddress());
-					addressRepository.save(address);
-					userEntity.setAddress(address);
-				}
-				userRepository.save(userEntity);
-			}
+			persistUsers(adminData);
 		}
 		if (adminData.getSignatureDefs() != null) {
 			final SignatureDefConverter signatureDefConverter = new SignatureDefConverter();
 			for (final SignatureDef signatureDef : adminData.getSignatureDefs()) {
 				signatureDefRepository.save(signatureDefConverter.convertToEntity(signatureDef));
 			}
+		}
+	}
+
+	private void persistUsers(final AdminData adminData) {
+		final UserConverter userConverter = new UserConverter();
+		for (final User user : adminData.getUsers()) {
+			final org.nerdizin.eztrial.entities.admin.User userEntity = userConverter.convertToEntity(user);
+			if (user.getAddress() != null) {
+				final AddressConverter addressConverter = new AddressConverter();
+				final Address address = addressConverter.convertToEntity(user.getAddress());
+				addressRepository.save(address);
+				userEntity.setAddress(address);
+			}
+			if (user.getRoleRefs() != null) {
+				for (final RoleRef roleRef : user.getRoleRefs()) {
+					final org.nerdizin.eztrial.entities.admin.Role targetRole =
+							roleRepository.findByOid(roleRef.getRoleOid());
+					if (targetRole == null) {
+						log.error(String.format("Could not find role with oid %s for user %s", roleRef.getRoleOid(), user.getOid()));
+					} else {
+						userEntity.addRole(targetRole);
+					}
+				}
+			}
+			userRepository.save(userEntity);
 		}
 	}
 

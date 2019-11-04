@@ -8,4 +8,5 @@ public interface RoleRepository extends PagingAndSortingRepository<Role, Long> {
 
 	Iterable<Role> findAllByOrderByOid();
 
+	Role findByOid(String oid);
 }

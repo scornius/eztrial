@@ -6,12 +6,13 @@ import org.nerdizin.eztrial.entities.base.BaseEntity;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "admin_roles")
 public class Role extends BaseEntity {
 
-	@Column
+	@Column(nullable = false)
 	private String oid;
 
 	@Column
@@ -51,6 +52,23 @@ public class Role extends BaseEntity {
 		}
 		privilege.setRole(this);
 		this.privileges.add(privilege);
+	}
+
+	@Override
+	public boolean equals(final Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		final Role role = (Role) o;
+		return oid.equals(role.oid);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(oid);
 	}
 
 	@Override

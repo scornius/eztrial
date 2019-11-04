@@ -1,6 +1,8 @@
 package org.nerdizin.eztrial.entities.elementconverter;
 
+import org.nerdizin.eztrial.entities.admin.Role;
 import org.nerdizin.eztrial.entities.admin.User;
+import org.nerdizin.eztrial.xml.odm.admin.RoleRef;
 import org.nerdizin.eztrial.xml.odm.admin.UserType;
 
 public class UserConverter implements OdmElementToEntityConverter<org.nerdizin.eztrial.xml.odm.admin.User,User> {
@@ -44,6 +46,14 @@ public class UserConverter implements OdmElementToEntityConverter<org.nerdizin.e
 		if (user.getAddress() != null) {
 			final AddressConverter addressConverter = new AddressConverter();
 			result.setAddress(addressConverter.convertToElement(user.getAddress()));
+		}
+
+		if (user.getRoles() != null) {
+			for (final Role role : user.getRoles()) {
+				final RoleRef roleRef = new RoleRef();
+				roleRef.setRoleOid(role.getOid());
+				result.addRoleRef(roleRef);
+			}
 		}
 
 		return result;

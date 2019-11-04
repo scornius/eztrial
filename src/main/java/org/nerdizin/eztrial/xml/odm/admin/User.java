@@ -1,12 +1,14 @@
 package org.nerdizin.eztrial.xml.odm.admin;
 
+import org.nerdizin.eztrial.xml.Namespaces;
 import org.nerdizin.eztrial.xml.adapter.UserTypeAdapter;
-import org.nerdizin.eztrial.xml.odm.base.OdmElement;
 import org.nerdizin.eztrial.xml.odm.base.OidElement;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class User extends OidElement {
@@ -29,6 +31,9 @@ public class User extends OidElement {
 
     @XmlElement(name = "Phone")
     private String phone;
+
+    @XmlElement(name = "RoleRef", namespace = Namespaces.EZTRIAL)
+    private List<RoleRef> roleRefs;
 
 
     public UserType getUserType() {
@@ -78,4 +83,19 @@ public class User extends OidElement {
     public void setPhone(final String phone) {
         this.phone = phone;
     }
+
+	public List<RoleRef> getRoleRefs() {
+		return roleRefs;
+	}
+
+	public void setRoleRefs(final List<RoleRef> roleRefs) {
+		this.roleRefs = roleRefs;
+	}
+
+	public void addRoleRef(final RoleRef roleRef) {
+    	if (this.roleRefs == null) {
+    		this.roleRefs = new ArrayList<>();
+		}
+    	this.roleRefs.add(roleRef);
+	}
 }

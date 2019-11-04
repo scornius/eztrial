@@ -201,7 +201,7 @@ public class StudyDefExportServiceImpl implements StudyDefExportService {
 			loadUsers(users, result);
 		}
 
-		final Iterable<Role> roles = roleRepository.findAll();
+		final Iterable<Role> roles = roleRepository.findAllByOrderByOid();
 		if (roles != null) {
 			loadRoles(roles, result);
 		}

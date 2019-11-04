@@ -309,6 +309,22 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 				locationRepository.save(locationConverter.convertToEntity(location));
 			}
 		}
+		if (adminData.getRoles() != null) {
+			final RoleConverter roleConverter = new RoleConverter();
+			for (final Role role : adminData.getRoles()) {
+				final PrivilegeConverter privilegeConverter = new PrivilegeConverter();
+				org.nerdizin.eztrial.entities.admin.Role roleEntity = roleConverter.convertToEntity(role);
+				if (role.getPrivileges() != null) {
+					for (final Privilege privilege : role.getPrivileges()) {
+						final org.nerdizin.eztrial.entities.admin.Privilege privilegeEntity =
+								privilegeConverter.convertToEntity(privilege);
+						roleEntity.addPrivilege(privilegeEntity);
+						privilegeRepository.save(privilegeEntity);
+					}
+				}
+				roleRepository.save(roleEntity);
+			}
+		}
 		if (adminData.getUsers() != null) {
 			final UserConverter userConverter = new UserConverter();
 			for (final User user : adminData.getUsers()) {
@@ -326,22 +342,6 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 			final SignatureDefConverter signatureDefConverter = new SignatureDefConverter();
 			for (final SignatureDef signatureDef : adminData.getSignatureDefs()) {
 				signatureDefRepository.save(signatureDefConverter.convertToEntity(signatureDef));
-			}
-		}
-		if (adminData.getRoles() != null) {
-			final RoleConverter roleConverter = new RoleConverter();
-			for (final Role role : adminData.getRoles()) {
-				final PrivilegeConverter privilegeConverter = new PrivilegeConverter();
-				org.nerdizin.eztrial.entities.admin.Role roleEntity = roleConverter.convertToEntity(role);
-				if (role.getPrivileges() != null) {
-					for (final Privilege privilege : role.getPrivileges()) {
-						final org.nerdizin.eztrial.entities.admin.Privilege privilegeEntity =
-								privilegeConverter.convertToEntity(privilege);
-						roleEntity.addPrivilege(privilegeEntity);
-						privilegeRepository.save(privilegeEntity);
-					}
-				}
-				roleRepository.save(roleEntity);
 			}
 		}
 	}

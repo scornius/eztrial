@@ -9,11 +9,11 @@ import java.util.TreeSet;
 
 public class Role extends OidElement {
 
-	@XmlElement(name = "Privilege", namespace = Namespaces.EZTRIAL)
-	private Set<Privilege> privileges;
-
 	@XmlElement(name = "Description", namespace = Namespaces.EZTRIAL)
 	private String description;
+
+	@XmlElement(name = "Privilege", namespace = Namespaces.EZTRIAL)
+	private Set<Privilege> privileges;
 
 	public Set<Privilege> getPrivileges() {
 		return privileges;

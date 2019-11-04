@@ -2,13 +2,12 @@ package org.nerdizin.eztrial.xml.odm.admin;
 
 import org.nerdizin.eztrial.xml.odm.base.OidElement;
 
+import javax.xml.bind.annotation.XmlValue;
+
 public class Privilege extends OidElement implements Comparable<Privilege> {
 
+	@XmlValue
 	private boolean value;
-
-	public boolean isValue() {
-		return value;
-	}
 
 	public boolean getValue() {
 		return value;

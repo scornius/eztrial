@@ -1,6 +1,7 @@
 package org.nerdizin.eztrial.services.xml;
 
 import org.nerdizin.eztrial.entities.admin.Location;
+import org.nerdizin.eztrial.entities.admin.Role;
 import org.nerdizin.eztrial.entities.admin.SignatureDef;
 import org.nerdizin.eztrial.entities.admin.User;
 import org.nerdizin.eztrial.entities.elementconverter.*;
@@ -24,6 +25,7 @@ public class StudyDefExportServiceImpl implements StudyDefExportService {
 
 	private final LocationRepository locationRepository;
 	private final UserRepository userRepository;
+	private final RoleRepository roleRepository;
 	private final AddressRepository addressRepository;
 	private final SignatureDefRepository signatureDefRepository;
 	private final MetaDataVersionRefRepository metaDataVersionRefRepository;
@@ -45,6 +47,7 @@ public class StudyDefExportServiceImpl implements StudyDefExportService {
 	@Autowired
 	public StudyDefExportServiceImpl(final LocationRepository locationRepository,
 			final UserRepository userRepository,
+			final RoleRepository roleRepository,
 			final AddressRepository addressRepository,
 			final SignatureDefRepository signatureDefRepository,
 			final MetaDataVersionRefRepository metaDataVersionRefRepository,
@@ -62,6 +65,7 @@ public class StudyDefExportServiceImpl implements StudyDefExportService {
 			final ItemRefRepository itemRefRepository) {
 		this.locationRepository = locationRepository;
 		this.userRepository = userRepository;
+		this.roleRepository = roleRepository;
 		this.addressRepository = addressRepository;
 		this.signatureDefRepository = signatureDefRepository;
 		this.metaDataVersionRefRepository = metaDataVersionRefRepository;
@@ -197,6 +201,11 @@ public class StudyDefExportServiceImpl implements StudyDefExportService {
 			loadUsers(users, result);
 		}
 
+		final Iterable<Role> roles = roleRepository.findAll();
+		if (roles != null) {
+			loadRoles(roles, result);
+		}
+
 		final Iterable<Location> locations = locationRepository.findAll();
 		if (locations != null) {
 			loadLocations(locations, result);
@@ -214,6 +223,13 @@ public class StudyDefExportServiceImpl implements StudyDefExportService {
 		final UserConverter userConverter = new UserConverter();
 		for (final User user : users) {
 			adminData.addUser(userConverter.convertToElement(user));
+		}
+	}
+
+	private void loadRoles(final Iterable<Role> roles, final AdminData adminData) {
+		final RoleConverter roleConverter = new RoleConverter();
+		for (final Role role : roles) {
+			adminData.addRole(roleConverter.convertToElement(role));
 		}
 	}
 

@@ -17,6 +17,9 @@ public class User extends OidElement {
     @XmlJavaTypeAdapter(UserTypeAdapter.class)
     private UserType userType;
 
+	@XmlElement(name = "LoginName")
+	private String loginName;
+
     @XmlElement(name = "FirstName")
     private String firstName;
 
@@ -32,6 +35,9 @@ public class User extends OidElement {
     @XmlElement(name = "Phone")
     private String phone;
 
+	@XmlElement(name = "Password", namespace = Namespaces.EZTRIAL)
+	private String password;
+
     @XmlElement(name = "RoleRef", namespace = Namespaces.EZTRIAL)
     private List<RoleRef> roleRefs;
 
@@ -44,7 +50,23 @@ public class User extends OidElement {
         this.userType = userType;
     }
 
-    public String getFirstName() {
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(final String password) {
+		this.password = password;
+	}
+
+	public String getLoginName() {
+		return loginName;
+	}
+
+	public void setLoginName(final String loginName) {
+		this.loginName = loginName;
+	}
+
+	public String getFirstName() {
         return firstName;
     }
 

@@ -10,30 +10,50 @@
 </head>
 <body>
 
-    <table>
-        <tr>
-            <td th:text="#{user.oid}">Oid</td>
-            <td th:text="${user.oid}">oid.4711</td>
-        </tr>
-        <tr>
-            <td th:text="#{user.userName}">Oid</td>
-            <td th:text="${user.userName}">oid.4711</td>
-        </tr>
-        <tr>
-            <td th:text="#{user.email}">Oid</td>
-            <td th:text="${user.email}">oid.4711</td>
-        </tr>
-        <tr>
-            <td th:text="#{user.type}">Oid</td>
-            <td th:text="${user.userType}">oid.4711</td>
-        </tr>
-    </table>
+    <form action="#" th:action="@{/user}" th:object="${user}" method="post">
+        <input type="hidden" name="id" th:value="${user.id}"/>
+        <table>
+            <tr>
+                <td th:text="#{user.oid}">Oid</td>
+                <td th:text="${user.oid}">oid.4711</td>
+            </tr>
+            <tr>
+                <td th:text="#{user.userName}"><label for="userName">Username</label></td>
+                <td>
+                    <input type="text" name="userName" id="userName" th:value="*{userName}" value="oid.4711"/>
+                </td>
+            </tr>
+            <tr>
+                <td th:text="#{user.email}"><label for="email">Email</label></td>
+                <td>
+                    <input type="text" name="email" id="email" th:value="*{email}" value="foo@bar.com"/>
+                </td>
+            </tr>
+            <tr>
+                <td th:text="#{user.firstName}"><label for="firstName">First name</label></td>
+                <td>
+                    <input type="text" name="firstName" id="firstName" th:value="*{firstName}" value="Max"/>
+                </td>
+            </tr>
+            <tr>
+                <td th:text="#{user.lastName}"><label for="lastName">Last name</label></td>
+                <td>
+                    <input type="text" name="lastName" id="lastName" th:value="*{lastName}" value="Mustermann"/>
+                </td>
+            </tr>
+            <tr>
+                <td th:text="#{user.type}">Type</td>
+                <td th:text="${user.type}">Investigator</td>
+            </tr>
+        </table>
 
-    <table>
-        <tr th:each="role: ${user.roles}">
-            <td th:text="${role}">some role</td>
-        </tr>
-    </table>
+        <table>
+            <tr th:each="role: ${user.roles}">
+                <td th:text="${role}">some role</td>
+            </tr>
+        </table>
+        <input type="submit" th:value="#{common.save}"/>
+    </form>
 
 </body>
 </html>

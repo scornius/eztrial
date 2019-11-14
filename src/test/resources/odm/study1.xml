@@ -78,6 +78,7 @@
             </Address>
             <Email>sepp.laibach@nerdizin.org</Email>
             <Phone>089 32 16 8</Phone>
+            <ez:Password>abc</ez:Password>
             <ez:RoleRef RoleOID="role.investigator" />
         </User>
         <Location OID="location.1" Name="Medizinische Hochschule Schlumpfhausen" LocationType="Site">

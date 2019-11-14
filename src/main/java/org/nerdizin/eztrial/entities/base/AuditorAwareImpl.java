@@ -1,8 +1,11 @@
 package org.nerdizin.eztrial.entities.base;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.nerdizin.eztrial.entities.admin.User;
 import org.nerdizin.eztrial.repositories.admin.UserRepository;
 import org.nerdizin.eztrial.util.Constants;
+import org.nerdizin.eztrial.web.mvc.UserController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,6 +16,8 @@ import java.util.Optional;
 @Service
 public class AuditorAwareImpl implements AuditorAware<User> {
 
+	private final static Log log = LogFactory.getLog(UserController.class);
+
 	private UserRepository userRepository;
 
 	@Override
@@ -22,14 +27,11 @@ public class AuditorAwareImpl implements AuditorAware<User> {
 			final User admin = new User();
 			admin.setOid(Constants.ADMIN_OID);
 			admin.setId(1L);
-			admin.setFirstName("admin");
-			admin.setLastName("admin");
 			return Optional.of(admin);
 		}
 
-		final String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		final User user = userRepository.findByUserName(username);
-		return Optional.of(user);
+		final UserPrincipal principal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return Optional.of(principal.getUser());
 	}
 
 	@Autowired

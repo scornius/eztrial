@@ -14,7 +14,7 @@ public class User implements UiModel {
 	private String lastName;
 	private String email;
 	private String phone;
-	private String userType;
+	private String type;
 	private Address address;
 	private Set<String> roles;
 
@@ -74,12 +74,12 @@ public class User implements UiModel {
 		this.phone = phone;
 	}
 
-	public String getUserType() {
-		return userType;
+	public String getType() {
+		return type;
 	}
 
-	public void setUserType(final String userType) {
-		this.userType = userType;
+	public void setType(final String type) {
+		this.type = type;
 	}
 
 	public Address getAddress() {

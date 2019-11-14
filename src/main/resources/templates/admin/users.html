@@ -32,7 +32,7 @@
         <td th:text="${user.email}">some.one@somewhere.net</td>
         <td th:text="${user.firstName}">Firstname</td>
         <td th:text="${user.lastName}">Lastname</td>
-        <td th:text="${user.userType}">Usertype 1</td>
+        <td th:text="${user.type}">Usertype 1</td>
         <td th:text="${user.address}">My Town 1</td>
         <td>
             <a th:href="@{/user/{id}(id=${user.id})}">edit</a>

@@ -21,6 +21,12 @@ public class User extends BaseEntity {
 	@Column(name = "user_name")
 	private String userName;
 
+	@Column(name = "password")
+	private String password;
+
+	@Column(name = "active", nullable = false)
+	private boolean active;
+
 	@Column(name = "first_name")
 	private String firstName;
 
@@ -40,7 +46,7 @@ public class User extends BaseEntity {
 	@OneToOne
 	private Address address;
 
-	@OneToMany(fetch = FetchType.EAGER)
+	@OneToMany
 	private Set<Role> roles;
 
 
@@ -72,6 +78,14 @@ public class User extends BaseEntity {
 
 	public void setUserName(final String userName) {
 		this.userName = userName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(final String password) {
+		this.password = password;
 	}
 
 	public String getFirstName() {
@@ -120,6 +134,14 @@ public class User extends BaseEntity {
 
 	public void setAddress(final Address address) {
 		this.address = address;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(final boolean active) {
+		this.active = active;
 	}
 
 	public Set<Role> getRoles() {

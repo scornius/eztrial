@@ -4,6 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.nerdizin.eztrial.entities.admin.User;
 import org.nerdizin.eztrial.repositories.admin.UserRepository;
+import org.nerdizin.eztrial.services.UserService;
 import org.nerdizin.eztrial.util.Constants;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -15,12 +16,16 @@ public class AppInitializer {
 	private final static Log log = LogFactory.getLog(AppInitializer.class);
 
 	@Bean
-	public CommandLineRunner initDatabase(final UserRepository userRepository) {
+	public CommandLineRunner initDatabase(final UserRepository userRepository,
+			final UserService userService) {
+
 		return args -> {
 			log.info("Initializing database");
 
 			final User admin = new User();
 			admin.setOid(Constants.ADMIN_OID);
+			admin.setPassword(userService.encryptPassword("admin"));
+			admin.setActive(true);
 			admin.setUserName("admin");
 			admin.setFirstName("admin");
 			admin.setLastName("admin");

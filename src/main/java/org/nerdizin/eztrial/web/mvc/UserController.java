@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Optional;
@@ -58,6 +59,27 @@ public class UserController {
 		final Optional<User> user = userRepository.findById(id);
 		if (user.isPresent()) {
 			model.addAttribute("user", userConverter.convertToUiModel(user.get()));
+		} else {
+			return "error";
+		}
+
+		return "/admin/user.html";
+	}
+
+	@PostMapping
+	public String updateUser(final Model model,
+			final org.nerdizin.eztrial.web.model.User user) {
+
+		final Optional<User> userOptional = userRepository.findByIdAndEagerlyFetchRoles(user.getId());
+		if (userOptional.isPresent()) {
+			final User userEntity = userOptional.get();
+			userEntity.setEmail(user.getEmail());
+			userEntity.setFirstName(user.getFirstName());
+			userEntity.setLastName(user.getLastName());
+			userEntity.setPhone(user.getPhone());
+			final User updatedUser = userRepository.save(userEntity);
+
+			model.addAttribute("user", userConverter.convertToUiModel(updatedUser));
 		} else {
 			return "error";
 		}

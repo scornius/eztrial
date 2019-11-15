@@ -16,7 +16,7 @@ public class UserPrincipal implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
+		return user.getAuthorities();
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class UserPrincipal implements UserDetails {
 
 	@Override
 	public boolean isAccountNonLocked() {
-		return true;
+		return !user.isLocked();
 	}
 
 	@Override

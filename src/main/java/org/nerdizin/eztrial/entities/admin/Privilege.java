@@ -2,12 +2,13 @@ package org.nerdizin.eztrial.entities.admin;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.nerdizin.eztrial.entities.base.BaseEntity;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "admin_privileges")
-public class Privilege extends BaseEntity implements Comparable<Privilege> {
+public class Privilege extends BaseEntity implements Comparable<Privilege>, GrantedAuthority {
 
 	@Column
 	private String oid;
@@ -19,6 +20,11 @@ public class Privilege extends BaseEntity implements Comparable<Privilege> {
 	@JoinColumn(name = "role_id")
 	private Role role;
 
+
+	@Override
+	public String getAuthority() {
+		return oid;
+	}
 
 	public String getOid() {
 		return oid;

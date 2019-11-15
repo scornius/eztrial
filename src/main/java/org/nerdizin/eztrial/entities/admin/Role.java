@@ -75,4 +75,5 @@ public class Role extends BaseEntity {
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
 	}
+
 }

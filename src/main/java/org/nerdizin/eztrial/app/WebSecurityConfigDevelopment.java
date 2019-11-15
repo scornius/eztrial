@@ -19,6 +19,7 @@ import java.util.Arrays;
 @EnableWebSecurity
 public class WebSecurityConfigDevelopment extends WebSecurityConfigurerAdapter {
 
+
 	@Override
 	protected void configure(final HttpSecurity http) throws Exception {
 		http

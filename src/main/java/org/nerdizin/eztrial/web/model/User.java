@@ -8,6 +8,7 @@ import java.util.Set;
 public class User implements UiModel {
 
 	private long id;
+	private boolean active;
 	private String oid;
 	private String userName;
 	private String firstName;
@@ -24,6 +25,14 @@ public class User implements UiModel {
 
 	public void setId(final long id) {
 		this.id = id;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(final boolean active) {
+		this.active = active;
 	}
 
 	public String getOid() {

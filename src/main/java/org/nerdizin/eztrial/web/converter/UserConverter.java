@@ -11,6 +11,7 @@ public class UserConverter implements Entity2UiModelConverter<User,org.nerdizin.
 		final org.nerdizin.eztrial.web.model.User result =
 				new org.nerdizin.eztrial.web.model.User();
 		result.setId(entity.getId());
+		result.setActive(entity.isActive());
 		result.setOid(entity.getOid());
 		result.setFirstName(entity.getFirstName());
 		result.setLastName(entity.getLastName());

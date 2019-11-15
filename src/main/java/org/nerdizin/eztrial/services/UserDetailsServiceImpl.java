@@ -5,20 +5,18 @@ import org.apache.commons.logging.LogFactory;
 import org.nerdizin.eztrial.entities.admin.User;
 import org.nerdizin.eztrial.entities.base.UserPrincipal;
 import org.nerdizin.eztrial.repositories.admin.UserRepository;
-import org.nerdizin.eztrial.web.mvc.UserController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsPasswordService;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsManager, UserDetailsPasswordService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
-	private final static Log log = LogFactory.getLog(UserController.class);
+	private final static Log log = LogFactory.getLog(UserDetailsServiceImpl.class);
 
 	private final UserRepository userRepository;
 
@@ -28,42 +26,12 @@ public class UserDetailsServiceImpl implements UserDetailsManager, UserDetailsPa
 	}
 
 	@Override
-	public UserDetails loadUserByUsername(final String userName) throws UsernameNotFoundException {
-		final Optional<User> userOptional = userRepository.findByUserNameAndEagerlyFetchRoles(userName);
+	public UserDetails loadUserByUsername(final String userNameOrEmail) throws UsernameNotFoundException {
+		final Optional<User> userOptional = userRepository.findByUserNameOrEmailAndEagerlyFetchRoles(userNameOrEmail);
 		if (userOptional.isEmpty()) {
-			throw new UsernameNotFoundException(userName);
+			throw new UsernameNotFoundException(userNameOrEmail);
 		}
 		return new UserPrincipal(userOptional.get());
 	}
 
-	@Override
-	public UserDetails updatePassword(final UserDetails userDetails, final String s) {
-		return null;
-	}
-
-	@Override
-	public void createUser(final UserDetails userDetails) {
-
-	}
-
-	@Override
-	public void updateUser(final UserDetails userDetails) {
-
-	}
-
-	@Override
-	public void deleteUser(final String s) {
-
-	}
-
-	@Override
-	public void changePassword(final String s, final String s1) {
-
-	}
-
-	@Override
-	public boolean userExists(final String userName) {
-		log.info("userExists: " + userName);
-		return true;
-	}
 }

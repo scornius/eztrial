@@ -11,6 +11,13 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long> {
 
 	Iterable<User> findAllByOrderByOid();
 
+	Optional<User> findByUserName(String userName);
+
+	Optional<User> findByEmail(String email);
+
+	@Query("SELECT u FROM User u LEFT JOIN FETCH u.roles WHERE u.userName = :userNameOrEmail or u.email = :userNameOrEmail")
+	Optional<User> findByUserNameOrEmailAndEagerlyFetchRoles(@Param("userNameOrEmail") String userNameOrEmail);
+
 	@Query("SELECT u FROM User u LEFT JOIN FETCH u.roles WHERE u.userName = :userName")
 	Optional<User> findByUserNameAndEagerlyFetchRoles(@Param("userName") String userName);
 

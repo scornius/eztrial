@@ -3,7 +3,9 @@ package org.nerdizin.eztrial.web.mvc;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.nerdizin.eztrial.entities.admin.User;
+import org.nerdizin.eztrial.entities.enums.UserType;
 import org.nerdizin.eztrial.repositories.admin.UserRepository;
+import org.nerdizin.eztrial.services.UserService;
 import org.nerdizin.eztrial.web.converter.UserConverter;
 import org.nerdizin.eztrial.web.rest.controller.util.PagingParameters;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +28,14 @@ public class UserController {
 	private final static Log log = LogFactory.getLog(UserController.class);
 
 	private final UserRepository userRepository;
+	private final UserService userService;
+
 	private static final UserConverter userConverter = new UserConverter();
 
 	@Autowired
-	public UserController(final UserRepository userRepository) {
+	public UserController(final UserRepository userRepository, final UserService userService) {
 		this.userRepository = userRepository;
+		this.userService = userService;
 	}
 
 
@@ -59,6 +64,7 @@ public class UserController {
 		final Optional<User> user = userRepository.findById(id);
 		if (user.isPresent()) {
 			model.addAttribute("user", userConverter.convertToUiModel(user.get()));
+			model.addAttribute("userTypes", userService.getUserTypes());
 		} else {
 			return "error";
 		}
@@ -73,18 +79,21 @@ public class UserController {
 		final Optional<User> userOptional = userRepository.findByIdAndEagerlyFetchRoles(user.getId());
 		if (userOptional.isPresent()) {
 			final User userEntity = userOptional.get();
-			userEntity.setEmail(user.getEmail());
+			userEntity.setActive(user.isActive());
 			userEntity.setFirstName(user.getFirstName());
 			userEntity.setLastName(user.getLastName());
 			userEntity.setPhone(user.getPhone());
+			userEntity.setUserType(UserType.fromCode(user.getType()));
+
 			final User updatedUser = userRepository.save(userEntity);
 
 			model.addAttribute("user", userConverter.convertToUiModel(updatedUser));
+			model.addAttribute("userTypes", userService.getUserTypes());
 		} else {
 			return "error";
 		}
 
-		return "/admin/user.html";
+		return "redirect:/user/" + user.getId();
 	}
 
 	@GetMapping("/{id}/deleteUser")

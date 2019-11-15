@@ -5,10 +5,11 @@ import org.nerdizin.eztrial.entities.base.BaseEntity;
 import org.nerdizin.eztrial.entities.enums.UserType;
 import org.nerdizin.eztrial.entities.enums.UserTypeConverter;
 import org.nerdizin.eztrial.util.Privilege;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -26,6 +27,9 @@ public class User extends BaseEntity {
 
 	@Column(name = "active", nullable = false)
 	private boolean active;
+
+	@Column(name = "locked", nullable = false)
+	private boolean locked;
 
 	@Column(name = "first_name")
 	private String firstName;
@@ -50,18 +54,23 @@ public class User extends BaseEntity {
 	private Set<Role> roles;
 
 
-	public boolean hasPrivilege(final Privilege privilege) {
-		for (final Role role : roles) {
-			final List<org.nerdizin.eztrial.entities.admin.Privilege> privileges = role.getPrivileges();
-			if (privileges != null) {
-				for (org.nerdizin.eztrial.entities.admin.Privilege tmpPriv : privileges) {
-					if (privilege.getKey().equals(tmpPriv.getOid())) {
-						return true;
-					}
-				}
-			}
+	public Collection<GrantedAuthority> getAuthorities() {
+		if ("admin".equals(userName)) {
+			return getAdminAuthorities();
 		}
-		return false;
+		final Set<GrantedAuthority> result = new HashSet<>();
+		for (final Role role : roles) {
+			result.addAll(role.getPrivileges());
+		}
+		return result;
+	}
+
+	private Collection<GrantedAuthority> getAdminAuthorities() {
+		final Set<GrantedAuthority> result = new HashSet<>();
+		for (final Privilege value : Privilege.values()) {
+			result.add((GrantedAuthority) value::getKey);
+		}
+		return result;
 	}
 
 	public String getOid() {
@@ -142,6 +151,14 @@ public class User extends BaseEntity {
 
 	public void setActive(final boolean active) {
 		this.active = active;
+	}
+
+	public boolean isLocked() {
+		return locked;
+	}
+
+	public void setLocked(final boolean locked) {
+		this.locked = locked;
 	}
 
 	public Set<Role> getRoles() {

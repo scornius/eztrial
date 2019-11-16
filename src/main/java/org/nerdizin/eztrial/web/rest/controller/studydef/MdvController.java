@@ -2,7 +2,7 @@ package org.nerdizin.eztrial.web.rest.controller.studydef;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.nerdizin.eztrial.repositories.MetaDataVersionRepository;
+import org.nerdizin.eztrial.repositories.study.MetaDataVersionRepository;
 import org.nerdizin.eztrial.web.converter.MetaDataVersionConverter;
 import org.nerdizin.eztrial.web.model.MetaDataVersion;
 import org.nerdizin.eztrial.web.rest.controller.util.PagingParameters;

@@ -1,6 +1,5 @@
-package org.nerdizin.eztrial.repositories;
+package org.nerdizin.eztrial.repositories.study;
 
-import org.nerdizin.eztrial.entities.study.FormDef;
 import org.nerdizin.eztrial.entities.study.ItemGroupDef;
 import org.nerdizin.eztrial.entities.study.MetaDataVersion;
 import org.springframework.data.repository.CrudRepository;

@@ -1,4 +1,4 @@
-package org.nerdizin.eztrial.repositories;
+package org.nerdizin.eztrial.repositories.study;
 
 import org.nerdizin.eztrial.entities.study.ItemRef;
 import org.springframework.data.repository.CrudRepository;

@@ -1,4 +1,4 @@
-package org.nerdizin.eztrial.repositories;
+package org.nerdizin.eztrial.repositories.study;
 
 import org.nerdizin.eztrial.entities.study.MeasurementUnit;
 import org.nerdizin.eztrial.entities.study.Study;

@@ -2,12 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="https://www.thymeleaf.org"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xsi:schemaLocation="https://www.thymeleaf.org">
 
 <body>
 <div th:fragment="navigation">
-    <a href="/user/listUsers" th:text="#{user.administration}">User administration</a><br/>
-    <a href="/location/listLocations" th:text="#{location.administration}">Location administration</a>
+    <a href="/user/listUsers" th:text="#{user.administration}">Users</a>
+    <a href="/location/listLocations" th:text="#{location.administration}">Locations</a>
+    Logged in as:
+    <a href="/myAccount">
+        <span sec:authentication="name">sepp.laibach</span>
+    </a>
 </div>
 </body>
 

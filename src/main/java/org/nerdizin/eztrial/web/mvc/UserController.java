@@ -13,11 +13,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -37,7 +39,6 @@ public class UserController {
 		this.userRepository = userRepository;
 		this.userService = userService;
 	}
-
 
 	@GetMapping("/listUsers")
 	public String listUsers(final Model model) {
@@ -74,7 +75,13 @@ public class UserController {
 
 	@PostMapping
 	public String updateUser(final Model model,
-			final org.nerdizin.eztrial.web.model.User user) {
+			@Valid final org.nerdizin.eztrial.web.model.User user,
+			final BindingResult bindingResult) {
+
+		if (bindingResult.hasErrors()) {
+			log.info("errors: " + bindingResult.getAllErrors());
+			return "/admin/user.html";
+		}
 
 		final Optional<User> userOptional = userRepository.findByIdAndEagerlyFetchRoles(user.getId());
 		if (userOptional.isPresent()) {

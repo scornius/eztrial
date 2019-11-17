@@ -1,6 +1,7 @@
 package org.nerdizin.eztrial.web.model;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.nerdizin.eztrial.web.validator.PhoneNumberConstraint;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +15,10 @@ public class User implements UiModel {
 	private String firstName;
 	private String lastName;
 	private String email;
+
+	@PhoneNumberConstraint
 	private String phone;
+
 	private String type;
 	private Address address;
 	private Set<String> roles;

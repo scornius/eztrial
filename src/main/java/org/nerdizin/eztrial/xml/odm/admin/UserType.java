@@ -2,6 +2,7 @@ package org.nerdizin.eztrial.xml.odm.admin;
 
 public enum UserType {
 
+	ADMINISTRATOR("Administrator"),
     SPONSOR("Sponsor"),
 	INVESTIGATOR("Investigator"),
 	LAB("Lab"),

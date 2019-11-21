@@ -13,6 +13,10 @@
     <a href="/myAccount">
         <span sec:authentication="name">sepp.laibach</span>
     </a>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+    <a th:action="@{/logout}">logout</a>
 </div>
 </body>
 

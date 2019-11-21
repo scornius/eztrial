@@ -58,6 +58,7 @@ public class MyAccountController {
 		final UserPrincipal principal = (UserPrincipal) authentication.getPrincipal();
 		final User user = principal.getUser();
 		user.setPassword(userService.encryptPassword(passwordChange.getPassword1()));
+		userRepository.save(user);
 
 		return "redirect:/myAccount";
 	}

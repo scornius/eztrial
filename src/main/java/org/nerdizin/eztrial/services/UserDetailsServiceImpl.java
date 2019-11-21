@@ -27,6 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(final String userNameOrEmail) throws UsernameNotFoundException {
+		log.info(String.format("Login attempt by %s", userNameOrEmail));
 		final Optional<User> userOptional = userRepository.findByUserNameOrEmailAndEagerlyFetchRoles(userNameOrEmail);
 		if (userOptional.isEmpty()) {
 			throw new UsernameNotFoundException(userNameOrEmail);

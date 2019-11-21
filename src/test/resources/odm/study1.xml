@@ -66,7 +66,8 @@
     </Study>
 
     <AdminData>
-        <User OID="user.1" UserType="Investigator">
+        <User OID="user.1" UserType="Investigator" ez:active="true">
+            <LoginName>sepp</LoginName>
             <FirstName>Sepp</FirstName>
             <LastName>Laibach</LastName>
             <Address>
@@ -78,7 +79,7 @@
             </Address>
             <Email>sepp.laibach@nerdizin.org</Email>
             <Phone>089 32 16 8</Phone>
-            <ez:Password>abc</ez:Password>
+            <ez:Password>$2a$10$e8B.4ZlWz2FVT/O6T2Lry.mPZnd0Y8/K7hMQ9xbcNJXDwyX7kmOnW</ez:Password>
             <ez:RoleRef RoleOID="role.investigator" />
         </User>
         <Location OID="location.1" Name="Medizinische Hochschule Schlumpfhausen" LocationType="Site">

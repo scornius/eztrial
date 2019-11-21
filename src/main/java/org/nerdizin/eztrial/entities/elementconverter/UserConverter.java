@@ -18,6 +18,7 @@ public class UserConverter implements OdmElementToEntityConverter<org.nerdizin.e
 		result.setLastName(user.getLastName());
 		result.setPhone(user.getPhone());
 		result.setEmail(user.getEmail());
+		result.setActive(user.isActive());
 
 		if (user.getUserType() != null) {
 			result.setUserType(org.nerdizin.eztrial.entities.enums.UserType.fromCode(user.getUserType().getCode()));
@@ -42,6 +43,7 @@ public class UserConverter implements OdmElementToEntityConverter<org.nerdizin.e
 		result.setLastName(user.getLastName());
 		result.setPhone(user.getPhone());
 		result.setEmail(user.getEmail());
+		result.setActive(user.isActive());
 
 		if (user.getUserType() != null) {
 			result.setUserType(UserType.fromCode(user.getUserType().getCode()));

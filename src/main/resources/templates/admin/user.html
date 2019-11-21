@@ -71,6 +71,7 @@
             <td th:text="#{user.type}"><label for="userType">Type</label></td>
             <td>
                 <select name="userType" id="userType" th:field="*{type}">
+                    <option th:value="none" th:text="#{common.none}" value="">None</option>
                     <option th:each="userType : ${userTypes}"
                             th:value="${userType}"
                             th:text="#{${userType}}"
@@ -94,6 +95,28 @@
     </div>
     <button type="button" th:text="#{common.cancel}" th:action="@{/user/listUsers}">Cancel</button>
 </form>
+
+
+<!--/*@thymesVar id="passwordChange" type="org.nerdizin.eztrial.web.model.PasswordChange"*/-->
+<form action="#" th:action="@{/user/{id}/changePassword(id=${user.id})}" th:object="${passwordChange}" method="post">
+    <table>
+        <tr>
+            <td><label for="password1" th:text="#{user.password}"></label></td>
+            <td><input type="password" name="password1" id="password1"/>
+            </td>
+            <td th:if="${#fields.hasErrors('password1')}" th:errors="${passwordChange.password1}"
+                th:text="#{user.validation.phone}">Validation error</td>
+        </tr>
+        <tr>
+            <td><label for="password2" th:text="#{user.password.repeat}"></label></td>
+            <td><input type="password" name="password2" id="password2"/></td>
+        </tr>
+        <tr>
+            <td><input type="submit" th:value="#{common.save}"/></td>
+        </tr>
+    </table>
+</form>
+
 
 </body>
 </html>

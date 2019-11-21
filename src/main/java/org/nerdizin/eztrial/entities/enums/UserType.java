@@ -2,7 +2,6 @@ package org.nerdizin.eztrial.entities.enums;
 
 public enum UserType {
 
-	ADMINISTRATOR("Administrator"),
 	SPONSOR("Sponsor"),
 	INVESTIGATOR("Investigator"),
 	LAB("Lab"),

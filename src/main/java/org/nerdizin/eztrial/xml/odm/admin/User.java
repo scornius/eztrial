@@ -41,6 +41,9 @@ public class User extends OidElement {
     @XmlElement(name = "RoleRef", namespace = Namespaces.EZTRIAL)
     private List<RoleRef> roleRefs;
 
+    @XmlAttribute(name = "active", namespace = Namespaces.EZTRIAL)
+	private boolean active;
+
 
     public UserType getUserType() {
         return userType;
@@ -119,5 +122,13 @@ public class User extends OidElement {
     		this.roleRefs = new ArrayList<>();
 		}
     	this.roleRefs.add(roleRef);
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(final boolean active) {
+		this.active = active;
 	}
 }

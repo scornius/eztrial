@@ -13,6 +13,7 @@ import org.nerdizin.eztrial.web.validator.PasswordChangeValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -44,7 +45,7 @@ public class UserController {
 	}
 
 	@GetMapping("/listUsers")
-	//@PreAuthorize("hasAuthority(T(org.nerdizin.eztrial.util.Privilege).USER_LIST)")
+	@PreAuthorize("hasAuthority(T(org.nerdizin.eztrial.security.Privilege).USER_LIST.key)")
 	public String listUsers(final Model model) {
 
 		final PagingParameters pagingParameters = new PagingParameters();
@@ -63,6 +64,7 @@ public class UserController {
 	}
 
 	@GetMapping("/{id}")
+	@PreAuthorize("hasAuthority(T(org.nerdizin.eztrial.security.Privilege).USER_EDIT.key)")
 	public String showUser(final Model model,
 			@PathVariable final Long id) {
 

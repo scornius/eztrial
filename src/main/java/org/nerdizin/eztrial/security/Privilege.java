@@ -1,4 +1,4 @@
-package org.nerdizin.eztrial.util;
+package org.nerdizin.eztrial.security;
 
 public enum Privilege {
 	USER_CREATE("user.create"),
@@ -7,7 +7,7 @@ public enum Privilege {
 	USER_LIST("user.list")
 	;
 
-	private String key;
+	private final String key;
 
 	Privilege(final String key) {
 		this.key = key;

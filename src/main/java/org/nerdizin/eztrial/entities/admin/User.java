@@ -4,7 +4,6 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.nerdizin.eztrial.entities.base.BaseEntity;
 import org.nerdizin.eztrial.entities.enums.UserType;
 import org.nerdizin.eztrial.entities.enums.UserTypeConverter;
-import org.nerdizin.eztrial.util.Privilege;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
@@ -67,9 +66,7 @@ public class User extends BaseEntity {
 
 	private Collection<GrantedAuthority> getAdminAuthorities() {
 		final Set<GrantedAuthority> result = new HashSet<>();
-		for (final Privilege value : Privilege.values()) {
-			result.add((GrantedAuthority) value::getKey);
-		}
+
 		return result;
 	}
 

@@ -5,10 +5,12 @@ import org.springframework.data.domain.Sort;
 
 public class Pagination {
 
+	private static final int DEFAULT_PAGE_SIZE = 2;
+
 	private int page = 0;
-	private int rows = 1;
+	private int rows = DEFAULT_PAGE_SIZE;
 	private boolean descending;
-	private String[] properties;
+	private String[] properties = new String[0];
 
 
 	public int getPage() {

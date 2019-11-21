@@ -9,6 +9,7 @@ import org.nerdizin.eztrial.services.UserService;
 import org.nerdizin.eztrial.web.converter.UserConverter;
 import org.nerdizin.eztrial.web.model.admin.PasswordChange;
 import org.nerdizin.eztrial.web.model.common.Pagination;
+import org.nerdizin.eztrial.web.validator.PaginationValidator;
 import org.nerdizin.eztrial.web.validator.PasswordChangeValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -47,19 +48,26 @@ public class UserController {
 	@GetMapping("/listUsers")
 	@PreAuthorize("hasAuthority(T(org.nerdizin.eztrial.security.Privilege).USER_LIST.key)")
 	public String listUsers(final Model model,
-			final Pagination pagination) {
+			final Pagination pagination,
+			final BindingResult bindingResult) {
 
-		pagination.setRows(1);
+		new PaginationValidator().validate(pagination, bindingResult);
+		if (bindingResult.hasErrors()) {
+			log.info("errors: " + bindingResult.getAllErrors());
+			return "/admin/user.html";
+		}
+
+		log.info(pagination);
 
 		final Page<User> page = userRepository.findAll(
 				PageRequest.of(pagination.getPage(),
 						pagination.getRows(),
 						pagination.getSortDirection(),
-						"oid", "userName"));
+						pagination.getProperties()));
 
 		model.addAttribute("users",
 				page.stream().map(userConverter::convertToUiModel).collect(Collectors.toList()));
-		model.addAttribute("pagingParameters", pagination);
+		model.addAttribute("pagination", pagination);
 		return "/admin/users.html";
 	}
 
@@ -99,9 +107,9 @@ public class UserController {
 			userEntity.setLastName(user.getLastName());
 			userEntity.setPhone(user.getPhone());
 			if (NONE.equals(user.getType())) {
-				userEntity.setUserType(null);
+				userEntity.setType(null);
 			} else {
-				userEntity.setUserType(UserType.fromCode(user.getType()));
+				userEntity.setType(UserType.fromCode(user.getType()));
 			}
 			final User updatedUser = userRepository.save(userEntity);
 

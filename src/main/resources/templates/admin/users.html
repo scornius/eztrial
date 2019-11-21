@@ -17,14 +17,23 @@
 
 <table>
     <tr>
-        <th th:text="#{user.oid}">Oid</th>
-        <th th:text="#{user.userName}">User name</th>
+        <th>
+            <a th:href="@{/user/listUsers(page=${pagination.page},properties='oid')}"
+               th:text="#{user.oid}">Oid</a>
+        </th>
+        <th>
+            <a th:href="@{/user/listUsers(page=${pagination.page},properties='userName')}"
+               th:text="#{user.userName}">User name</a>
+        </th>
         <th th:text="#{user.email}">Email</th>
         <th th:text="#{user.firstName}">First name</th>
         <th th:text="#{user.lastName}">Last name</th>
-        <th th:text="#{user.type}">Type</th>
+        <th>
+            <a th:href="@{/user/listUsers(page=${pagination.page},properties='type')}"
+               th:text="#{user.type}">Type</a>
+        </th>
         <th th:text="#{user.address}">Address</th>
-        <th></th>
+        <th th:text="#{common.actions}">Actions</th>
     </tr>
     <tr th:each="user: ${users}">
         <td th:text="${user.oid}">16</td>
@@ -54,11 +63,10 @@
 </table>
 
 <!--/*@thymesVar id="pagination" type="org.nerdizin.eztrial.web.model.common.Pagination"*/-->
-<a th:href="@{/user/listUsers(page=${pagination.page - 1})}"
+<a th:href="@{/user/listUsers(page=${pagination.page - 1},properties=${pagination.properties})}"
    th:text="#{common.pagination.back.one}">back</a>
-<a th:href="@{/user/listUsers(page=${pagination.page + 1})}"
+<a th:href="@{/user/listUsers(page=${pagination.page + 1},properties=${pagination.properties})}"
    th:text="#{common.pagination.forward.one}">forward</a>
-<p th:text="${pagination.page}">17</p>
 
 </body>
 </html>

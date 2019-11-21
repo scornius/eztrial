@@ -46,7 +46,7 @@ public class User extends BaseEntity {
 
 	@Column(name = "user_type")
 	@Convert(converter = UserTypeConverter.class)
-	private UserType userType;
+	private UserType type;
 
 	@OneToOne
 	private Address address;
@@ -132,12 +132,12 @@ public class User extends BaseEntity {
 		this.phone = phone;
 	}
 
-	public UserType getUserType() {
-		return userType;
+	public UserType getType() {
+		return type;
 	}
 
-	public void setUserType(final UserType userType) {
-		this.userType = userType;
+	public void setType(final UserType type) {
+		this.type = type;
 	}
 
 	public Address getAddress() {

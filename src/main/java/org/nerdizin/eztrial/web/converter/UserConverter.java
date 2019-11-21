@@ -18,8 +18,8 @@ public class UserConverter implements Entity2UiModelConverter<User,org.nerdizin.
 		result.setEmail(entity.getEmail());
 		result.setPhone(entity.getPhone());
 		result.setUserName(entity.getUserName());
-		if (entity.getUserType() != null) {
-			result.setType(entity.getUserType().getCode());
+		if (entity.getType() != null) {
+			result.setType(entity.getType().getCode());
 		}
 		
 		if (entity.getAddress() != null) {

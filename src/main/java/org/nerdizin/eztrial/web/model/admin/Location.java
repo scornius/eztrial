@@ -1,6 +1,7 @@
-package org.nerdizin.eztrial.web.model;
+package org.nerdizin.eztrial.web.model.admin;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.nerdizin.eztrial.web.model.UiModel;
 
 public class Location implements UiModel {
 

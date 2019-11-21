@@ -6,7 +6,7 @@ import org.nerdizin.eztrial.entities.admin.User;
 import org.nerdizin.eztrial.entities.base.UserPrincipal;
 import org.nerdizin.eztrial.repositories.admin.UserRepository;
 import org.nerdizin.eztrial.services.UserService;
-import org.nerdizin.eztrial.web.model.PasswordChange;
+import org.nerdizin.eztrial.web.model.admin.PasswordChange;
 import org.nerdizin.eztrial.web.validator.PasswordChangeValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;

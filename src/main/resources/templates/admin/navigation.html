@@ -7,16 +7,13 @@
 
 <body>
 <div th:fragment="navigation">
-    <a href="/user/listUsers" th:text="#{user.administration}">Users</a>
-    <a href="/location/listLocations" th:text="#{location.administration}">Locations</a>
+    <a th:href="@{/user/listUsers}" th:text="#{user.administration}">Users</a>
+    <a th:href="@{/location/listLocations}" th:text="#{location.administration}">Locations</a>
     Logged in as:
-    <a href="/myAccount">
+    <a th:href="@{/myAccount}">
         <span sec:authentication="name">sepp.laibach</span>
     </a>
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out"/>
-    </form>
-    <a th:action="@{/logout}">logout</a>
+    <a th:href="@{/logout}">logout</a>
 </div>
 </body>
 

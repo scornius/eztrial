@@ -1,6 +1,6 @@
 package org.nerdizin.eztrial.web.validator;
 
-import org.nerdizin.eztrial.web.model.PasswordChange;
+import org.nerdizin.eztrial.web.model.admin.PasswordChange;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 

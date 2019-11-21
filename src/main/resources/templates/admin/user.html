@@ -5,7 +5,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xsi:schemaLocation="https://www.thymeleaf.org">
 <!--/*@thymesVar id="message" type="java.lang.String"*/-->
-<!--/*@thymesVar id="user" type="org.nerdizin.eztrial.web.model.User"*/-->
+<!--/*@thymesVar id="user" type="org.nerdizin.eztrial.web.model.admin.User"*/-->
 <!--/*@thymesVar id="userTypes" type="java.util.List"*/-->
 <!--/*@thymesVar id="userType" type="java.lang.String"*/-->
 
@@ -97,7 +97,7 @@
 </form>
 
 
-<!--/*@thymesVar id="passwordChange" type="org.nerdizin.eztrial.web.model.PasswordChange"*/-->
+<!--/*@thymesVar id="passwordChange" type="org.nerdizin.eztrial.web.model.admin.PasswordChange"*/-->
 <form action="#" th:action="@{/user/{id}/changePassword(id=${user.id})}" th:object="${passwordChange}" method="post">
     <table>
         <tr>

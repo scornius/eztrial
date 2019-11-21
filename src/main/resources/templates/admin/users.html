@@ -4,7 +4,7 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="https://www.thymeleaf.org">
 <!--/*@thymesVar id="users" type="java.util.List"*/-->
-<!--/*@thymesVar id="user" type="org.nerdizin.eztrial.web.model.User"*/-->
+<!--/*@thymesVar id="user" type="org.nerdizin.eztrial.web.model.admin.User"*/-->
 <head>
     <title th:text="#{user.administration}">The user administration</title>
 </head>
@@ -52,6 +52,13 @@
         </td>
     </tr>
 </table>
+
+<!--/*@thymesVar id="pagination" type="org.nerdizin.eztrial.web.model.common.Pagination"*/-->
+<a th:href="@{/user/listUsers(page=${pagination.page - 1})}"
+   th:text="#{common.pagination.back.one}">back</a>
+<a th:href="@{/user/listUsers(page=${pagination.page + 1})}"
+   th:text="#{common.pagination.forward.one}">forward</a>
+<p th:text="${pagination.page}">17</p>
 
 </body>
 </html>

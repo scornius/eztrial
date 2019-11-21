@@ -7,8 +7,8 @@ import org.nerdizin.eztrial.entities.enums.UserType;
 import org.nerdizin.eztrial.repositories.admin.UserRepository;
 import org.nerdizin.eztrial.services.UserService;
 import org.nerdizin.eztrial.web.converter.UserConverter;
-import org.nerdizin.eztrial.web.model.PasswordChange;
-import org.nerdizin.eztrial.web.rest.controller.util.PagingParameters;
+import org.nerdizin.eztrial.web.model.admin.PasswordChange;
+import org.nerdizin.eztrial.web.model.common.Pagination;
 import org.nerdizin.eztrial.web.validator.PasswordChangeValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -46,20 +46,20 @@ public class UserController {
 
 	@GetMapping("/listUsers")
 	@PreAuthorize("hasAuthority(T(org.nerdizin.eztrial.security.Privilege).USER_LIST.key)")
-	public String listUsers(final Model model) {
+	public String listUsers(final Model model,
+			final Pagination pagination) {
 
-		final PagingParameters pagingParameters = new PagingParameters();
-		pagingParameters.setPage(0);
-		pagingParameters.setSize(100);
+		pagination.setRows(1);
 
 		final Page<User> page = userRepository.findAll(
-				PageRequest.of(pagingParameters.getPage(),
-						pagingParameters.getSize(),
-						pagingParameters.getSortDirection(),
+				PageRequest.of(pagination.getPage(),
+						pagination.getRows(),
+						pagination.getSortDirection(),
 						"oid", "userName"));
 
 		model.addAttribute("users",
 				page.stream().map(userConverter::convertToUiModel).collect(Collectors.toList()));
+		model.addAttribute("pagingParameters", pagination);
 		return "/admin/users.html";
 	}
 
@@ -83,7 +83,7 @@ public class UserController {
 	@PostMapping
 	@PreAuthorize("hasAuthority(T(org.nerdizin.eztrial.security.Privilege).USER_EDIT.key)")
 	public String updateUser(final Model model,
-			@Valid final org.nerdizin.eztrial.web.model.User user,
+			@Valid final org.nerdizin.eztrial.web.model.admin.User user,
 			final BindingResult bindingResult) {
 
 		if (bindingResult.hasErrors()) {

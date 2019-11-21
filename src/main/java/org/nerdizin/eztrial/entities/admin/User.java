@@ -4,12 +4,14 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.nerdizin.eztrial.entities.base.BaseEntity;
 import org.nerdizin.eztrial.entities.enums.UserType;
 import org.nerdizin.eztrial.entities.enums.UserTypeConverter;
+import org.nerdizin.eztrial.security.Privilege;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "admin_users")
@@ -18,7 +20,7 @@ public class User extends BaseEntity {
 	@Column(name = "oid", nullable = false, updatable = false, unique = true)
 	private String oid;
 
-	@Column(name = "user_name")
+	@Column(name = "user_name", unique = true)
 	private String userName;
 
 	@Column(name = "password")
@@ -59,14 +61,18 @@ public class User extends BaseEntity {
 		}
 		final Set<GrantedAuthority> result = new HashSet<>();
 		for (final Role role : roles) {
-			result.addAll(role.getPrivileges());
+			result.addAll(role.getPrivileges().stream()
+					.filter(org.nerdizin.eztrial.entities.admin.Privilege::isValue)
+					.collect(Collectors.toSet()));
 		}
 		return result;
 	}
 
 	private Collection<GrantedAuthority> getAdminAuthorities() {
 		final Set<GrantedAuthority> result = new HashSet<>();
-
+		for (final Privilege value : Privilege.values()) {
+			result.add((GrantedAuthority) value::getKey);
+		}
 		return result;
 	}
 

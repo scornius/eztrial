@@ -81,6 +81,7 @@ public class UserController {
 	}
 
 	@PostMapping
+	@PreAuthorize("hasAuthority(T(org.nerdizin.eztrial.security.Privilege).USER_EDIT.key)")
 	public String updateUser(final Model model,
 			@Valid final org.nerdizin.eztrial.web.model.User user,
 			final BindingResult bindingResult) {
@@ -114,6 +115,7 @@ public class UserController {
 	}
 
 	@GetMapping("/{id}/deleteUser")
+	@PreAuthorize("hasAuthority(T(org.nerdizin.eztrial.security.Privilege).USER_DELETE.key)")
 	public String deleteUser(final Model model,
 			@PathVariable final Long id) {
 

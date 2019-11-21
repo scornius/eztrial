@@ -3,6 +3,9 @@ package org.nerdizin.eztrial.web.model.common;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.data.domain.Sort;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Pagination {
 
 	private static final int DEFAULT_PAGE_SIZE = 2;
@@ -11,7 +14,7 @@ public class Pagination {
 	private int rows = DEFAULT_PAGE_SIZE;
 	private boolean descending;
 	private String[] properties = new String[0];
-
+	private Map<String,String> filters = new HashMap<>();
 
 	public int getPage() {
 		return page;
@@ -47,6 +50,14 @@ public class Pagination {
 	public Pagination setProperties(final String[] properties) {
 		this.properties = properties;
 		return this;
+	}
+
+	public Map<String,String> getFilters() {
+		return filters;
+	}
+
+	public void setFilters(final Map<String,String> filters) {
+		this.filters = filters;
 	}
 
 	public Sort.Direction getSortDirection() {

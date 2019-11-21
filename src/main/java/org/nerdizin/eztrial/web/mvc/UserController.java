@@ -14,16 +14,21 @@ import org.nerdizin.eztrial.web.validator.PasswordChangeValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.persistence.criteria.Predicate;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -60,6 +65,7 @@ public class UserController {
 		log.info(pagination);
 
 		final Page<User> page = userRepository.findAll(
+				getUserSpecification(pagination),
 				PageRequest.of(pagination.getPage(),
 						pagination.getRows(),
 						pagination.getSortDirection(),
@@ -69,6 +75,21 @@ public class UserController {
 				page.stream().map(userConverter::convertToUiModel).collect(Collectors.toList()));
 		model.addAttribute("pagination", pagination);
 		return "/admin/users.html";
+	}
+
+	private Specification<User> getUserSpecification(final Pagination pagination) {
+		return (Specification<User>) (user, criteriaQuery, cb) -> {
+
+			final List<Predicate> predicates = new ArrayList<>();
+			pagination.getFilters().entrySet().stream()
+					.filter(entry -> !StringUtils.isEmpty(entry.getValue()))
+					.forEach(entry -> predicates.add(
+							cb.like(user.get(entry.getKey()), cb.lower(cb.literal("%" + entry.getValue() + "%")))
+						)
+					);
+
+			return cb.and(predicates.toArray(new Predicate[0]));
+		};
 	}
 
 	@GetMapping("/{id}")

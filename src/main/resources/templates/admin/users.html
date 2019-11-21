@@ -15,17 +15,24 @@
     <a href="locations.html">Location administration</a>
 </div>
 
+<form th:action="@{/user/listUsers}" th:object="${pagination}" method="get">
 <table>
     <tr>
         <th>
             <a th:href="@{/user/listUsers(page=${pagination.page},properties='oid')}"
-               th:text="#{user.oid}">Oid</a>
+               th:text="#{user.oid}">Oid</a><br/>
+            <input type="text" th:field="*{filters['oid']}" />
         </th>
         <th>
             <a th:href="@{/user/listUsers(page=${pagination.page},properties='userName')}"
-               th:text="#{user.userName}">User name</a>
+               th:text="#{user.userName}">User name</a><br>
+            <input type="text" th:field="*{filters['userName']}" />
         </th>
-        <th th:text="#{user.email}">Email</th>
+        <th>
+            <a th:href="@{/user/listUsers(page=${pagination.page},properties='email')}"
+               th:text="#{user.email}">Email</a><br>
+            <input type="text" th:field="*{filters['email']}" />
+        </th>
         <th th:text="#{user.firstName}">First name</th>
         <th th:text="#{user.lastName}">Last name</th>
         <th>
@@ -33,7 +40,10 @@
                th:text="#{user.type}">Type</a>
         </th>
         <th th:text="#{user.address}">Address</th>
-        <th th:text="#{common.actions}">Actions</th>
+        <th>
+            <label th:text="#{common.actions}">Actions</label>
+            <input type="submit" th:value="#{common.filter}"/>
+        </th>
     </tr>
     <tr th:each="user: ${users}">
         <td th:text="${user.oid}">16</td>
@@ -61,6 +71,7 @@
         </td>
     </tr>
 </table>
+</form>
 
 <!--/*@thymesVar id="pagination" type="org.nerdizin.eztrial.web.model.common.Pagination"*/-->
 <a th:href="@{/user/listUsers(page=${pagination.page - 1},properties=${pagination.properties})}"

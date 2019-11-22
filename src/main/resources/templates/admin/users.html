@@ -33,13 +33,21 @@
                th:text="#{user.email}">Email</a><br>
             <input type="text" th:field="*{filters['email']}" />
         </th>
-        <th th:text="#{user.firstName}">First name</th>
-        <th th:text="#{user.lastName}">Last name</th>
+        <th>
+            <a th:href="@{/user/listUsers(page=${pagination.page},properties='firstName')}"
+               th:text="#{user.firstName}">First name</a><br>
+            <input type="text" th:field="*{filters['firstName']}" />
+        </th>
+        <th>
+            <a th:href="@{/user/listUsers(page=${pagination.page},properties='lastName')}"
+               th:text="#{user.lastName}">Last name</a><br>
+            <input type="text" th:field="*{filters['lastName']}" />
+        </th>
         <th>
             <a th:href="@{/user/listUsers(page=${pagination.page},properties='type')}"
-               th:text="#{user.type}">Type</a>
+               th:text="#{user.type}">Type</a><br>
+            <input type="text" th:field="*{filters['type']}" />
         </th>
-        <th th:text="#{user.address}">Address</th>
         <th>
             <label th:text="#{common.actions}">Actions</label>
             <input type="submit" th:value="#{common.filter}"/>
@@ -52,7 +60,6 @@
         <td th:text="${user.firstName}">Firstname</td>
         <td th:text="${user.lastName}">Lastname</td>
         <td th:text="${user.type}">Usertype 1</td>
-        <td th:text="${user.address}">My Town 1</td>
         <td>
             <a th:href="@{/user/{id}(id=${user.id})}">edit</a>
             <a th:href="@{/user/{id}/deleteUser(id=${user.id})}">delete</a>
@@ -65,7 +72,6 @@
         <td>Firstname</td>
         <td>Lastname</td>
         <td>Usertype 2</td>
-        <td>Some address 2</td>
         <td>
 
         </td>

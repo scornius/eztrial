@@ -35,6 +35,9 @@ public abstract class BaseEntity {
 	@Column(name = "modified_on", nullable = false)
 	private LocalDateTime modifiedDate;
 
+	@Column(name = "deleted", nullable = false)
+	private boolean deleted;
+
 	public Long getId() {
 		return id;
 	}
@@ -73,6 +76,14 @@ public abstract class BaseEntity {
 
 	public void setModifiedDate(final LocalDateTime modifiedDate) {
 		this.modifiedDate = modifiedDate;
+	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(final boolean deleted) {
+		this.deleted = deleted;
 	}
 
 	@Override

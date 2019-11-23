@@ -13,7 +13,7 @@ public class Pagination {
 	private int page = 0;
 	private int rows = DEFAULT_PAGE_SIZE;
 	private boolean descending;
-	private String[] properties = new String[0];
+	private String[] sortBy = new String[0];
 	private Map<String,String> filters = new HashMap<>();
 
 	public int getPage() {
@@ -43,12 +43,12 @@ public class Pagination {
 		return this;
 	}
 
-	public String[] getProperties() {
-		return properties;
+	public String[] getSortBy() {
+		return sortBy;
 	}
 
-	public Pagination setProperties(final String[] properties) {
-		this.properties = properties;
+	public Pagination setSortBy(final String[] sortBy) {
+		this.sortBy = sortBy;
 		return this;
 	}
 

@@ -35,15 +35,15 @@ public class MdvController {
 	public List<org.nerdizin.eztrial.web.model.MetaDataVersion> getMdvs(
 			final Pagination pagination) {
 
-		if (pagination.getProperties() == null) {
-			pagination.setProperties(new String[]{"oid"});
+		if (pagination.getSortBy() == null) {
+			pagination.setSortBy(new String[]{"oid"});
 		}
 
 		final Page<org.nerdizin.eztrial.entities.study.MetaDataVersion> page = metaDataVersionRepository.findAll(
 				PageRequest.of(pagination.getPage(),
 						pagination.getRows(),
 						pagination.getSortDirection(),
-						pagination.getProperties()));
+						pagination.getSortBy()));
 
 		return page.stream().map(metaDataVersionConverter::convertToUiModel).collect(Collectors.toList());
 	}

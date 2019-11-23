@@ -19,32 +19,32 @@
 <table>
     <tr>
         <th>
-            <a th:href="@{/user/listUsers(page=${pagination.page},properties='oid')}"
+            <a th:href="@{/user/listUsers(page=${pagination.page},sortBy='oid')}"
                th:text="#{user.oid}">Oid</a><br/>
             <input type="text" th:field="*{filters['oid']}" />
         </th>
         <th>
-            <a th:href="@{/user/listUsers(page=${pagination.page},properties='userName')}"
+            <a th:href="@{/user/listUsers(page=${pagination.page},sortBy='userName')}"
                th:text="#{user.userName}">User name</a><br>
             <input type="text" th:field="*{filters['userName']}" />
         </th>
         <th>
-            <a th:href="@{/user/listUsers(page=${pagination.page},properties='email')}"
+            <a th:href="@{/user/listUsers(page=${pagination.page},sortBy='email')}"
                th:text="#{user.email}">Email</a><br>
             <input type="text" th:field="*{filters['email']}" />
         </th>
         <th>
-            <a th:href="@{/user/listUsers(page=${pagination.page},properties='firstName')}"
+            <a th:href="@{/user/listUsers(page=${pagination.page},sortBy='firstName')}"
                th:text="#{user.firstName}">First name</a><br>
             <input type="text" th:field="*{filters['firstName']}" />
         </th>
         <th>
-            <a th:href="@{/user/listUsers(page=${pagination.page},properties='lastName')}"
+            <a th:href="@{/user/listUsers(page=${pagination.page},sortBy='lastName')}"
                th:text="#{user.lastName}">Last name</a><br>
             <input type="text" th:field="*{filters['lastName']}" />
         </th>
         <th>
-            <a th:href="@{/user/listUsers(page=${pagination.page},properties='type')}"
+            <a th:href="@{/user/listUsers(page=${pagination.page},sortBy='type')}"
                th:text="#{user.type}">Type</a><br>
             <input type="text" th:field="*{filters['type']}" />
         </th>
@@ -73,16 +73,17 @@
         <td>Lastname</td>
         <td>Usertype 2</td>
         <td>
-
+            <a href="user.html">Edit</a>
+            <a href="#">Delete</a>
         </td>
     </tr>
 </table>
 </form>
 
 <!--/*@thymesVar id="pagination" type="org.nerdizin.eztrial.web.model.common.Pagination"*/-->
-<a th:href="@{/user/listUsers(page=${pagination.page - 1},properties=${pagination.properties})}"
+<a th:href="@{/user/listUsers(page=${pagination.page - 1},sortBy=${pagination.sortBy})}"
    th:text="#{common.pagination.back.one}">back</a>
-<a th:href="@{/user/listUsers(page=${pagination.page + 1},properties=${pagination.properties})}"
+<a th:href="@{/user/listUsers(page=${pagination.page + 1},sortBy=${pagination.sortBy})}"
    th:text="#{common.pagination.forward.one}">forward</a>
 
 </body>

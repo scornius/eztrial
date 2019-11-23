@@ -14,8 +14,8 @@ public class PaginationValidator implements Validator {
 	@Override
 	public void validate(final Object o, final Errors errors) {
 		final Pagination pagination = (Pagination) o;
-		if (pagination.getProperties() == null || pagination.getProperties().length == 0) {
-			pagination.setProperties(new String[]{"oid"});
+		if (pagination.getSortBy() == null || pagination.getSortBy().length == 0) {
+			pagination.setSortBy(new String[]{"oid"});
 		}
 		if (pagination.getRows() < 1) {
 			pagination.setRows(1);

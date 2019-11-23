@@ -69,7 +69,7 @@ public class UserController {
 				PageRequest.of(pagination.getPage(),
 						pagination.getRows(),
 						pagination.getSortDirection(),
-						pagination.getProperties()));
+						pagination.getSortBy()));
 
 		model.addAttribute("users",
 				page.stream().map(userConverter::convertToUiModel).collect(Collectors.toList()));

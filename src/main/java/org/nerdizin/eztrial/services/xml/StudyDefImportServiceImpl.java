@@ -6,12 +6,15 @@ import org.nerdizin.eztrial.entities.admin.Address;
 import org.nerdizin.eztrial.entities.elementconverter.*;
 import org.nerdizin.eztrial.entities.study.EventDef;
 import org.nerdizin.eztrial.entities.study.EventRef;
-import org.nerdizin.eztrial.repositories.*;
+import org.nerdizin.eztrial.repositories.admin.*;
+import org.nerdizin.eztrial.repositories.study.*;
 import org.nerdizin.eztrial.xml.odm.Odm;
 import org.nerdizin.eztrial.xml.odm.admin.*;
 import org.nerdizin.eztrial.xml.odm.study.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class StudyDefImportServiceImpl implements StudyDefImportService {
@@ -348,12 +351,12 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 			}
 			if (user.getRoleRefs() != null) {
 				for (final RoleRef roleRef : user.getRoleRefs()) {
-					final org.nerdizin.eztrial.entities.admin.Role targetRole =
+					final Optional<org.nerdizin.eztrial.entities.admin.Role> targetRole =
 							roleRepository.findByOid(roleRef.getRoleOid());
-					if (targetRole == null) {
-						log.error(String.format("Could not find role with oid %s for user %s", roleRef.getRoleOid(), user.getOid()));
+					if (targetRole.isPresent()) {
+						userEntity.addRole(targetRole.get());
 					} else {
-						userEntity.addRole(targetRole);
+						log.error(String.format("Could not find role with oid %s for user %s", roleRef.getRoleOid(), user.getOid()));
 					}
 				}
 			}

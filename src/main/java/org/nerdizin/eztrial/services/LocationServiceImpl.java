@@ -1,7 +1,7 @@
 package org.nerdizin.eztrial.services;
 
 import org.nerdizin.eztrial.entities.admin.Location;
-import org.nerdizin.eztrial.repositories.LocationRepository;
+import org.nerdizin.eztrial.repositories.admin.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

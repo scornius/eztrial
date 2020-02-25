@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xsi:schemaLocation="https://www.thymeleaf.org">
+<!--/*@thymesVar id="message" type="java.lang.String"*/-->
+<!--/*@thymesVar id="user" type="org.nerdizin.eztrial.web.model.admin.User"*/-->
+<!--/*@thymesVar id="userTypes" type="java.util.List"*/-->
+<!--/*@thymesVar id="userType" type="java.lang.String"*/-->
+
+<head>
+    <title th:text="#{user.administration}">The user administration</title>
+</head>
+<body>
+
+<div th:replace="~{admin/navigation :: navigation}">
+    <a href="users.html">Users</a>
+    <a href="locations.html">Locations</a>
+</div>
+
+<form action="#" th:action="@{/user}" th:object="${user}" method="post">
+    <input type="hidden" name="id" th:value="${user.id}"/>
+    <ul th:if="${#fields.hasErrors('global')}">
+        <li th:each="err : ${#fields.errors('global')}" th:text="${err}">Input is incorrect</li>
+    </ul>
+    <table>
+        <tr>
+            <td th:text="#{user.oid}">Oid</td>
+            <td th:text="${user.oid}">oid.4711</td>
+        </tr>
+        <tr>
+            <td><label for="userName" th:text="#{user.userName}">Username</label></td>
+            <td>
+                <input type="text" name="userName" id="userName" th:value="*{userName}" value="oid.4711"/>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="active" th:text="#{user.active}">Active</label></td>
+            <td>
+                <input type="checkbox" name="active" id="active" th:field="*{active}"/>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="email" th:text="#{user.email}">Email</label></td>
+            <td>
+                <input type="text" name="email" id="email" th:value="*{email}" value="foo@bar.com" readonly/>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="firstName" th:text="#{user.firstName}">First name</label></td>
+            <td>
+                <input type="text" name="firstName" id="firstName" th:value="*{firstName}" value="Max"/>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="lastName" th:text="#{user.lastName}">Last name</label></td>
+            <td>
+                <input type="text" name="lastName" id="lastName" th:value="*{lastName}" value="Mustermann"/>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="phone" th:text="#{user.phone}">Phone</label></td>
+            <td>
+                <input type="text" name="phone" id="phone" th:value="*{phone}" th:errorclass="fieldError" value="089 / 32 16 8"/>
+            </td>
+            <td th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"
+                th:text="#{user.validation.phone}">Validation error</td>
+        </tr>
+        <tr>
+            <td th:text="#{user.type}"><label for="userType">Type</label></td>
+            <td>
+                <select name="userType" id="userType" th:field="*{type}">
+                    <option th:value="none" th:text="#{common.none}" value="">None</option>
+                    <option th:each="userType : ${userTypes}"
+                            th:value="${userType}"
+                            th:text="#{${userType}}"
+                            th:selected="${userType == user.type}">
+                    <option th:remove="all" value="sponsor">Sponsor</option>
+                    <option th:remove="all" value="investigator">Investigator</option>
+                    <option th:remove="all" value="lab">Lab</option>
+                    <option th:remove="all" value="other">Other</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+
+    <table>
+        <tr th:each="role: ${user.roles}">
+            <td th:text="${role}">some role</td>
+        </tr>
+    </table>
+    <div sec:authorize="hasAuthority('user.edit')">
+        <input type="submit" th:value="#{common.save}"/>
+    </div>
+    <button type="button" th:text="#{common.cancel}" th:action="@{/user/listUsers}">Cancel</button>
+</form>
+
+
+<!--/*@thymesVar id="passwordChange" type="org.nerdizin.eztrial.web.model.admin.PasswordChange"*/-->
+<form action="#" th:action="@{/user/{id}/changePassword(id=${user.id})}" th:object="${passwordChange}" method="post">
+    <table>
+        <tr>
+            <td><label for="password1" th:text="#{user.password}"></label></td>
+            <td><input type="password" name="password1" id="password1"/>
+            </td>
+            <td th:if="${#fields.hasErrors('password1')}" th:errors="${passwordChange.password1}"
+                th:text="#{user.validation.phone}">Validation error</td>
+        </tr>
+        <tr>
+            <td><label for="password2" th:text="#{user.password.repeat}"></label></td>
+            <td><input type="password" name="password2" id="password2"/></td>
+        </tr>
+        <tr>
+            <td><input type="submit" th:value="#{common.save}"/></td>
+        </tr>
+    </table>
+</form>
+
+
+</body>
+</html>

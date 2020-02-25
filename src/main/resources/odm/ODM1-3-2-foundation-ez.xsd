@@ -868,7 +868,9 @@
 	<xs:attributeGroup name="CodeListItemAttributeExtension"/>
 	<xs:attributeGroup name="DecodeAttributeExtension"/>
 	<xs:attributeGroup name="AdminDataAttributeExtension"/>
-	<xs:attributeGroup name="UserAttributeExtension"/>
+	<xs:attributeGroup name="UserAttributeExtension">
+        <xs:attribute ref="ez:active"/>
+    </xs:attributeGroup>
 	<xs:attributeGroup name="AddressAttributeExtension"/>
 	<xs:attributeGroup name="LocationAttributeExtension"/>
 	<xs:attributeGroup name="SignatureDefAttributeExtension"/>
@@ -1034,6 +1036,7 @@
 	</xs:group>
 	<xs:group name="UserElementExtension">
 		<xs:sequence>
+            <xs:element ref="ez:Password" minOccurs="0"/>
             <xs:element ref="ez:RoleRef" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
 	</xs:group>

@@ -3,8 +3,10 @@
       xmlns:th="https://www.thymeleaf.org"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="https://www.thymeleaf.org">
+<!--/*@thymesVar id="users" type="java.util.List"*/-->
+<!--/*@thymesVar id="user" type="org.nerdizin.eztrial.web.model.admin.User"*/-->
 <head>
-    <title th:text="#{user.administration}">The user admin page</title>
+    <title th:text="#{user.administration}">The user administration</title>
 </head>
 <body>
 
@@ -13,18 +15,43 @@
     <a href="locations.html">Location administration</a>
 </div>
 
+<form th:action="@{/user/listUsers}" th:object="${pagination}" method="get">
 <table>
-    <!--/*@thymesVar id="users" type="java.util.List"*/-->
-    <!--/*@thymesVar id="user" type="org.nerdizin.eztrial.web.model.User"*/-->
     <tr>
-        <th th:text="#{user.oid}">Oid</th>
-        <th th:text="#{user.userName}">User name</th>
-        <th th:text="#{user.email}">Email</th>
-        <th th:text="#{user.firstName}">First name</th>
-        <th th:text="#{user.lastName}">Last name</th>
-        <th th:text="#{user.type}">Type</th>
-        <th th:text="#{user.address}">Address</th>
-        <th></th>
+        <th>
+            <a th:href="@{/user/listUsers(page=${pagination.page},sortBy='oid')}"
+               th:text="#{user.oid}">Oid</a><br/>
+            <input type="text" th:field="*{filters['oid']}" />
+        </th>
+        <th>
+            <a th:href="@{/user/listUsers(page=${pagination.page},sortBy='userName')}"
+               th:text="#{user.userName}">User name</a><br>
+            <input type="text" th:field="*{filters['userName']}" />
+        </th>
+        <th>
+            <a th:href="@{/user/listUsers(page=${pagination.page},sortBy='email')}"
+               th:text="#{user.email}">Email</a><br>
+            <input type="text" th:field="*{filters['email']}" />
+        </th>
+        <th>
+            <a th:href="@{/user/listUsers(page=${pagination.page},sortBy='firstName')}"
+               th:text="#{user.firstName}">First name</a><br>
+            <input type="text" th:field="*{filters['firstName']}" />
+        </th>
+        <th>
+            <a th:href="@{/user/listUsers(page=${pagination.page},sortBy='lastName')}"
+               th:text="#{user.lastName}">Last name</a><br>
+            <input type="text" th:field="*{filters['lastName']}" />
+        </th>
+        <th>
+            <a th:href="@{/user/listUsers(page=${pagination.page},sortBy='type')}"
+               th:text="#{user.type}">Type</a><br>
+            <input type="text" th:field="*{filters['type']}" />
+        </th>
+        <th>
+            <label th:text="#{common.actions}">Actions</label>
+            <input type="submit" th:value="#{common.filter}"/>
+        </th>
     </tr>
     <tr th:each="user: ${users}">
         <td th:text="${user.oid}">16</td>
@@ -32,9 +59,9 @@
         <td th:text="${user.email}">some.one@somewhere.net</td>
         <td th:text="${user.firstName}">Firstname</td>
         <td th:text="${user.lastName}">Lastname</td>
-        <td th:text="${user.userType}">Usertype 1</td>
-        <td th:text="${user.address}">My Town 1</td>
+        <td th:text="${user.type}">Usertype 1</td>
         <td>
+            <a th:href="@{/user/{id}(id=${user.id})}">edit</a>
             <a th:href="@{/user/{id}/deleteUser(id=${user.id})}">delete</a>
         </td>
     </tr>
@@ -45,12 +72,19 @@
         <td>Firstname</td>
         <td>Lastname</td>
         <td>Usertype 2</td>
-        <td>Some address 2</td>
         <td>
-
+            <a href="user.html">Edit</a>
+            <a href="#">Delete</a>
         </td>
     </tr>
 </table>
+</form>
+
+<!--/*@thymesVar id="pagination" type="org.nerdizin.eztrial.web.model.common.Pagination"*/-->
+<a th:href="@{/user/listUsers(page=${pagination.page - 1},sortBy=${pagination.sortBy})}"
+   th:text="#{common.pagination.back.one}">back</a>
+<a th:href="@{/user/listUsers(page=${pagination.page + 1},sortBy=${pagination.sortBy})}"
+   th:text="#{common.pagination.forward.one}">forward</a>
 
 </body>
 </html>

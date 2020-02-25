@@ -4,10 +4,14 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.nerdizin.eztrial.entities.base.BaseEntity;
 import org.nerdizin.eztrial.entities.enums.UserType;
 import org.nerdizin.eztrial.entities.enums.UserTypeConverter;
+import org.nerdizin.eztrial.security.Privilege;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "admin_users")
@@ -16,8 +20,17 @@ public class User extends BaseEntity {
 	@Column(name = "oid", nullable = false, updatable = false, unique = true)
 	private String oid;
 
-	@Column(name = "user_name")
+	@Column(name = "user_name", unique = true)
 	private String userName;
+
+	@Column(name = "password")
+	private String password;
+
+	@Column(name = "active", nullable = false)
+	private boolean active;
+
+	@Column(name = "locked", nullable = false)
+	private boolean locked;
 
 	@Column(name = "first_name")
 	private String firstName;
@@ -33,14 +46,35 @@ public class User extends BaseEntity {
 
 	@Column(name = "user_type")
 	@Convert(converter = UserTypeConverter.class)
-	private UserType userType;
+	private UserType type;
 
 	@OneToOne
 	private Address address;
 
-	@OneToMany(fetch = FetchType.EAGER)
+	@OneToMany
 	private Set<Role> roles;
 
+
+	public Collection<GrantedAuthority> getAuthorities() {
+		if ("admin".equals(userName)) {
+			return getAdminAuthorities();
+		}
+		final Set<GrantedAuthority> result = new HashSet<>();
+		for (final Role role : roles) {
+			result.addAll(role.getPrivileges().stream()
+					.filter(org.nerdizin.eztrial.entities.admin.Privilege::isValue)
+					.collect(Collectors.toSet()));
+		}
+		return result;
+	}
+
+	private Collection<GrantedAuthority> getAdminAuthorities() {
+		final Set<GrantedAuthority> result = new HashSet<>();
+		for (final Privilege value : Privilege.values()) {
+			result.add((GrantedAuthority) value::getKey);
+		}
+		return result;
+	}
 
 	public String getOid() {
 		return oid;
@@ -56,6 +90,14 @@ public class User extends BaseEntity {
 
 	public void setUserName(final String userName) {
 		this.userName = userName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(final String password) {
+		this.password = password;
 	}
 
 	public String getFirstName() {
@@ -90,12 +132,12 @@ public class User extends BaseEntity {
 		this.phone = phone;
 	}
 
-	public UserType getUserType() {
-		return userType;
+	public UserType getType() {
+		return type;
 	}
 
-	public void setUserType(final UserType userType) {
-		this.userType = userType;
+	public void setType(final UserType type) {
+		this.type = type;
 	}
 
 	public Address getAddress() {
@@ -104,6 +146,22 @@ public class User extends BaseEntity {
 
 	public void setAddress(final Address address) {
 		this.address = address;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(final boolean active) {
+		this.active = active;
+	}
+
+	public boolean isLocked() {
+		return locked;
+	}
+
+	public void setLocked(final boolean locked) {
+		this.locked = locked;
 	}
 
 	public Set<Role> getRoles() {

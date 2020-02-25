@@ -39,6 +39,14 @@
         </xs:complexType>
     </xs:element>
 
+    <xs:element name="Password">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string"/>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
     <xs:element name="RoleRef">
         <xs:complexType>
             <xs:simpleContent>
@@ -48,5 +56,7 @@
             </xs:simpleContent>
         </xs:complexType>
     </xs:element>
+
+    <xs:attribute name="active" type="boolean"/>
 
 </xs:schema>

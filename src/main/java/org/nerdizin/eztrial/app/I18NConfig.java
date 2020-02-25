@@ -15,7 +15,8 @@ public class I18NConfig {
 
 		final ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
 		messageSource.addBasenames("classpath:messages/administration",
-				"classpath:messages/error");
+				"classpath:messages/error",
+				"classpath:messages/common");
 		messageSource.setDefaultEncoding("UTF-8");
 		messageSource.setUseCodeAsDefaultMessage(true);
 

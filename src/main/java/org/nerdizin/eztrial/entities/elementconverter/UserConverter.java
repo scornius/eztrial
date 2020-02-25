@@ -11,14 +11,17 @@ public class UserConverter implements OdmElementToEntityConverter<org.nerdizin.e
 	public User convertToEntity(final org.nerdizin.eztrial.xml.odm.admin.User user) {
 
 		final User result = new User();
+		result.setUserName(user.getLoginName());
 		result.setOid(user.getOid());
+		result.setPassword(user.getPassword());
 		result.setFirstName(user.getFirstName());
 		result.setLastName(user.getLastName());
 		result.setPhone(user.getPhone());
 		result.setEmail(user.getEmail());
+		result.setActive(user.isActive());
 
 		if (user.getUserType() != null) {
-			result.setUserType(org.nerdizin.eztrial.entities.enums.UserType.fromCode(user.getUserType().getCode()));
+			result.setType(org.nerdizin.eztrial.entities.enums.UserType.fromCode(user.getUserType().getCode()));
 		}
 
 		if (user.getAddress() != null) {
@@ -34,13 +37,16 @@ public class UserConverter implements OdmElementToEntityConverter<org.nerdizin.e
 
 		final org.nerdizin.eztrial.xml.odm.admin.User result = new org.nerdizin.eztrial.xml.odm.admin.User();
 		result.setOid(user.getOid());
+		result.setLoginName(user.getUserName());
+		result.setPassword(user.getPassword());
 		result.setFirstName(user.getFirstName());
 		result.setLastName(user.getLastName());
 		result.setPhone(user.getPhone());
 		result.setEmail(user.getEmail());
+		result.setActive(user.isActive());
 
-		if (user.getUserType() != null) {
-			result.setUserType(UserType.fromCode(user.getUserType().getCode()));
+		if (user.getType() != null) {
+			result.setUserType(UserType.fromCode(user.getType().getCode()));
 		}
 
 		if (user.getAddress() != null) {

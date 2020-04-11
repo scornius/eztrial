@@ -32,7 +32,7 @@ public class EztrialApplication {
 			@Transactional
 			public void run(final String... args) throws Exception {
 
-				final File file = new File("/Users/ralf/dev/ws/eztrialws/eztrial/src/test/resources/odm/study1.xml");
+				final File file = new File("/Users/ralf/dev/ws/eztrial/src/test/resources/odm/study1.xml");
 				final Odm odm = studyDefParserService.parse(new FileInputStream(file));
 				studyDefImportService.importStudyDef(odm);
 

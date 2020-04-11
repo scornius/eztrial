@@ -6,7 +6,10 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
       - my_dbdata:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=eztrialdb
+      - POSTGRES_USER=eztrial
+      - POSTGRES_PASSWORD=eztrial123
 volumes:
   my_dbdata:

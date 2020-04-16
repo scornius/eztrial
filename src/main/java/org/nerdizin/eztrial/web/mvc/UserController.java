@@ -6,6 +6,8 @@ import org.nerdizin.eztrial.entities.admin.User;
 import org.nerdizin.eztrial.entities.enums.UserType;
 import org.nerdizin.eztrial.repositories.admin.UserRepository;
 import org.nerdizin.eztrial.services.UserService;
+import org.nerdizin.eztrial.util.Constants;
+import org.nerdizin.eztrial.util.EzException;
 import org.nerdizin.eztrial.web.converter.UserConverter;
 import org.nerdizin.eztrial.web.model.admin.PasswordChange;
 import org.nerdizin.eztrial.web.model.common.Pagination;
@@ -81,10 +83,12 @@ public class UserController {
 		return (Specification<User>) (user, criteriaQuery, cb) -> {
 
 			final List<Predicate> predicates = new ArrayList<>();
+			predicates.add(cb.isFalse(user.get("deleted")));
 			pagination.getFilters().entrySet().stream()
 					.filter(entry -> !StringUtils.isEmpty(entry.getValue()))
 					.forEach(entry -> predicates.add(
-							cb.like(user.get(entry.getKey()), cb.lower(cb.literal("%" + entry.getValue() + "%")))
+							cb.like(user.get(entry.getKey()), cb.lower(
+									cb.literal("%" + entry.getValue() + "%")))
 						)
 					);
 
@@ -145,10 +149,18 @@ public class UserController {
 
 	@GetMapping("/{id}/deleteUser")
 	@PreAuthorize("hasAuthority(T(org.nerdizin.eztrial.security.Privilege).USER_DELETE.key)")
-	public String deleteUser(final Model model,
-			@PathVariable final Long id) {
+	public String deleteUser(final Model model, @PathVariable final Long id) {
 
-		log.info("deleteUser " + id);
+		final Optional<User> byId = userRepository.findById(id);
+		if (byId.isEmpty()) {
+			throw new EzException(String.format("No user with id %s found", id));
+		}
+		final User user = byId.get();
+		if (Constants.ADMIN_OID.equals(user.getOid())) {
+			throw new EzException("Admin user may not be deleted");
+		}
+
+		userRepository.delete(user);
 
 		return "forward:/user/listUsers";
 	}

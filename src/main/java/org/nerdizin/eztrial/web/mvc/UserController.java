@@ -101,13 +101,13 @@ public class UserController {
 	public String showUser(final Model model,
 			@PathVariable final Long id) {
 
-		final Optional<User> user = userRepository.findById(id);
-		if (user.isPresent()) {
-			model.addAttribute("user", userConverter.convertToUiModel(user.get()));
+		final Optional<User> userOpt = userRepository.findById(id);
+		if (userOpt.isPresent()) {
+			model.addAttribute("user", userConverter.convertToUiModel(userOpt.get()));
 			model.addAttribute("userTypes", userService.getUserTypes());
 			model.addAttribute("passwordChange", new PasswordChange());
 		} else {
-			return "error";
+			throw new EzException(String.format("No user with id %s found", id));
 		}
 
 		return "/admin/user.html";
@@ -124,9 +124,9 @@ public class UserController {
 			return "/admin/user.html";
 		}
 
-		final Optional<User> userOptional = userRepository.findByIdAndEagerlyFetchRoles(user.getId());
-		if (userOptional.isPresent()) {
-			final User userEntity = userOptional.get();
+		final Optional<User> userOpt = userRepository.findByIdAndEagerlyFetchRoles(user.getId());
+		if (userOpt.isPresent()) {
+			final User userEntity = userOpt.get();
 			userEntity.setActive(user.isActive());
 			userEntity.setFirstName(user.getFirstName());
 			userEntity.setLastName(user.getLastName());
@@ -141,7 +141,7 @@ public class UserController {
 			model.addAttribute("user", userConverter.convertToUiModel(updatedUser));
 			model.addAttribute("userTypes", userService.getUserTypes());
 		} else {
-			return "error";
+			throw new EzException(String.format("No user with id %s found", user.getId()));
 		}
 
 		return "redirect:/user/" + user.getId();
@@ -151,16 +151,17 @@ public class UserController {
 	@PreAuthorize("hasAuthority(T(org.nerdizin.eztrial.security.Privilege).USER_DELETE.key)")
 	public String deleteUser(final Model model, @PathVariable final Long id) {
 
-		final Optional<User> byId = userRepository.findById(id);
-		if (byId.isEmpty()) {
+		final Optional<User> userOpt = userRepository.findById(id);
+		if (userOpt.isEmpty()) {
 			throw new EzException(String.format("No user with id %s found", id));
 		}
-		final User user = byId.get();
+		final User user = userOpt.get();
 		if (Constants.ADMIN_OID.equals(user.getOid())) {
 			throw new EzException("Admin user may not be deleted");
 		}
 
-		userRepository.delete(user);
+		user.setDeleted(true);
+		userRepository.save(user);
 
 		return "forward:/user/listUsers";
 	}
@@ -178,12 +179,12 @@ public class UserController {
 			return "/admin/user.html";
 		}
 
-		final Optional<User> userOptional = userRepository.findById(id);
-		if (userOptional.isEmpty()) {
-			return "error";
+		final Optional<User> userOpt = userRepository.findById(id);
+		if (userOpt.isEmpty()) {
+			throw new EzException(String.format("No user with id %s found", id));
 		}
 
-		final User user = userOptional.get();
+		final User user = userOpt.get();
 		user.setPassword(userService.encryptPassword(passwordChange.getPassword1()));
 		userRepository.save(user);
 

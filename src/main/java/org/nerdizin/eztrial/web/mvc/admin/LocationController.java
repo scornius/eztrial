@@ -1,4 +1,4 @@
-package org.nerdizin.eztrial.web.mvc;
+package org.nerdizin.eztrial.web.mvc.admin;
 
 import org.nerdizin.eztrial.entities.admin.Location;
 import org.nerdizin.eztrial.repositories.admin.LocationRepository;

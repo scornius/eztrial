@@ -15,6 +15,9 @@ public class Role extends BaseEntity {
 	@Column(nullable = false)
 	private String oid;
 
+	@Column(nullable = false, unique = true)
+	private String name;
+
 	@Column
 	private String description;
 
@@ -26,24 +29,36 @@ public class Role extends BaseEntity {
 		return oid;
 	}
 
-	public void setOid(final String oid) {
+	public Role setOid(String oid) {
 		this.oid = oid;
+		return this;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public Role setName(String name) {
+		this.name = name;
+		return this;
 	}
 
 	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(final String description) {
+	public Role setDescription(String description) {
 		this.description = description;
+		return this;
 	}
 
 	public List<Privilege> getPrivileges() {
 		return privileges;
 	}
 
-	public void setPrivileges(final List<Privilege> privileges) {
+	public Role setPrivileges(List<Privilege> privileges) {
 		this.privileges = privileges;
+		return this;
 	}
 
 	public void addPrivilege(final Privilege privilege) {

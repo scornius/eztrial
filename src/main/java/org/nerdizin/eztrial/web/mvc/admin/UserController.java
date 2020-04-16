@@ -1,7 +1,8 @@
-package org.nerdizin.eztrial.web.mvc;
+package org.nerdizin.eztrial.web.mvc.admin;
 
 import org.nerdizin.eztrial.entities.admin.User;
 import org.nerdizin.eztrial.entities.enums.UserType;
+import org.nerdizin.eztrial.repositories.admin.RoleRepository;
 import org.nerdizin.eztrial.repositories.admin.UserRepository;
 import org.nerdizin.eztrial.services.UserService;
 import org.nerdizin.eztrial.util.Constants;
@@ -14,25 +15,17 @@ import org.nerdizin.eztrial.web.validator.PasswordChangeValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.persistence.criteria.Predicate;
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/user")
@@ -42,13 +35,17 @@ public class UserController {
 	private static final String NONE = "none";
 
 	private final UserRepository userRepository;
+	private final RoleRepository roleRepository;
 	private final UserService userService;
 
 	private static final UserConverter userConverter = new UserConverter();
 
 	@Autowired
-	public UserController(final UserRepository userRepository, final UserService userService) {
+	public UserController(final UserRepository userRepository,
+						  final RoleRepository roleRepository,
+						  final UserService userService) {
 		this.userRepository = userRepository;
+		this.roleRepository = roleRepository;
 		this.userService = userService;
 	}
 
@@ -66,34 +63,9 @@ public class UserController {
 
 		log.info(pagination.toString());
 
-		final Page<User> page = userRepository.findAll(
-				getUserSpecification(pagination),
-				PageRequest.of(pagination.getPage(),
-						pagination.getRows(),
-						pagination.getSortDirection(),
-						pagination.getSortBy()));
-
-		model.addAttribute("users",
-				page.stream().map(userConverter::convertToUiModel).collect(Collectors.toList()));
+		model.addAttribute("users", userService.getAllUsers(pagination));
 		model.addAttribute("pagination", pagination);
 		return "/admin/users.html";
-	}
-
-	private Specification<User> getUserSpecification(final Pagination pagination) {
-		return (Specification<User>) (user, criteriaQuery, cb) -> {
-
-			final List<Predicate> predicates = new ArrayList<>();
-			predicates.add(cb.isFalse(user.get("deleted")));
-			pagination.getFilters().entrySet().stream()
-					.filter(entry -> !StringUtils.isEmpty(entry.getValue()))
-					.forEach(entry -> predicates.add(
-							cb.like(user.get(entry.getKey()), cb.lower(
-									cb.literal("%" + entry.getValue() + "%")))
-						)
-					);
-
-			return cb.and(predicates.toArray(new Predicate[0]));
-		};
 	}
 
 	@GetMapping("/{id}")
@@ -102,12 +74,15 @@ public class UserController {
 			@PathVariable final Long id) {
 
 		final Optional<User> userOpt = userRepository.findById(id);
-		if (userOpt.isPresent()) {
-			model.addAttribute("user", userConverter.convertToUiModel(userOpt.get()));
-			model.addAttribute("userTypes", userService.getUserTypes());
-			model.addAttribute("passwordChange", new PasswordChange());
+		if (userOpt.isEmpty()) {
+			throw new EzException(String.format("No user found with id %s.", id));
 		} else {
-			throw new EzException(String.format("No user with id %s found", id));
+			final org.nerdizin.eztrial.web.model.admin.User user = userConverter.convertToUiModel(userOpt.get());
+			model.addAttribute("user", user);
+			model.addAttribute("userTypes", userService.getUserTypes());
+			model.addAttribute("availableRoles",
+					UserUtils.getRolesNotAssignedToUser(userService.getAllRoles(), user));
+			model.addAttribute("passwordChange", new PasswordChange());
 		}
 
 		return "/admin/user.html";

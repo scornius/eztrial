@@ -8,7 +8,7 @@
 <!--/*@thymesVar id="user" type="org.nerdizin.eztrial.web.model.admin.User"*/-->
 <!--/*@thymesVar id="userTypes" type="java.util.List"*/-->
 <!--/*@thymesVar id="userType" type="java.lang.String"*/-->
-
+<!--/*@thymesVar id="availableRoles" type="java.util.List<org.nerdizin.eztrial.web.model.admin.Role>"*/-->
 <head>
     <title th:text="#{user.administration}">The user administration</title>
 </head>
@@ -75,7 +75,7 @@
                     <option th:each="userType : ${userTypes}"
                             th:value="${userType}"
                             th:text="#{${userType}}"
-                            th:selected="${userType == user.type}">
+                            th:selected="${userType == user.type}"></option>
                     <option th:remove="all" value="sponsor">Sponsor</option>
                     <option th:remove="all" value="investigator">Investigator</option>
                     <option th:remove="all" value="lab">Lab</option>
@@ -85,11 +85,31 @@
         </tr>
     </table>
 
-    <table>
-        <tr th:each="role: ${user.roles}">
-            <td th:text="${role}">some role</td>
-        </tr>
-    </table>
+    <div sec:authorize="hasAuthority('user.edit')">
+        <table>
+            <tr>
+                <td>
+                    <label for="availableRoles">Available Roles</label>
+                    <select name="availableRoles" id="availableRoles" multiple="multiple" >
+                        <option th:each="role : ${availableRoles}"
+                                th:text="${role.name}"
+                                th:value="${role.oid}"
+                                th:alt="${role.description}"></option>
+                    </select>
+                </td>
+                <td>
+                    <label for="assignedRoles">Assigned Roles</label>
+                    <select name="assignedRoles" id="assignedRoles" th:field="*{roles}" multiple="multiple" >
+                        <option th:each="role : ${user.roles}"
+                                th:text="${role.name}"
+                                th:value="${role.oid}"
+                                th:alt="${role.description}"></option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </div>
+
     <div sec:authorize="hasAuthority('user.edit')">
         <input type="submit" th:value="#{common.save}"/>
     </div>

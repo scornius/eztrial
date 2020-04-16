@@ -10,6 +10,7 @@ public class RoleConverter implements OdmElementToEntityConverter<org.nerdizin.e
 
 		final Role result = new Role();
 		result.setOid(role.getOid());
+		result.setName(role.getName());
 		result.setDescription(role.getDescription());
 
 		if (role.getPrivileges() != null) {
@@ -27,6 +28,7 @@ public class RoleConverter implements OdmElementToEntityConverter<org.nerdizin.e
 
 		final org.nerdizin.eztrial.xml.odm.admin.Role result = new org.nerdizin.eztrial.xml.odm.admin.Role();
 		result.setOid(role.getOid());
+		result.setName(role.getName());
 		result.setDescription(role.getDescription());
 
 		if (role.getPrivileges() != null) {

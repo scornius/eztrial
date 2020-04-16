@@ -1,13 +1,13 @@
 package org.nerdizin.eztrial.web.rest.controller;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.nerdizin.eztrial.repositories.admin.UserRepository;
 import org.nerdizin.eztrial.web.converter.UserConverter;
 import org.nerdizin.eztrial.web.model.admin.User;
 import org.nerdizin.eztrial.web.model.common.Pagination;
 import org.nerdizin.eztrial.web.rest.base.AbstractRestController;
 import org.nerdizin.eztrial.web.rest.base.UserNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @RestController
 public class UserRestController extends AbstractRestController {
 
-	private final static Log log = LogFactory.getLog(UserRestController.class);
+	private final static Logger log = LoggerFactory.getLogger(UserRestController.class);
 
 	private final UserRepository userRepository;
 	private static final UserConverter userConverter = new UserConverter();

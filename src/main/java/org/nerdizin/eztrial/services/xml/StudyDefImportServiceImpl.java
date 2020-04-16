@@ -1,7 +1,5 @@
 package org.nerdizin.eztrial.services.xml;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.nerdizin.eztrial.entities.admin.Address;
 import org.nerdizin.eztrial.entities.elementconverter.*;
 import org.nerdizin.eztrial.entities.study.EventDef;
@@ -11,6 +9,8 @@ import org.nerdizin.eztrial.repositories.study.*;
 import org.nerdizin.eztrial.xml.odm.Odm;
 import org.nerdizin.eztrial.xml.odm.admin.*;
 import org.nerdizin.eztrial.xml.odm.study.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,7 @@ import java.util.Optional;
 @Service
 public class StudyDefImportServiceImpl implements StudyDefImportService {
 
-	private final static Log log = LogFactory.getLog(StudyDefImportServiceImpl.class);
+	private final static Logger log = LoggerFactory.getLogger(StudyDefImportServiceImpl.class);
 
 	private final LocationRepository locationRepository;
 	private final UserRepository userRepository;

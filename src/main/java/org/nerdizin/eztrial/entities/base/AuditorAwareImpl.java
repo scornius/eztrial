@@ -1,11 +1,8 @@
 package org.nerdizin.eztrial.entities.base;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.nerdizin.eztrial.entities.admin.User;
 import org.nerdizin.eztrial.repositories.admin.UserRepository;
 import org.nerdizin.eztrial.util.Constants;
-import org.nerdizin.eztrial.web.mvc.UserController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,8 +12,6 @@ import java.util.Optional;
 
 @Service
 public class AuditorAwareImpl implements AuditorAware<User> {
-
-	private final static Log log = LogFactory.getLog(UserController.class);
 
 	private UserRepository userRepository;
 

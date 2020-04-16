@@ -1,11 +1,11 @@
 package org.nerdizin.eztrial.web.mvc;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.nerdizin.eztrial.entities.admin.Location;
 import org.nerdizin.eztrial.repositories.admin.LocationRepository;
 import org.nerdizin.eztrial.web.converter.LocationConverter;
 import org.nerdizin.eztrial.web.model.common.Pagination;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/location")
 public class LocationController {
 
-	private final static Log log = LogFactory.getLog(LocationController.class);
+	private final static Logger log = LoggerFactory.getLogger(LocationController.class);
 
 	private final LocationRepository locationRepository;
 	private final LocationConverter locationConverter = new LocationConverter();

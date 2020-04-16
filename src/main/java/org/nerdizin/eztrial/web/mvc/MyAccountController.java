@@ -1,13 +1,13 @@
 package org.nerdizin.eztrial.web.mvc;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.nerdizin.eztrial.entities.admin.User;
 import org.nerdizin.eztrial.entities.base.UserPrincipal;
 import org.nerdizin.eztrial.repositories.admin.UserRepository;
 import org.nerdizin.eztrial.services.UserService;
 import org.nerdizin.eztrial.web.model.admin.PasswordChange;
 import org.nerdizin.eztrial.web.validator.PasswordChangeValidator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -23,7 +23,7 @@ import javax.validation.Valid;
 @RequestMapping("/myAccount")
 public class MyAccountController {
 
-	private final static Log log = LogFactory.getLog(UserController.class);
+	private final static Logger log = LoggerFactory.getLogger(UserController.class);
 
 	private final UserRepository userRepository;
 	private final UserService userService;

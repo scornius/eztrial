@@ -1,11 +1,11 @@
 package org.nerdizin.eztrial.app;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.nerdizin.eztrial.entities.admin.User;
 import org.nerdizin.eztrial.repositories.admin.UserRepository;
 import org.nerdizin.eztrial.services.UserService;
 import org.nerdizin.eztrial.util.Constants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AppInitializer {
 
-	private final static Log log = LogFactory.getLog(AppInitializer.class);
+	private final static Logger log = LoggerFactory.getLogger(AppInitializer.class);
 
 	@Bean
 	public CommandLineRunner initDatabase(final UserRepository userRepository,

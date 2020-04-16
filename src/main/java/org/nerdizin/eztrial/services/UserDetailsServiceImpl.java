@@ -1,10 +1,10 @@
 package org.nerdizin.eztrial.services;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.nerdizin.eztrial.entities.admin.User;
 import org.nerdizin.eztrial.entities.base.UserPrincipal;
 import org.nerdizin.eztrial.repositories.admin.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,7 +16,7 @@ import java.util.Optional;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-	private final static Log log = LogFactory.getLog(UserDetailsServiceImpl.class);
+	private final static Logger log = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
 
 	private final UserRepository userRepository;
 

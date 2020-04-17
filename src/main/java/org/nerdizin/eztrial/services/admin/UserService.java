@@ -1,4 +1,4 @@
-package org.nerdizin.eztrial.services;
+package org.nerdizin.eztrial.services.admin;
 
 import org.nerdizin.eztrial.web.model.admin.Role;
 import org.nerdizin.eztrial.web.model.common.Pagination;

@@ -1,4 +1,4 @@
-package org.nerdizin.eztrial.services;
+package org.nerdizin.eztrial.services.admin;
 
 import org.nerdizin.eztrial.entities.admin.Location;
 import org.nerdizin.eztrial.repositories.admin.LocationRepository;

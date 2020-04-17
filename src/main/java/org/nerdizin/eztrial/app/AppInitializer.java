@@ -2,7 +2,7 @@ package org.nerdizin.eztrial.app;
 
 import org.nerdizin.eztrial.entities.admin.User;
 import org.nerdizin.eztrial.repositories.admin.UserRepository;
-import org.nerdizin.eztrial.services.UserService;
+import org.nerdizin.eztrial.services.admin.UserService;
 import org.nerdizin.eztrial.util.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

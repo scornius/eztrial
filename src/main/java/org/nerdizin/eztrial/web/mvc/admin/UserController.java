@@ -4,7 +4,7 @@ import org.nerdizin.eztrial.entities.admin.User;
 import org.nerdizin.eztrial.entities.enums.UserType;
 import org.nerdizin.eztrial.repositories.admin.RoleRepository;
 import org.nerdizin.eztrial.repositories.admin.UserRepository;
-import org.nerdizin.eztrial.services.UserService;
+import org.nerdizin.eztrial.services.admin.UserService;
 import org.nerdizin.eztrial.util.Constants;
 import org.nerdizin.eztrial.util.EzException;
 import org.nerdizin.eztrial.web.converter.UserConverter;

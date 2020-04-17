@@ -22,7 +22,7 @@ public class WebSecurityConfigProduction extends WebSecurityConfigurerAdapter {
 
 		http
 				.authorizeRequests()
-				.antMatchers("/", "/home").permitAll()
+				.antMatchers("/", "/home", "/public/*").permitAll()
 				.anyRequest().authenticated()
 
 				.and()

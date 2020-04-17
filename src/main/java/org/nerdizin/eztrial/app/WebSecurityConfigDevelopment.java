@@ -26,7 +26,7 @@ public class WebSecurityConfigDevelopment extends WebSecurityConfigurerAdapter {
 				.cors().and()
 				.csrf().disable()
 				.authorizeRequests()
-				.antMatchers("/", "/home", "/public/*").permitAll()
+				.antMatchers("/", "/home", "/public/**").permitAll()
 				.anyRequest().authenticated()
 
 				.and()
@@ -53,11 +53,6 @@ public class WebSecurityConfigDevelopment extends WebSecurityConfigurerAdapter {
 		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", configuration);
 		return source;
-	}
-
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
 	}
 
 }

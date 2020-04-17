@@ -1,9 +1,11 @@
-package org.nerdizin.eztrial.web.mvc.admin;
+package org.nerdizin.eztrial.web.mvc.pub;
 
 import org.nerdizin.eztrial.entities.admin.User;
 import org.nerdizin.eztrial.repositories.admin.PasswordResetRepository;
 import org.nerdizin.eztrial.repositories.admin.UserRepository;
+import org.nerdizin.eztrial.services.mail.MailMode;
 import org.nerdizin.eztrial.services.mail.MailService;
+import org.nerdizin.eztrial.services.mail.MailTemplateService;
 import org.nerdizin.eztrial.util.EzException;
 import org.nerdizin.eztrial.web.model.admin.PasswordReset;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,18 +22,21 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/resetPassword")
-public class PasswordResetController {
+@RequestMapping("/public/resetPassword")
+public class ResetPasswordController {
 
     private final UserRepository userRepository;
+    private final MailTemplateService mailTemplateService;
     private final MailService mailService;
     private final PasswordResetRepository passwordResetRepository;
 
     @Autowired
-    public PasswordResetController(final UserRepository userRepository,
+    public ResetPasswordController(final UserRepository userRepository,
+                                   final MailTemplateService mailTemplateService,
                                    final MailService mailService,
                                    final PasswordResetRepository passwordResetRepository) {
         this.userRepository = userRepository;
+        this.mailTemplateService = mailTemplateService;
         this.mailService = mailService;
         this.passwordResetRepository = passwordResetRepository;
     }
@@ -62,12 +67,22 @@ public class PasswordResetController {
         passwordResetEntity.setAccessToken(accessToken.toString());
         passwordResetRepository.save(passwordResetEntity);
 
+        final String body = mailTemplateService.resolveTemplate("reset-password",
+                MailMode.TEXT,
+                getXml(accessToken.toString(), user.getUserName()));
         mailService.sendMail("no-reply@example.org",
                 user.getEmail(),
                 "password reset request",
-                "http://localhost:8080/resetPassword/apply/" + accessToken);
+                body);
 
         return "/public/reset-password-token-sent.html";
+    }
+
+    private String getXml(final String accessToken, final String userName) {
+        return "<mail>" +
+                "<name>" + userName + "</name>" +
+                "<url>" + "http://localhost:8080/public/resetPassword/apply/" + accessToken + "</url>" +
+                "</mail>";
     }
 
     @GetMapping("/apply/{accessToken}")

@@ -94,8 +94,7 @@
                     <select name="availableRoles" id="availableRoles" multiple="multiple" >
                         <option th:each="role : ${availableRoles}"
                                 th:text="${role.name}"
-                                th:value="${role.oid}"
-                                th:alt="${role.description}"></option>
+                                th:value="${role.oid}"></option>
                     </select>
                 </td>
                 <td>
@@ -103,8 +102,7 @@
                     <select name="assignedRoles" id="assignedRoles" th:field="*{roles}" multiple="multiple" >
                         <option th:each="role : ${user.roles}"
                                 th:text="${role.name}"
-                                th:value="${role.oid}"
-                                th:alt="${role.description}"></option>
+                                th:value="${role.oid}"></option>
                     </select>
                 </td>
             </tr>

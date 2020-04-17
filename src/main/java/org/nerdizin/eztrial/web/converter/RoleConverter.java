@@ -9,8 +9,7 @@ public class RoleConverter implements Entity2UiModelConverter<Role, org.nerdizin
     public org.nerdizin.eztrial.web.model.admin.Role convertToUiModel(Role role) {
         return new org.nerdizin.eztrial.web.model.admin.Role()
                 .setOid(role.getOid())
-                .setName(role.getName())
-                .setDescription(role.getDescription());
+                .setName(role.getName());
     }
 
     @Override

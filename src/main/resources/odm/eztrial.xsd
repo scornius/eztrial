@@ -23,7 +23,6 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="Name" type="xs:string"/>
-                <xs:element name="Description" type="xs:string"/>
                 <xs:element ref="ez:Privilege" minOccurs="0" maxOccurs="unbounded" />
             </xs:sequence>
             <xs:attribute name="OID" type="xs:string" />

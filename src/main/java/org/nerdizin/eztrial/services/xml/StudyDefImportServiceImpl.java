@@ -1,14 +1,16 @@
 package org.nerdizin.eztrial.services.xml;
 
 import org.nerdizin.eztrial.entities.admin.Address;
-import org.nerdizin.eztrial.entities.elementconverter.*;
-import org.nerdizin.eztrial.entities.study.EventDef;
-import org.nerdizin.eztrial.entities.study.EventRef;
+import org.nerdizin.eztrial.entities.elementconverter.admin.*;
+import org.nerdizin.eztrial.entities.elementconverter.def.*;
+import org.nerdizin.eztrial.entities.study.def.EventDef;
+import org.nerdizin.eztrial.entities.study.def.EventRef;
+import org.nerdizin.eztrial.entities.study.def.ItemRef;
 import org.nerdizin.eztrial.repositories.admin.*;
-import org.nerdizin.eztrial.repositories.study.*;
+import org.nerdizin.eztrial.repositories.study.def.*;
 import org.nerdizin.eztrial.xml.odm.Odm;
 import org.nerdizin.eztrial.xml.odm.admin.*;
-import org.nerdizin.eztrial.xml.odm.study.*;
+import org.nerdizin.eztrial.xml.odm.study.def.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,27 +90,27 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 	public void importStudyDef(final Odm odm) {
 
 		if (odm.getAdminData() != null) {
-			persistAdminData(odm.getAdminData());
+			importAdminData(odm.getAdminData());
 		}
 		if (odm.getStudy() != null) {
-			persistStudy(odm.getStudy());
+			importStudy(odm.getStudy());
 		}
 		if (odm.getAdminData() != null) {
-			persistAdminDataRefs(odm.getAdminData());
+			importAdminDataRefs(odm.getAdminData());
 		}
 	}
 
-	private void persistStudy(final Study study) {
+	private void importStudy(final Study study) {
 
 		final StudyConverter studyConverter = new StudyConverter();
-		final org.nerdizin.eztrial.entities.study.Study studyEntity = studyConverter.convertToEntity(study);
+		final org.nerdizin.eztrial.entities.study.def.Study studyEntity = studyConverter.convertToEntity(study);
 		studyRepository.save(studyEntity);
 
 		if (study.getBasicDefinitions() != null) {
 			if (study.getBasicDefinitions().getMeasurementUnits() != null) {
 				final MeasurementUnitConverter measurementUnitConverter = new MeasurementUnitConverter();
 				for (final MeasurementUnit measurementUnit : study.getBasicDefinitions().getMeasurementUnits()) {
-					final org.nerdizin.eztrial.entities.study.MeasurementUnit measurementEntity =
+					final org.nerdizin.eztrial.entities.study.def.MeasurementUnit measurementEntity =
 							measurementUnitConverter.convertToEntity(measurementUnit);
 					measurementEntity.setStudy(studyEntity);
 					measurementUnitRepository.save(measurementEntity);
@@ -119,60 +121,60 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 
 		if (study.getMetaDataVersions() != null) {
 			for (final MetaDataVersion metaDataVersion : study.getMetaDataVersions()) {
-				final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity =
-						persistDefs(studyEntity, metaDataVersion);
+				final org.nerdizin.eztrial.entities.study.def.MetaDataVersion metaDataVersionEntity =
+						importDefs(studyEntity, metaDataVersion);
 				metaDataVersionRepository.save(metaDataVersionEntity);
-				persistRefs(studyEntity, metaDataVersion, metaDataVersionEntity);
+				importRefs(studyEntity, metaDataVersion, metaDataVersionEntity);
 			}
 		}
 	}
 
-	private org.nerdizin.eztrial.entities.study.MetaDataVersion persistDefs(
-			final org.nerdizin.eztrial.entities.study.Study studyEntity,
+	private org.nerdizin.eztrial.entities.study.def.MetaDataVersion importDefs(
+			final org.nerdizin.eztrial.entities.study.def.Study studyEntity,
 			final MetaDataVersion metaDataVersion) {
 
 		final MetaDataVersionConverter metaDataVersionConverter = new MetaDataVersionConverter();
 
-		final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity =
+		final org.nerdizin.eztrial.entities.study.def.MetaDataVersion metaDataVersionEntity =
 				metaDataVersionConverter.convertToEntity(metaDataVersion);
 		metaDataVersionEntity.setStudy(studyEntity);
 		metaDataVersionRepository.save(metaDataVersionEntity);
 		studyEntity.addMetaDataVersion(metaDataVersionEntity);
 
 		if (metaDataVersion.getProtocol() != null) {
-			persistProtocolDef(metaDataVersion, metaDataVersionEntity);
+			importProtocolDef(metaDataVersion, metaDataVersionEntity);
 		}
 		if (metaDataVersion.getStudyEventDefs() != null) {
-			persistEventDef(metaDataVersion, metaDataVersionEntity);
+			importEventDef(metaDataVersion, metaDataVersionEntity);
 		}
 		if (metaDataVersion.getFormDefs() != null) {
-			persistFormDef(metaDataVersion, metaDataVersionEntity);
+			importFormDef(metaDataVersion, metaDataVersionEntity);
 		}
 		if (metaDataVersion.getItemGroupDefs() != null) {
-			persistItemGroupDef(metaDataVersion, metaDataVersionEntity);
+			importItemGroupDef(metaDataVersion, metaDataVersionEntity);
 		}
 		if (metaDataVersion.getItemDefs() != null) {
-			persistItemDef(metaDataVersion, metaDataVersionEntity);
+			importItemDef(metaDataVersion, metaDataVersionEntity);
 		}
 		return metaDataVersionEntity;
 	}
 
-	private void persistItemDef(final MetaDataVersion metaDataVersion,
-			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
+	private void importItemDef(final MetaDataVersion metaDataVersion,
+							   final org.nerdizin.eztrial.entities.study.def.MetaDataVersion metaDataVersionEntity) {
 		final ItemDefConverter itemDefConverter = new ItemDefConverter();
 		for (final ItemDef itemDef : metaDataVersion.getItemDefs()) {
-			final org.nerdizin.eztrial.entities.study.ItemDef itemDefEntity = itemDefConverter.convertToEntity(itemDef);
+			final org.nerdizin.eztrial.entities.study.def.ItemDef itemDefEntity = itemDefConverter.convertToEntity(itemDef);
 			itemDefEntity.setMetaDataVersion(metaDataVersionEntity);
 			itemDefRepository.save(itemDefEntity);
 			metaDataVersionEntity.addItemDef(itemDefEntity);
 		}
 	}
 
-	private void persistItemGroupDef(final MetaDataVersion metaDataVersion,
-			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
+	private void importItemGroupDef(final MetaDataVersion metaDataVersion,
+									final org.nerdizin.eztrial.entities.study.def.MetaDataVersion metaDataVersionEntity) {
 		final ItemGroupDefConverter itemGroupDefConverter = new ItemGroupDefConverter();
 		for (final ItemGroupDef itemGroupDef : metaDataVersion.getItemGroupDefs()) {
-			final org.nerdizin.eztrial.entities.study.ItemGroupDef itemGroupDefEntity =
+			final org.nerdizin.eztrial.entities.study.def.ItemGroupDef itemGroupDefEntity =
 					itemGroupDefConverter.convertToEntity(itemGroupDef);
 			itemGroupDefEntity.setMetaDataVersion(metaDataVersionEntity);
 			itemGroupDefRepository.save(itemGroupDefEntity);
@@ -180,19 +182,19 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 		}
 	}
 
-	private void persistFormDef(final MetaDataVersion metaDataVersion,
-			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
+	private void importFormDef(final MetaDataVersion metaDataVersion,
+							   final org.nerdizin.eztrial.entities.study.def.MetaDataVersion metaDataVersionEntity) {
 		final FormDefConverter formDefConverter = new FormDefConverter();
 		for (final FormDef formDef : metaDataVersion.getFormDefs()) {
-			final org.nerdizin.eztrial.entities.study.FormDef formDefEntity = formDefConverter.convertToEntity(formDef);
+			final org.nerdizin.eztrial.entities.study.def.FormDef formDefEntity = formDefConverter.convertToEntity(formDef);
 			formDefEntity.setMetaDataVersion(metaDataVersionEntity);
 			formDefRepository.save(formDefEntity);
 			metaDataVersionEntity.addFormDef(formDefEntity);
 		}
 	}
 
-	private void persistEventDef(final MetaDataVersion metaDataVersion,
-			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
+	private void importEventDef(final MetaDataVersion metaDataVersion,
+								final org.nerdizin.eztrial.entities.study.def.MetaDataVersion metaDataVersionEntity) {
 		final EventDefConverter eventDefConverter = new EventDefConverter();
 		for (final StudyEventDef studyElementDef : metaDataVersion.getStudyEventDefs()) {
 			final EventDef eventDefEntity = eventDefConverter.convertToEntity(studyElementDef);
@@ -202,23 +204,23 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 		}
 	}
 
-	private void persistProtocolDef(final MetaDataVersion metaDataVersion,
-			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
+	private void importProtocolDef(final MetaDataVersion metaDataVersion,
+								   final org.nerdizin.eztrial.entities.study.def.MetaDataVersion metaDataVersionEntity) {
 		final ProtocolConverter protocolConverter = new ProtocolConverter();
-		final org.nerdizin.eztrial.entities.study.Protocol protocolEntity =
+		final org.nerdizin.eztrial.entities.study.def.Protocol protocolEntity =
 				protocolConverter.convertToEntity(metaDataVersion.getProtocol());
 		protocolEntity.setMetaDataVersion(metaDataVersionEntity);
 		protocolRepository.save(protocolEntity);
 		metaDataVersionEntity.setProtocol(protocolEntity);
 	}
 
-	private void persistRefs(final org.nerdizin.eztrial.entities.study.Study studyEntity,
-			final MetaDataVersion metaDataVersion,
-			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
+	private void importRefs(final org.nerdizin.eztrial.entities.study.def.Study studyEntity,
+							final MetaDataVersion metaDataVersion,
+							final org.nerdizin.eztrial.entities.study.def.MetaDataVersion metaDataVersionEntity) {
 
 		if (metaDataVersion.getProtocol() != null && metaDataVersion.getProtocol().getStudyEventRefs() != null) {
 			for (final StudyEventRef eventRef : metaDataVersion.getProtocol().getStudyEventRefs()) {
-				final org.nerdizin.eztrial.entities.study.Protocol protocolEntity = metaDataVersionEntity.getProtocol();
+				final org.nerdizin.eztrial.entities.study.def.Protocol protocolEntity = metaDataVersionEntity.getProtocol();
 				final EventDef targetEventDef = metaDataVersionEntity.findEventDefByOid(eventRef.getStudyEventOid());
 				final EventRef eventRefEntity = new EventRef();
 				eventRefEntity.setProtocol(protocolEntity);
@@ -230,27 +232,27 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 		}
 
 		if (metaDataVersion.getStudyEventDefs() != null) {
-			persistFormRefs(metaDataVersion, metaDataVersionEntity);
+			importFormRefs(metaDataVersion, metaDataVersionEntity);
 		}
 		if (metaDataVersion.getFormDefs() != null) {
-			persistItemGroupRefs(metaDataVersion, metaDataVersionEntity);
+			importItemGroupRefs(metaDataVersion, metaDataVersionEntity);
 		}
 		if (metaDataVersion.getItemGroupDefs() != null) {
-			persistItemRefs(metaDataVersion, metaDataVersionEntity);
+			importItemRefs(metaDataVersion, metaDataVersionEntity);
 		}
 	}
 
-	private void persistFormRefs(final MetaDataVersion metaDataVersion,
-			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
+	private void importFormRefs(final MetaDataVersion metaDataVersion,
+								final org.nerdizin.eztrial.entities.study.def.MetaDataVersion metaDataVersionEntity) {
 
 		for (final StudyEventDef eventDef : metaDataVersion.getStudyEventDefs()) {
 			if (eventDef.getFormRefs() != null) {
 				final EventDef eventDefEntity = metaDataVersionEntity.findEventDefByOid(eventDef.getOid());
 				for (final FormRef formRef : eventDef.getFormRefs()) {
-					final org.nerdizin.eztrial.entities.study.FormDef targetFormDef =
+					final org.nerdizin.eztrial.entities.study.def.FormDef targetFormDef =
 							metaDataVersionEntity.findFormDefByOid(formRef.getFormOid());
-					final org.nerdizin.eztrial.entities.study.FormRef formRefEntity =
-							new org.nerdizin.eztrial.entities.study.FormRef();
+					final org.nerdizin.eztrial.entities.study.def.FormRef formRefEntity =
+							new org.nerdizin.eztrial.entities.study.def.FormRef();
 					formRefEntity.setEventDef(eventDefEntity);
 					formRefEntity.setFormDef(targetFormDef);
 					formRefEntity.setMandatory(formRef.getMandatory());
@@ -261,17 +263,17 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 		}
 	}
 
-	private void persistItemGroupRefs(final MetaDataVersion metaDataVersion,
-			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
+	private void importItemGroupRefs(final MetaDataVersion metaDataVersion,
+									 final org.nerdizin.eztrial.entities.study.def.MetaDataVersion metaDataVersionEntity) {
 
 		for (final FormDef formDef : metaDataVersion.getFormDefs()) {
 			if (formDef.getItemGroupRefs() != null) {
-				final org.nerdizin.eztrial.entities.study.FormDef formDefEntity = metaDataVersionEntity.findFormDefByOid(formDef.getOid());
+				final org.nerdizin.eztrial.entities.study.def.FormDef formDefEntity = metaDataVersionEntity.findFormDefByOid(formDef.getOid());
 				for (final ItemGroupRef itemGroupRef : formDef.getItemGroupRefs()) {
-					final org.nerdizin.eztrial.entities.study.ItemGroupDef targetItemGroupDef =
+					final org.nerdizin.eztrial.entities.study.def.ItemGroupDef targetItemGroupDef =
 							metaDataVersionEntity.findItemGroupDefByOid(itemGroupRef.getItemGroupOid());
-					final org.nerdizin.eztrial.entities.study.ItemGroupRef itemGroupRefEntity =
-							new org.nerdizin.eztrial.entities.study.ItemGroupRef();
+					final org.nerdizin.eztrial.entities.study.def.ItemGroupRef itemGroupRefEntity =
+							new org.nerdizin.eztrial.entities.study.def.ItemGroupRef();
 					itemGroupRefEntity.setFormDef(formDefEntity);
 					itemGroupRefEntity.setItemGroupDef(targetItemGroupDef);
 					itemGroupRefEntity.setMandatory(itemGroupRef.getMandatory());
@@ -282,18 +284,18 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 		}
 	}
 
-	private void persistItemRefs(final MetaDataVersion metaDataVersion,
-			final org.nerdizin.eztrial.entities.study.MetaDataVersion metaDataVersionEntity) {
+	private void importItemRefs(final MetaDataVersion metaDataVersion,
+								final org.nerdizin.eztrial.entities.study.def.MetaDataVersion metaDataVersionEntity) {
 
 		for (final ItemGroupDef itemGroupDef : metaDataVersion.getItemGroupDefs()) {
 			if (itemGroupDef.getItemRefs() != null) {
-				final org.nerdizin.eztrial.entities.study.ItemGroupDef itemGroupDefEntity =
+				final org.nerdizin.eztrial.entities.study.def.ItemGroupDef itemGroupDefEntity =
 						metaDataVersionEntity.findItemGroupDefByOid(itemGroupDef.getOid());
 				for (final ItemRefElement itemRef : itemGroupDef.getItemRefs()) {
-					final org.nerdizin.eztrial.entities.study.ItemDef targetItemDef =
+					final org.nerdizin.eztrial.entities.study.def.ItemDef targetItemDef =
 							metaDataVersionEntity.findItemDefByOid(itemRef.getItemOid());
-					final org.nerdizin.eztrial.entities.study.ItemRef itemRefEntity =
-							new org.nerdizin.eztrial.entities.study.ItemRef();
+					final ItemRef itemRefEntity =
+							new ItemRef();
 					itemRefEntity.setItemGroupDef(itemGroupDefEntity);
 					itemRefEntity.setItemDef(targetItemDef);
 					itemRefEntity.setMandatory(itemRef.getMandatory());
@@ -304,7 +306,7 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 		}
 	}
 
-	private void persistAdminData(final AdminData adminData) {
+	private void importAdminData(final AdminData adminData) {
 
 		if (adminData.getLocations() != null) {
 			final LocationConverter locationConverter = new LocationConverter();
@@ -329,7 +331,7 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 			}
 		}
 		if (adminData.getUsers() != null) {
-			persistUsers(adminData);
+			importUsers(adminData);
 		}
 		if (adminData.getSignatureDefs() != null) {
 			final SignatureDefConverter signatureDefConverter = new SignatureDefConverter();
@@ -339,7 +341,7 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 		}
 	}
 
-	private void persistUsers(final AdminData adminData) {
+	private void importUsers(final AdminData adminData) {
 		final UserConverter userConverter = new UserConverter();
 		for (final User user : adminData.getUsers()) {
 			final org.nerdizin.eztrial.entities.admin.User userEntity = userConverter.convertToEntity(user);
@@ -364,25 +366,38 @@ public class StudyDefImportServiceImpl implements StudyDefImportService {
 		}
 	}
 
-	private void persistAdminDataRefs(final AdminData adminData) {
+	private void importAdminDataRefs(final AdminData adminData) {
 
 		if (adminData.getLocations() != null) {
 			for (final Location location : adminData.getLocations()) {
 				if (location.getMetaDataVersionRefs() != null) {
 					for (final MetaDataVersionRef metaDataVersionRef : location.getMetaDataVersionRefs()) {
 
-						final org.nerdizin.eztrial.entities.study.MetaDataVersion targetMetaDataVersion =
+						final Optional<org.nerdizin.eztrial.entities.study.def.MetaDataVersion> targetMetaDataVersionOpt =
 								metaDataVersionRepository.findByOid(metaDataVersionRef.getMetaDataVersionOid());
-						final org.nerdizin.eztrial.entities.study.Study targetStudy =
+						if (targetMetaDataVersionOpt.isEmpty()) {
+							throw new IllegalArgumentException(String.format("Could not find mdv with oid %s",
+									metaDataVersionRef.getMetaDataVersionOid()));
+						}
+						final Optional<org.nerdizin.eztrial.entities.study.def.Study> targetStudyOpt =
 								studyRepository.findByOid(metaDataVersionRef.getStudyOid());
-						final org.nerdizin.eztrial.entities.admin.Location targetLocation =
+						if (targetStudyOpt.isEmpty()) {
+							throw new IllegalArgumentException(String.format("Could not find study with oid %s",
+									metaDataVersionRef.getStudyOid()));
+						}
+						final Optional<org.nerdizin.eztrial.entities.admin.Location> targetLocationOpt =
 								locationRepository.findByOid(location.getOid());
+						if (targetLocationOpt.isEmpty()) {
+							throw new IllegalArgumentException(String.format("Could not find location with oid %s",
+									location.getOid()));
+						}
+						org.nerdizin.eztrial.entities.admin.Location targetLocation = targetLocationOpt.get();
 
 						final org.nerdizin.eztrial.entities.admin.MetaDataVersionRef metaDataVersionRefEntity =
 								new org.nerdizin.eztrial.entities.admin.MetaDataVersionRef();
 						metaDataVersionRefEntity.setLocation(targetLocation);
-						metaDataVersionRefEntity.setMetaDataVersion(targetMetaDataVersion);
-						metaDataVersionRefEntity.setStudy(targetStudy);
+						metaDataVersionRefEntity.setMetaDataVersion(targetMetaDataVersionOpt.get());
+						metaDataVersionRefEntity.setStudy(targetStudyOpt.get());
 						metaDataVersionRefEntity.setEffectiveDate(metaDataVersionRef.getEffectiveDate());
 
 						targetLocation.addMetaDataVersionRef(metaDataVersionRefEntity);

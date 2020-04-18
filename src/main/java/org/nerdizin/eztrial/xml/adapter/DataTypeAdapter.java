@@ -1,6 +1,6 @@
 package org.nerdizin.eztrial.xml.adapter;
 
-import org.nerdizin.eztrial.xml.odm.study.DataType;
+import org.nerdizin.eztrial.xml.odm.study.def.DataType;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 

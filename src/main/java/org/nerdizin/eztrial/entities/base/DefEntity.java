@@ -1,7 +1,7 @@
 package org.nerdizin.eztrial.entities.base;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.nerdizin.eztrial.entities.study.MetaDataVersion;
+import org.nerdizin.eztrial.entities.study.def.MetaDataVersion;
 
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;

@@ -1,6 +1,6 @@
 package org.nerdizin.eztrial.xml.odm.base;
 
-import org.nerdizin.eztrial.xml.odm.study.TranslatedText;
+import org.nerdizin.eztrial.xml.odm.study.def.TranslatedText;
 
 import javax.xml.bind.annotation.XmlElement;
 import java.util.ArrayList;

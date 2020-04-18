@@ -1,6 +1,6 @@
 package org.nerdizin.eztrial.web.rest.controller.studydef;
 
-import org.nerdizin.eztrial.repositories.study.MetaDataVersionRepository;
+import org.nerdizin.eztrial.repositories.study.def.MetaDataVersionRepository;
 import org.nerdizin.eztrial.web.converter.MetaDataVersionConverter;
 import org.nerdizin.eztrial.web.model.MetaDataVersion;
 import org.nerdizin.eztrial.web.model.common.Pagination;
@@ -39,7 +39,7 @@ public class MdvController {
 			pagination.setSortBy(new String[]{"oid"});
 		}
 
-		final Page<org.nerdizin.eztrial.entities.study.MetaDataVersion> page = metaDataVersionRepository.findAll(
+		final Page<org.nerdizin.eztrial.entities.study.def.MetaDataVersion> page = metaDataVersionRepository.findAll(
 				PageRequest.of(pagination.getPage(),
 						pagination.getRows(),
 						pagination.getSortDirection(),
@@ -52,7 +52,7 @@ public class MdvController {
 	public MetaDataVersion createMdv(@RequestBody final MetaDataVersion mdv) {
 
 		try {
-			final org.nerdizin.eztrial.entities.study.MetaDataVersion savedMdv =
+			final org.nerdizin.eztrial.entities.study.def.MetaDataVersion savedMdv =
 					metaDataVersionRepository.save(metaDataVersionConverter.convertToEntity(mdv));
 			return metaDataVersionConverter.convertToUiModel(savedMdv);
 		} catch (Exception e) {

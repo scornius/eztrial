@@ -1,6 +1,6 @@
 package org.nerdizin.eztrial.web.converter;
 
-import org.nerdizin.eztrial.entities.study.MetaDataVersion;
+import org.nerdizin.eztrial.entities.study.def.MetaDataVersion;
 
 public class MetaDataVersionConverter implements Entity2UiModelConverter<MetaDataVersion,org.nerdizin.eztrial.web.model.MetaDataVersion> {
 

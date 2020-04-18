@@ -1,6 +1,6 @@
 package org.nerdizin.eztrial.xml.adapter;
 
-import org.nerdizin.eztrial.xml.odm.study.EventType;
+import org.nerdizin.eztrial.xml.odm.study.def.EventType;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 

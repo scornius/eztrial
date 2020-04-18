@@ -1,8 +1,8 @@
 package org.nerdizin.eztrial.xml.odm.base;
 
 import org.nerdizin.eztrial.xml.odm.admin.Location;
-import org.nerdizin.eztrial.xml.odm.study.MeasurementUnit;
-import org.nerdizin.eztrial.xml.odm.study.MetaDataVersion;
+import org.nerdizin.eztrial.xml.odm.study.def.MeasurementUnit;
+import org.nerdizin.eztrial.xml.odm.study.def.MetaDataVersion;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSeeAlso;

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDateTime;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -50,7 +51,8 @@ public class ResetPasswordController {
     @PostMapping("/initiate")
     public String resetPasswordInitiate(final Model model,
                              final PasswordReset passwordReset,
-                             final BindingResult bindingResult) {
+                             final BindingResult bindingResult,
+                             final Locale locale) {
 
         final Optional<User> userOpt = userRepository.findByUserNameOrEmail(passwordReset.getUserNameOrEmail());
         if (userOpt.isEmpty()) {
@@ -67,9 +69,10 @@ public class ResetPasswordController {
         passwordResetEntity.setAccessToken(accessToken.toString());
         passwordResetRepository.save(passwordResetEntity);
 
-        final String body = mailTemplateService.resolveTemplate("reset-password",
-                MailMode.TEXT,
-                getXml(accessToken.toString(), user.getUserName()));
+        final String body = mailTemplateService.applyTemplate("reset-password",
+                MailMode.HTML,
+                getXml(accessToken.toString(), user.getUserName()),
+                locale);
         mailService.sendMail("no-reply@example.org",
                 user.getEmail(),
                 "password reset request",

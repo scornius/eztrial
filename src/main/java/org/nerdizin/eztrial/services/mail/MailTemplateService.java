@@ -1,11 +1,11 @@
 package org.nerdizin.eztrial.services.mail;
 
+import java.util.Locale;
+
 public interface MailTemplateService {
 
-    int MODE_HTML = 1;
-    int MODE_TEXT = 2;
-
-    String resolveTemplate(String template,
-                           MailMode mailMode,
-                           String inputXml);
+    String applyTemplate(String template,
+                         MailMode mailMode,
+                         String inputXml,
+                         Locale locale);
 }

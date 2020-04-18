@@ -1,4 +1,4 @@
-package org.nerdizin.eztrial.web.mvc.pub;
+package org.nerdizin.eztrial.web.controller.pub;
 
 import org.nerdizin.eztrial.entities.admin.User;
 import org.nerdizin.eztrial.repositories.admin.PasswordResetRepository;

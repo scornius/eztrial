@@ -1,4 +1,4 @@
-package org.nerdizin.eztrial.web.mvc.admin;
+package org.nerdizin.eztrial.web.controller.admin;
 
 import org.nerdizin.eztrial.entities.admin.User;
 import org.nerdizin.eztrial.entities.enums.UserType;

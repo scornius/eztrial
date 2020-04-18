@@ -7,7 +7,7 @@ public class SubjectConverter implements
         OdmElementToEntityConverter<org.nerdizin.eztrial.xml.odm.study.data.SubjectData, SubjectData> {
 
     @Override
-    public SubjectData convertToEntity(org.nerdizin.eztrial.xml.odm.study.data.SubjectData subjectData) {
+    public SubjectData convertToEntity(final org.nerdizin.eztrial.xml.odm.study.data.SubjectData subjectData) {
 
         final SubjectData result = new SubjectData();
         result.setSubjectKey(subjectData.getSubjectKey());
@@ -16,7 +16,7 @@ public class SubjectConverter implements
     }
 
     @Override
-    public org.nerdizin.eztrial.xml.odm.study.data.SubjectData convertToElement(SubjectData subjectData) {
+    public org.nerdizin.eztrial.xml.odm.study.data.SubjectData convertToElement(final SubjectData subjectData) {
 
         final org.nerdizin.eztrial.xml.odm.study.data.SubjectData result =
                 new org.nerdizin.eztrial.xml.odm.study.data.SubjectData();

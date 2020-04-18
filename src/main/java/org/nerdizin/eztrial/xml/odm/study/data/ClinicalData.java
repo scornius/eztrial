@@ -1,11 +1,13 @@
 package org.nerdizin.eztrial.xml.odm.study.data;
 
+import org.nerdizin.eztrial.xml.odm.base.OdmElement;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClinicalData {
+public class ClinicalData implements OdmElement {
 
     @XmlAttribute(name = "StudyOID")
     private String studyOid;

@@ -114,6 +114,13 @@
 
     <ClinicalData StudyOID="study.1" MetaDataVersionOID="mdv.1">
         <SubjectData SubjectKey="subject.1">
+            <StudyEventData StudyEventOID="event.1">
+                <FormData FormOID="form.1">
+                    <ItemGroupData ItemGroupOID="itemgroup.1">
+                        <ItemDataInteger ItemOID="item.1">17</ItemDataInteger>
+                    </ItemGroupData>
+                </FormData>
+            </StudyEventData>
         </SubjectData>
     </ClinicalData>
 </ODM>

@@ -2,8 +2,7 @@ package org.nerdizin.eztrial.xml.odm.study.data;
 
 import org.nerdizin.eztrial.xml.odm.base.OdmElement;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +11,10 @@ public class ItemGroupData implements OdmElement {
     @XmlAttribute(name = "ItemGroupOID")
     private String itemGroupOid;
 
-    @XmlElement(name = "ItemData")
+    @XmlElements({
+            @XmlElement(name = "ItemDataString", type = ItemDataString.class),
+            @XmlElement(name = "ItemDataInteger", type = ItemDataInteger.class)
+    })
     private List<ItemData> itemDatas;
 
 
@@ -36,6 +38,6 @@ public class ItemGroupData implements OdmElement {
         if (this.itemDatas == null) {
             this.itemDatas = new ArrayList<>();
         }
-        this.itemDatas = new ArrayList<>();
+        this.itemDatas.add(itemData);
     }
 }

@@ -12,10 +12,21 @@ import javax.persistence.*;
 @DiscriminatorColumn(name="data_type", discriminatorType = DiscriminatorType.STRING)
 public abstract class ItemData extends OidEntity {
 
+    @Column(name = "value_original")
+    private String valueOriginal;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "itemgroup_id")
     private ItemGroupData itemGroup;
 
+
+    public String getValueOriginal() {
+        return valueOriginal;
+    }
+
+    public void setValueOriginal(final String valueRaw) {
+        this.valueOriginal = valueRaw;
+    }
 
     public ItemGroupData getItemGroup() {
         return itemGroup;

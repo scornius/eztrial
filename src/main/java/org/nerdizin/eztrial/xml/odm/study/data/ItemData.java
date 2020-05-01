@@ -7,7 +7,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlValue;
 
-@XmlSeeAlso({ItemDataString.class, ItemDataInteger.class})
+@XmlSeeAlso({ItemDataString.class,
+    ItemDataInteger.class,
+    ItemDataFloat.class })
 public abstract class ItemData implements OdmElement {
 
     @XmlAttribute(name = "ItemOID")

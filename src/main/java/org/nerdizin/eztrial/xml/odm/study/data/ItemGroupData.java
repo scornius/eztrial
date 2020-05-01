@@ -13,7 +13,8 @@ public class ItemGroupData implements OdmElement {
 
     @XmlElements({
             @XmlElement(name = "ItemDataString", type = ItemDataString.class),
-            @XmlElement(name = "ItemDataInteger", type = ItemDataInteger.class)
+            @XmlElement(name = "ItemDataInteger", type = ItemDataInteger.class),
+            @XmlElement(name = "ItemDataFloat", type = ItemDataFloat.class)
     })
     private List<ItemData> itemDatas;
 

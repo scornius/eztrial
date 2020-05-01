@@ -57,10 +57,28 @@
                     <TranslatedText xml:lang="en">Item 1 description</TranslatedText>
                 </Description>
                 <Question>
-                    <TranslatedText xml:lang="en">Body height</TranslatedText>
-                    <TranslatedText xml:lang="de">Körpergröße</TranslatedText>
+                    <TranslatedText xml:lang="en">an int</TranslatedText>
+                    <TranslatedText xml:lang="de">ein int</TranslatedText>
                 </Question>
                 <ez:Script>console.log('Servus !')</ez:Script>
+            </ItemDef>
+            <ItemDef OID="item.2" Name="Item 2" DataType="string">
+                <Description>
+                    <TranslatedText xml:lang="en">Item 2 description</TranslatedText>
+                </Description>
+                <Question>
+                    <TranslatedText xml:lang="en">A string</TranslatedText>
+                    <TranslatedText xml:lang="de">Ein String</TranslatedText>
+                </Question>
+            </ItemDef>
+            <ItemDef OID="item.3" Name="Item 3" DataType="float">
+                <Description>
+                    <TranslatedText xml:lang="en">Item 3 description</TranslatedText>
+                </Description>
+                <Question>
+                    <TranslatedText xml:lang="en">a float</TranslatedText>
+                    <TranslatedText xml:lang="de">ein float</TranslatedText>
+                </Question>
             </ItemDef>
         </MetaDataVersion>
     </Study>
@@ -118,6 +136,8 @@
                 <FormData FormOID="form.1">
                     <ItemGroupData ItemGroupOID="itemgroup.1">
                         <ItemDataInteger ItemOID="item.1">17</ItemDataInteger>
+                        <ItemDataString ItemOID="item.2">huhu</ItemDataString>
+                        <ItemDataFloat ItemOID="item.3">12345.67890</ItemDataFloat>
                     </ItemGroupData>
                 </FormData>
             </StudyEventData>

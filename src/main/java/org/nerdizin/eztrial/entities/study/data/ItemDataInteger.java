@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 @DiscriminatorValue(DataType.INTEGER)
 public class ItemDataInteger extends ItemData {
 
-    @Column
+    @Column(name = "value_int")
     private Integer valueInt;
 
 

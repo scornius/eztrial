@@ -6,7 +6,12 @@
 
 <!--/*@thymesVar id="passwordChange" type="org.nerdizin.eztrial.web.model.admin.PasswordChange"*/-->
 
-<div th:replace="~{admin/navigation :: navigation}">
+<head>
+    <!--/*/ <th:block th:include="/fragments/head.html :: header"></th:block> /*/-->
+    <title th:text="#{location.administration}">My Account</title>
+</head>
+
+<div th:replace="~{fragments/navigation :: navigation}">
     <a href="/admin/users.html">Users</a>
     <a href="/admin/locations.html">Locations</a>
 </div>

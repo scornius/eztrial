@@ -4,21 +4,26 @@ import org.nerdizin.eztrial.entities.admin.Location;
 import org.nerdizin.eztrial.entities.admin.Role;
 import org.nerdizin.eztrial.entities.admin.SignatureDef;
 import org.nerdizin.eztrial.entities.admin.User;
-import org.nerdizin.eztrial.entities.elementconverter.*;
-import org.nerdizin.eztrial.entities.study.*;
+import org.nerdizin.eztrial.entities.elementconverter.admin.LocationConverter;
+import org.nerdizin.eztrial.entities.elementconverter.admin.RoleConverter;
+import org.nerdizin.eztrial.entities.elementconverter.admin.SignatureDefConverter;
+import org.nerdizin.eztrial.entities.elementconverter.admin.UserConverter;
+import org.nerdizin.eztrial.entities.elementconverter.def.*;
+import org.nerdizin.eztrial.entities.study.def.*;
 import org.nerdizin.eztrial.repositories.admin.*;
-import org.nerdizin.eztrial.repositories.study.*;
+import org.nerdizin.eztrial.repositories.study.def.*;
 import org.nerdizin.eztrial.util.Constants;
 import org.nerdizin.eztrial.xml.odm.FileType;
 import org.nerdizin.eztrial.xml.odm.Odm;
 import org.nerdizin.eztrial.xml.odm.admin.AdminData;
-import org.nerdizin.eztrial.xml.odm.study.BasicDefinitions;
-import org.nerdizin.eztrial.xml.odm.study.Study;
+import org.nerdizin.eztrial.xml.odm.study.def.BasicDefinitions;
+import org.nerdizin.eztrial.xml.odm.study.def.Study;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -101,7 +106,11 @@ public class StudyDefExportServiceImpl implements StudyDefExportService {
 
 	private Study loadStudy(final String oid) {
 
-		final org.nerdizin.eztrial.entities.study.Study studyEntity = studyRepository.findByOid(oid);
+		final Optional<org.nerdizin.eztrial.entities.study.def.Study> studyEntityOpt = studyRepository.findByOid(oid);
+		if (studyEntityOpt.isEmpty()) {
+			throw new IllegalArgumentException(String.format("Could not dinf study wit oid %s", oid));
+		}
+		final org.nerdizin.eztrial.entities.study.def.Study studyEntity = studyEntityOpt.get();
 		final StudyConverter studyConverter = new StudyConverter();
 		final Study study = studyConverter.convertToElement(studyEntity);
 
@@ -128,7 +137,7 @@ public class StudyDefExportServiceImpl implements StudyDefExportService {
 
 		final MetaDataVersionConverter metaDataVersionConverter = new MetaDataVersionConverter();
 		for (final MetaDataVersion metaDataVersion : metaDataVersions) {
-			final org.nerdizin.eztrial.xml.odm.study.MetaDataVersion metaDataVersionElement =
+			final org.nerdizin.eztrial.xml.odm.study.def.MetaDataVersion metaDataVersionElement =
 					metaDataVersionConverter.convertToElement(metaDataVersion);
 
 			final Protocol protocol = metaDataVersion.getProtocol();
@@ -146,7 +155,7 @@ public class StudyDefExportServiceImpl implements StudyDefExportService {
 	}
 
 	private void loadEventDefs(final MetaDataVersion metaDataVersion,
-			final org.nerdizin.eztrial.xml.odm.study.MetaDataVersion metaDataVersionElement) {
+			final org.nerdizin.eztrial.xml.odm.study.def.MetaDataVersion metaDataVersionElement) {
 
 		final Iterable<EventDef> eventDefs = eventDefRepository.findAllByMetaDataVersion(metaDataVersion);
 		if (eventDefs != null) {
@@ -158,7 +167,7 @@ public class StudyDefExportServiceImpl implements StudyDefExportService {
 	}
 
 	private void loadFormDefs(final MetaDataVersion metaDataVersion,
-			final org.nerdizin.eztrial.xml.odm.study.MetaDataVersion metaDataVersionElement) {
+			final org.nerdizin.eztrial.xml.odm.study.def.MetaDataVersion metaDataVersionElement) {
 
 		final Iterable<FormDef> formDefs = formDefRepository.findAllByMetaDataVersion(metaDataVersion);
 		if (formDefs != null) {
@@ -170,7 +179,7 @@ public class StudyDefExportServiceImpl implements StudyDefExportService {
 	}
 
 	private void loadItemGroupDefs(final MetaDataVersion metaDataVersion,
-			final org.nerdizin.eztrial.xml.odm.study.MetaDataVersion metaDataVersionElement) {
+			final org.nerdizin.eztrial.xml.odm.study.def.MetaDataVersion metaDataVersionElement) {
 
 		final Iterable<ItemGroupDef> itemGroupDefs = itemGroupDefRepository.findAllByMetaDataVersion(metaDataVersion);
 		if (itemGroupDefs != null) {
@@ -182,7 +191,7 @@ public class StudyDefExportServiceImpl implements StudyDefExportService {
 	}
 
 	private void loadItemDefs(final MetaDataVersion metaDataVersion,
-			final org.nerdizin.eztrial.xml.odm.study.MetaDataVersion metaDataVersionElement) {
+			final org.nerdizin.eztrial.xml.odm.study.def.MetaDataVersion metaDataVersionElement) {
 
 		final Iterable<ItemDef> itemDefs = itemDefRepository.findAllByMetaDataVersion(metaDataVersion);
 		if (itemDefs != null) {

@@ -9,6 +9,9 @@ import java.util.TreeSet;
 
 public class Role extends OidElement {
 
+	@XmlElement(name = "Name", namespace = Namespaces.EZTRIAL)
+	private String name;
+
 	@XmlElement(name = "Description", namespace = Namespaces.EZTRIAL)
 	private String description;
 
@@ -34,7 +37,17 @@ public class Role extends OidElement {
 		return description;
 	}
 
-	public void setDescription(final String description) {
+	public Role setDescription(final String description) {
 		this.description = description;
+		return this;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public Role setName(final String name) {
+		this.name = name;
+		return this;
 	}
 }

@@ -5,10 +5,11 @@
       xsi:schemaLocation="https://www.thymeleaf.org">
 
 <head>
-    <title th:text="#{location.administration}">The center admin page</title>
+    <!--/*/ <th:block th:include="/fragments/head.html :: header"></th:block> /*/-->
+    <title th:text="#{location.administration}">Center administration</title>
 </head>
 
-<div th:replace="~{admin/navigation :: navigation}">
+<div th:replace="~{fragments/navigation :: navigation}">
     <a href="users.html">User administration</a>
     <a href="locations.html">Location administration</a>
 </div>

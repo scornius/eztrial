@@ -1,9 +1,8 @@
 package org.nerdizin.eztrial.web.converter;
 
-public interface Entity2UiModelConverter<UiModel,BaseEntity> {
+public interface Entity2UiModelConverter<BaseEntity,UiModel> {
 
-	BaseEntity convertToUiModel(UiModel uiModel);
+	UiModel convertToUiModel(BaseEntity entity);
 
-	UiModel convertToEntity(BaseEntity entity);
-
+	BaseEntity convertToEntity(UiModel uiModel);
 }

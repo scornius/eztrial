@@ -10,16 +10,24 @@ import java.util.Optional;
 
 public interface UserRepository extends PagingAndSortingRepository<User, Long>, JpaSpecificationExecutor<User> {
 
+	@Query("SELECT u FROM User u WHERE u.deleted = false ORDER BY u.oid")
 	Iterable<User> findAllByOrderByOid();
 
-	Optional<User> findByUserName(String userName);
+	@Query("SELECT u FROM User u WHERE u.deleted = false AND u.id = :id")
+	Optional<User> findById(@Param("id") Long id);
 
-	Optional<User> findByEmail(String email);
+	@Query("SELECT u FROM User u " +
+			"WHERE (u.userName = :userNameOrEmail or u.email = :userNameOrEmail) " +
+			"AND u.deleted = false")
+	Optional<User> findByUserNameOrEmail(@Param("userNameOrEmail") String userNameOrEmail);
 
-	@Query("SELECT u FROM User u LEFT JOIN FETCH u.roles r LEFT JOIN FETCH r.privileges WHERE u.userName = :userNameOrEmail or u.email = :userNameOrEmail")
+	@Query("SELECT u FROM User u LEFT JOIN FETCH u.roles r LEFT JOIN FETCH r.privileges " +
+			"WHERE (u.userName = :userNameOrEmail or u.email = :userNameOrEmail) " +
+			"AND u.deleted = false")
 	Optional<User> findByUserNameOrEmailAndEagerlyFetchRoles(@Param("userNameOrEmail") String userNameOrEmail);
 
-	@Query("SELECT u FROM User u LEFT JOIN FETCH u.roles WHERE u.id = :id")
+	@Query("SELECT u FROM User u LEFT JOIN FETCH u.roles " +
+			"WHERE u.id = :id AND u.deleted = false")
 	Optional<User> findByIdAndEagerlyFetchRoles(@Param("id") Long id);
 
 }

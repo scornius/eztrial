@@ -1,6 +1,6 @@
 package org.nerdizin.eztrial.xml.odm.base;
 
-import org.nerdizin.eztrial.xml.odm.study.Description;
+import org.nerdizin.eztrial.xml.odm.study.def.Description;
 
 import javax.xml.bind.annotation.XmlElement;
 

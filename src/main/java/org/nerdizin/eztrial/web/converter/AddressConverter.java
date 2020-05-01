@@ -7,14 +7,12 @@ public class AddressConverter implements Entity2UiModelConverter<Address,org.ner
 	@Override
 	public org.nerdizin.eztrial.web.model.admin.Address convertToUiModel(final Address entity) {
 
-		final org.nerdizin.eztrial.web.model.admin.Address result =
-				new org.nerdizin.eztrial.web.model.admin.Address();
-		result.setCity(entity.getCity());
-		result.setCountry(entity.getCountry());
-		result.setPostalCode(entity.getPostalCode());
-		result.setRegion(entity.getRegion());
-		result.setStreet(entity.getStreet());
-		return result;
+		return new org.nerdizin.eztrial.web.model.admin.Address()
+			.setCity(entity.getCity())
+			.setCountry(entity.getCountry())
+			.setPostalCode(entity.getPostalCode())
+			.setRegion(entity.getRegion())
+			.setStreet(entity.getStreet());
 	}
 
 	@Override

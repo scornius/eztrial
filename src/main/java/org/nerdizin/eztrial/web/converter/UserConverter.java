@@ -9,15 +9,16 @@ public class UserConverter implements Entity2UiModelConverter<User,org.nerdizin.
 	public org.nerdizin.eztrial.web.model.admin.User convertToUiModel(final User entity) {
 
 		final org.nerdizin.eztrial.web.model.admin.User result =
-				new org.nerdizin.eztrial.web.model.admin.User();
-		result.setId(entity.getId());
-		result.setActive(entity.isActive());
-		result.setOid(entity.getOid());
-		result.setFirstName(entity.getFirstName());
-		result.setLastName(entity.getLastName());
-		result.setEmail(entity.getEmail());
-		result.setPhone(entity.getPhone());
-		result.setUserName(entity.getUserName());
+				new org.nerdizin.eztrial.web.model.admin.User()
+			.setId(entity.getId())
+			.setActive(entity.isActive())
+			.setOid(entity.getOid())
+			.setFirstName(entity.getFirstName())
+			.setLastName(entity.getLastName())
+			.setEmail(entity.getEmail())
+			.setPhone(entity.getPhone())
+			.setUserName(entity.getUserName());
+
 		if (entity.getType() != null) {
 			result.setType(entity.getType().getCode());
 		}
@@ -28,8 +29,9 @@ public class UserConverter implements Entity2UiModelConverter<User,org.nerdizin.
 		}
 
 		if (entity.getRoles() != null) {
+			final RoleConverter roleConverter = new RoleConverter();
 			for (final Role role : entity.getRoles()) {
-				result.addRole(role.getOid());
+				result.addRole(roleConverter.convertToUiModel(role));
 			}
 		}
 

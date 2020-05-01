@@ -100,16 +100,27 @@
             <LegalReason>Signed</LegalReason>
         </SignatureDef>
         <ez:Role OID="role.investigator">
-            <ez:Description>The investigator role</ez:Description>
+            <ez:Name>Investigator</ez:Name>
             <ez:Privilege OID="user.list">true</ez:Privilege>
             <ez:Privilege OID="user.create">true</ez:Privilege>
             <ez:Privilege OID="user.edit">false</ez:Privilege>
         </ez:Role>
         <ez:Role OID="role.monitor">
-            <ez:Description>The monitor role</ez:Description>
+            <ez:Name>Monitor</ez:Name>
             <ez:Privilege OID="user.create">false</ez:Privilege>
             <ez:Privilege OID="user.edit">false</ez:Privilege>
         </ez:Role>
     </AdminData>
 
+    <ClinicalData StudyOID="study.1" MetaDataVersionOID="mdv.1">
+        <SubjectData SubjectKey="subject.1">
+            <StudyEventData StudyEventOID="event.1">
+                <FormData FormOID="form.1">
+                    <ItemGroupData ItemGroupOID="itemgroup.1">
+                        <ItemDataInteger ItemOID="item.1">17</ItemDataInteger>
+                    </ItemGroupData>
+                </FormData>
+            </StudyEventData>
+        </SubjectData>
+    </ClinicalData>
 </ODM>

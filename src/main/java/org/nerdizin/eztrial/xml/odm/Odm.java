@@ -3,7 +3,8 @@ package org.nerdizin.eztrial.xml.odm;
 import org.nerdizin.eztrial.xml.adapter.FileTypeAdapter;
 import org.nerdizin.eztrial.xml.adapter.LocalDateTimeAdapter;
 import org.nerdizin.eztrial.xml.odm.admin.AdminData;
-import org.nerdizin.eztrial.xml.odm.study.Study;
+import org.nerdizin.eztrial.xml.odm.study.data.ClinicalData;
+import org.nerdizin.eztrial.xml.odm.study.def.Study;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -31,6 +32,9 @@ public class Odm {
 
     @XmlElement(name = "AdminData")
     private AdminData adminData;
+
+    @XmlElement(name = "ClinicalData")
+    private ClinicalData clinicalData;
 
 
     public FileType getFileType() {
@@ -79,5 +83,13 @@ public class Odm {
 
     public void setAdminData(AdminData adminData) {
         this.adminData = adminData;
+    }
+
+    public ClinicalData getClinicalData() {
+        return clinicalData;
+    }
+
+    public void setClinicalData(ClinicalData clinicalData) {
+        this.clinicalData = clinicalData;
     }
 }

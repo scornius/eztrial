@@ -2,8 +2,8 @@ package org.nerdizin.eztrial.entities.admin;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.nerdizin.eztrial.entities.base.BaseEntity;
-import org.nerdizin.eztrial.entities.study.MetaDataVersion;
-import org.nerdizin.eztrial.entities.study.Study;
+import org.nerdizin.eztrial.entities.study.def.MetaDataVersion;
+import org.nerdizin.eztrial.entities.study.def.Study;
 
 import javax.persistence.*;
 import java.time.LocalDate;

@@ -29,6 +29,9 @@ public class User extends BaseEntity {
 	@Column(name = "active", nullable = false)
 	private boolean active;
 
+	@Column(name = "deleted", nullable = false)
+	private boolean deleted;
+
 	@Column(name = "locked", nullable = false)
 	private boolean locked;
 
@@ -177,6 +180,16 @@ public class User extends BaseEntity {
 			this.roles = new HashSet<>();
 		}
 		this.roles.add(role);
+	}
+
+	@Override
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	@Override
+	public void setDeleted(final boolean deleted) {
+		this.deleted = deleted;
 	}
 
 	@Override

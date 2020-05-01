@@ -22,101 +22,119 @@ public class User implements UiModel {
 
 	private String type;
 	private Address address;
-	private Set<String> roles;
+	private Set<Role> roles;
 
 	public long getId() {
 		return id;
 	}
 
-	public void setId(final long id) {
+	public User setId(long id) {
 		this.id = id;
+		return this;
 	}
 
 	public boolean isActive() {
 		return active;
 	}
 
-	public void setActive(final boolean active) {
+	public User setActive(boolean active) {
 		this.active = active;
+		return this;
 	}
 
 	public String getOid() {
 		return oid;
 	}
 
-	public void setOid(final String oid) {
+	public User setOid(String oid) {
 		this.oid = oid;
+		return this;
 	}
 
 	public String getUserName() {
 		return userName;
 	}
 
-	public void setUserName(final String userName) {
+	public User setUserName(String userName) {
 		this.userName = userName;
+		return this;
 	}
 
 	public String getFirstName() {
 		return firstName;
 	}
 
-	public void setFirstName(final String firstName) {
+	public User setFirstName(String firstName) {
 		this.firstName = firstName;
+		return this;
 	}
 
 	public String getLastName() {
 		return lastName;
 	}
 
-	public void setLastName(final String lastName) {
+	public User setLastName(String lastName) {
 		this.lastName = lastName;
+		return this;
 	}
 
 	public String getEmail() {
 		return email;
 	}
 
-	public void setEmail(final String email) {
+	public User setEmail(String email) {
 		this.email = email;
+		return this;
 	}
 
 	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(final String phone) {
+	public User setPhone(String phone) {
 		this.phone = phone;
+		return this;
 	}
 
 	public String getType() {
 		return type;
 	}
 
-	public void setType(final String type) {
+	public User setType(String type) {
 		this.type = type;
+		return this;
 	}
 
 	public Address getAddress() {
 		return address;
 	}
 
-	public void setAddress(final Address address) {
+	public User setAddress(Address address) {
 		this.address = address;
+		return this;
 	}
 
-	public Set<String> getRoles() {
+	public Set<Role> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(final Set<String> roles) {
+	public User setRoles(Set<Role> roles) {
 		this.roles = roles;
+		return this;
 	}
 
-	public void addRole(final String role) {
+	public void addRole(final Role role) {
 		if (this.roles == null) {
 			this.roles = new HashSet<>();
 		}
 		this.roles.add(role);
+	}
+
+	public boolean hasRole(final Role role) {
+		if (roles == null) {
+			return false;
+		}
+		return roles.contains(role);
 	}
 
 	@Override

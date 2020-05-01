@@ -6,11 +6,12 @@
 <!--/*@thymesVar id="users" type="java.util.List"*/-->
 <!--/*@thymesVar id="user" type="org.nerdizin.eztrial.web.model.admin.User"*/-->
 <head>
+    <!--/*/ <th:block th:include="/fragments/head.html :: header"></th:block> /*/-->
     <title th:text="#{user.administration}">The user administration</title>
 </head>
 <body>
 
-<div th:replace="~{admin/navigation :: navigation}">
+<div th:replace="~{fragments/navigation :: navigation}">
     <a href="users.html">User administration</a>
     <a href="locations.html">Location administration</a>
 </div>

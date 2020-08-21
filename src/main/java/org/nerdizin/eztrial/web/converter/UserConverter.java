@@ -2,7 +2,9 @@ package org.nerdizin.eztrial.web.converter;
 
 import org.nerdizin.eztrial.entities.admin.Role;
 import org.nerdizin.eztrial.entities.admin.User;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UserConverter implements Entity2UiModelConverter<User,org.nerdizin.eztrial.web.model.admin.User> {
 
 	@Override
@@ -23,16 +25,9 @@ public class UserConverter implements Entity2UiModelConverter<User,org.nerdizin.
 			result.setType(entity.getType().getCode());
 		}
 		
-		if (entity.getAddress() != null) {
+		if (entity.hasAddress()) {
 			final AddressConverter addressConverter = new AddressConverter();
 			result.setAddress(addressConverter.convertToUiModel(entity.getAddress()));
-		}
-
-		if (entity.getRoles() != null) {
-			final RoleConverter roleConverter = new RoleConverter();
-			for (final Role role : entity.getRoles()) {
-				result.addRole(roleConverter.convertToUiModel(role));
-			}
 		}
 
 		return result;

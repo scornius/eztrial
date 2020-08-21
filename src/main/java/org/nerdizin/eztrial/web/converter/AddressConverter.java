@@ -1,7 +1,9 @@
 package org.nerdizin.eztrial.web.converter;
 
 import org.nerdizin.eztrial.entities.admin.Address;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AddressConverter implements Entity2UiModelConverter<Address,org.nerdizin.eztrial.web.model.admin.Address> {
 
 	@Override

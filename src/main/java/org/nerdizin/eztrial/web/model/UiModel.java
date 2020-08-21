@@ -1,5 +1,7 @@
 package org.nerdizin.eztrial.web.model;
 
-public interface UiModel {
+import java.io.Serializable;
+
+public interface UiModel extends Serializable {
 
 }

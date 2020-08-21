@@ -3,7 +3,7 @@ package org.nerdizin.eztrial.web.controller.admin;
 import org.nerdizin.eztrial.entities.admin.User;
 import org.nerdizin.eztrial.entities.base.UserPrincipal;
 import org.nerdizin.eztrial.repositories.admin.UserRepository;
-import org.nerdizin.eztrial.services.admin.UserService;
+import org.nerdizin.eztrial.services.admin.UserSecurityService;
 import org.nerdizin.eztrial.web.model.admin.PasswordChange;
 import org.nerdizin.eztrial.web.validator.PasswordChangeValidator;
 import org.slf4j.Logger;
@@ -26,12 +26,12 @@ public class MyAccountController {
 	private final static Logger log = LoggerFactory.getLogger(UserController.class);
 
 	private final UserRepository userRepository;
-	private final UserService userService;
+	private final UserSecurityService userSecurityService;
 
 	@Autowired
-	public MyAccountController(final UserRepository userRepository, final UserService userService) {
+	public MyAccountController(final UserRepository userRepository, final UserSecurityService userSecurityService) {
 		this.userRepository = userRepository;
-		this.userService = userService;
+		this.userSecurityService = userSecurityService;
 	}
 
 	@GetMapping
@@ -57,7 +57,7 @@ public class MyAccountController {
 
 		final UserPrincipal principal = (UserPrincipal) authentication.getPrincipal();
 		final User user = principal.getUser();
-		user.setPassword(userService.encryptPassword(passwordChange.getPassword1()));
+		user.setPassword(userSecurityService.encryptPassword(passwordChange.getPassword1()));
 		userRepository.save(user);
 
 		return "redirect:/myAccount";

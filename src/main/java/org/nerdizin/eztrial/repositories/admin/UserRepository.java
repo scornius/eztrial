@@ -8,10 +8,14 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
 
-public interface UserRepository extends PagingAndSortingRepository<User, Long>, JpaSpecificationExecutor<User> {
+public interface UserRepository extends PagingAndSortingRepository<User, Long>,
+		JpaSpecificationExecutor<User>, UserRepositoryCustom {
 
 	@Query("SELECT u FROM User u WHERE u.deleted = false ORDER BY u.oid")
 	Iterable<User> findAllByOrderByOid();
+
+	@Query("SELECT u FROM User u LEFT JOIN FETCH u.roles r LEFT JOIN FETCH r.privileges WHERE u.deleted = false ORDER BY u.oid")
+	Iterable<User> findAllEagerlyFetchRoles();
 
 	@Query("SELECT u FROM User u WHERE u.deleted = false AND u.id = :id")
 	Optional<User> findById(@Param("id") Long id);
@@ -29,5 +33,6 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long>, 
 	@Query("SELECT u FROM User u LEFT JOIN FETCH u.roles " +
 			"WHERE u.id = :id AND u.deleted = false")
 	Optional<User> findByIdAndEagerlyFetchRoles(@Param("id") Long id);
+
 
 }

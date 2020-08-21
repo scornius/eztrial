@@ -151,6 +151,10 @@ public class User extends BaseEntity {
 		this.address = address;
 	}
 
+	public boolean hasAddress() {
+		return address != null;
+	}
+
 	public boolean isActive() {
 		return active;
 	}
@@ -180,6 +184,10 @@ public class User extends BaseEntity {
 			this.roles = new HashSet<>();
 		}
 		this.roles.add(role);
+	}
+
+	public boolean hasRoles() {
+		return roles != null;
 	}
 
 	@Override

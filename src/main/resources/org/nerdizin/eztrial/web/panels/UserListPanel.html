@@ -1,0 +1,32 @@
+<html xmlns:wicket="http://wicket.apache.org">
+<head></head>
+<body>
+
+<wicket:panel>
+
+<table class="dataview">
+    <tr>
+        <th wicket:id="sort.oid"><wicket:message key="user.oid"/></th>
+        <th wicket:id="sort.userName"><wicket:message key="user.userName"/></th>
+        <th wicket:id="sort.active"><wicket:message key="user.active"/></th>
+        <th wicket:id="sort.firstName"><wicket:message key="user.firstName"/></th>
+        <th wicket:id="sort.lastName"><wicket:message key="user.lastName"/></th>
+        <th wicket:id="sort.email"><wicket:message key="user.email"/></th>
+    </tr>
+    <tbody>
+    <tr wicket:id="userList">
+        <td><span wicket:id="oid"/></td>
+        <td><span wicket:id="userName"/></td>
+        <td><span wicket:id="active"/></td>
+        <td><span wicket:id="firstName"/></td>
+        <td><span wicket:id="lastName"/></td>
+        <td><span wicket:id="email"/></td>
+    </tr>
+    </tbody>
+</table>
+<div wicket:id="pagingNavigator"></div>
+
+</wicket:panel>
+
+</body>
+</html>

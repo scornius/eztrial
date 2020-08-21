@@ -2,7 +2,7 @@ package org.nerdizin.eztrial.app;
 
 import org.nerdizin.eztrial.entities.admin.User;
 import org.nerdizin.eztrial.repositories.admin.UserRepository;
-import org.nerdizin.eztrial.services.admin.UserService;
+import org.nerdizin.eztrial.services.admin.UserSecurityService;
 import org.nerdizin.eztrial.util.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,14 +17,14 @@ public class AppInitializer {
 
 	@Bean
 	public CommandLineRunner initDatabase(final UserRepository userRepository,
-			final UserService userService) {
+			final UserSecurityService userSecurityService) {
 
 		return args -> {
 			log.info("Initializing database");
 
 			final User admin = new User();
 			admin.setOid(Constants.ADMIN_OID);
-			admin.setPassword(userService.encryptPassword("admin"));
+			admin.setPassword(userSecurityService.encryptPassword("admin"));
 			admin.setActive(true);
 			admin.setUserName("admin");
 			admin.setFirstName("admin");

@@ -1,7 +1,9 @@
 package org.nerdizin.eztrial.web.converter;
 
 import org.nerdizin.eztrial.entities.study.def.MetaDataVersion;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MetaDataVersionConverter implements Entity2UiModelConverter<MetaDataVersion,org.nerdizin.eztrial.web.model.MetaDataVersion> {
 
 	@Override

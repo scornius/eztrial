@@ -4,7 +4,7 @@ import org.nerdizin.eztrial.entities.admin.User;
 import org.nerdizin.eztrial.entities.enums.UserType;
 import org.nerdizin.eztrial.repositories.admin.RoleRepository;
 import org.nerdizin.eztrial.repositories.admin.UserRepository;
-import org.nerdizin.eztrial.services.admin.UserService;
+import org.nerdizin.eztrial.services.admin.UserSecurityService;
 import org.nerdizin.eztrial.util.Constants;
 import org.nerdizin.eztrial.util.EzException;
 import org.nerdizin.eztrial.web.converter.UserConverter;
@@ -36,18 +36,21 @@ public class UserController {
 
 	private final UserRepository userRepository;
 	private final RoleRepository roleRepository;
-	private final UserService userService;
+	private final UserSecurityService userSecurityService;
 
 	private static final UserConverter userConverter = new UserConverter();
 
 	@Autowired
 	public UserController(final UserRepository userRepository,
 						  final RoleRepository roleRepository,
-						  final UserService userService) {
+						  final UserSecurityService userSecurityService) {
 		this.userRepository = userRepository;
 		this.roleRepository = roleRepository;
-		this.userService = userService;
+		this.userSecurityService = userSecurityService;
 	}
+
+	/*
+
 
 	@GetMapping("/listUsers")
 	@PreAuthorize("hasAuthority(T(org.nerdizin.eztrial.security.Privilege).USER_LIST.key)")
@@ -63,7 +66,7 @@ public class UserController {
 
 		log.info(pagination.toString());
 
-		model.addAttribute("users", userService.getAllUsers(pagination));
+		model.addAttribute("users", userSecurityService.getAllUsers(pagination));
 		model.addAttribute("pagination", pagination);
 		return "/admin/users.html";
 	}
@@ -79,90 +82,13 @@ public class UserController {
 		} else {
 			final org.nerdizin.eztrial.web.model.admin.User user = userConverter.convertToUiModel(userOpt.get());
 			model.addAttribute("user", user);
-			model.addAttribute("userTypes", userService.getUserTypes());
+			model.addAttribute("userTypes", userSecurityService.getUserTypes());
 			model.addAttribute("availableRoles",
-					UserUtils.getRolesNotAssignedToUser(userService.getAllRoles(), user));
+					UserUtils.getRolesNotAssignedToUser(userSecurityService.getAllRoles(), user));
 			model.addAttribute("passwordChange", new PasswordChange());
 		}
 
 		return "/admin/user.html";
 	}
-
-	@PostMapping
-	@PreAuthorize("hasAuthority(T(org.nerdizin.eztrial.security.Privilege).USER_EDIT.key)")
-	public String updateUser(final Model model,
-			@Valid final org.nerdizin.eztrial.web.model.admin.User user,
-			final BindingResult bindingResult) {
-
-		if (bindingResult.hasErrors()) {
-			log.info("errors: " + bindingResult.getAllErrors());
-			return "/admin/user.html";
-		}
-
-		final Optional<User> userOpt = userRepository.findByIdAndEagerlyFetchRoles(user.getId());
-		if (userOpt.isPresent()) {
-			final User userEntity = userOpt.get();
-			userEntity.setActive(user.isActive());
-			userEntity.setFirstName(user.getFirstName());
-			userEntity.setLastName(user.getLastName());
-			userEntity.setPhone(user.getPhone());
-			if (NONE.equals(user.getType())) {
-				userEntity.setType(null);
-			} else {
-				userEntity.setType(UserType.fromCode(user.getType()));
-			}
-			final User updatedUser = userRepository.save(userEntity);
-
-			model.addAttribute("user", userConverter.convertToUiModel(updatedUser));
-			model.addAttribute("userTypes", userService.getUserTypes());
-		} else {
-			throw new EzException(String.format("No user with id %s found", user.getId()));
-		}
-
-		return "redirect:/user/" + user.getId();
-	}
-
-	@GetMapping("/{id}/deleteUser")
-	@PreAuthorize("hasAuthority(T(org.nerdizin.eztrial.security.Privilege).USER_DELETE.key)")
-	public String deleteUser(final Model model, @PathVariable final Long id) {
-
-		final Optional<User> userOpt = userRepository.findById(id);
-		if (userOpt.isEmpty()) {
-			throw new EzException(String.format("No user with id %s found", id));
-		}
-		final User user = userOpt.get();
-		if (Constants.ADMIN_OID.equals(user.getOid())) {
-			throw new EzException("Admin user may not be deleted");
-		}
-
-		user.setDeleted(true);
-		userRepository.save(user);
-
-		return "forward:/user/listUsers";
-	}
-
-	@PostMapping("/{id}/changePassword")
-	public String changePassword(@Valid final PasswordChange passwordChange,
-			@PathVariable final Long id,
-			final BindingResult bindingResult) {
-
-		log.info("change password " + id);
-
-		new PasswordChangeValidator().validate(passwordChange, bindingResult);
-		if (bindingResult.hasErrors()) {
-			log.info("errors: " + bindingResult.getAllErrors());
-			return "/admin/user.html";
-		}
-
-		final Optional<User> userOpt = userRepository.findById(id);
-		if (userOpt.isEmpty()) {
-			throw new EzException(String.format("No user with id %s found", id));
-		}
-
-		final User user = userOpt.get();
-		user.setPassword(userService.encryptPassword(passwordChange.getPassword1()));
-		userRepository.save(user);
-
-		return "redirect:/user/" + id;
-	}
+*/
 }

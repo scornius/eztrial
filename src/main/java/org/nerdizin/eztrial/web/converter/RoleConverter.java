@@ -2,7 +2,9 @@ package org.nerdizin.eztrial.web.converter;
 
 
 import org.nerdizin.eztrial.entities.admin.Role;
+import org.springframework.stereotype.Component;
 
+@Component
 public class RoleConverter implements Entity2UiModelConverter<Role, org.nerdizin.eztrial.web.model.admin.Role> {
 
     @Override

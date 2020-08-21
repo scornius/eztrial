@@ -1,7 +1,9 @@
 package org.nerdizin.eztrial.web.converter;
 
 import org.nerdizin.eztrial.entities.admin.Location;
+import org.springframework.stereotype.Component;
 
+@Component
 public class LocationConverter implements Entity2UiModelConverter<Location,org.nerdizin.eztrial.web.model.admin.Location> {
 
 	@Override

@@ -28,7 +28,7 @@ public class WebSecurityConfigDevelopment extends WebSecurityConfigurerAdapter {
 				.cors().and()
 				.csrf().disable()
 				.authorizeRequests()
-				.antMatchers("/", "/home", "/public/**").permitAll()
+				.antMatchers("/", "/wicket/resource/**").permitAll()
 				.anyRequest().authenticated()
 
 				.and()
